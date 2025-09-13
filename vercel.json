@@ -11,5 +11,11 @@
         }
       ]
     }
+  ],
+  "rewrites": [
+    {
+      "source": "/tech/:path*",
+      "destination": "https://media-site-q96l5j4kp-madao1056s-projects.vercel.app/tech/:path*"
+    }
   ]
 }
