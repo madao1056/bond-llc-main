@@ -12,12 +12,6 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/tech/:path*",
-      "destination": "https://media-site-mg7bi9caj-madao1056s-projects.vercel.app/tech/:path*"
-    }
-  ],
   "redirects": [
     {
       "source": "/:path*",
