@@ -17,5 +17,18 @@
       "source": "/tech/:path*",
       "destination": "https://media-site-pf3yyy09s-madao1056s-projects.vercel.app/tech/:path*"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "bond-llc-main-(.+).vercel.app"
+        }
+      ],
+      "destination": "https://bond-llc.jp/:path*",
+      "permanent": true
+    }
   ]
 }
