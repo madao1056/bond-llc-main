@@ -24,7 +24,18 @@
       "has": [
         {
           "type": "host",
-          "value": "bond-llc-main-(.+).vercel.app"
+          "value": "bond-llc-main.vercel.app"
+        }
+      ],
+      "destination": "https://bond-llc.jp/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "bond-llc-main-*.vercel.app"
         }
       ],
       "destination": "https://bond-llc.jp/:path*",
