@@ -15,7 +15,7 @@
   "rewrites": [
     {
       "source": "/tech/:path*",
-      "destination": "https://media-site-q96l5j4kp-madao1056s-projects.vercel.app/tech/:path*"
+      "destination": "https://media-site-pf3yyy09s-madao1056s-projects.vercel.app/tech/:path*"
     }
   ]
 }
