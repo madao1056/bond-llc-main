@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Button from '~/components/ui/Button.astro';
+
+export interface Props {
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  id,
+  isDark = false,
+  classes = {},
+  title = 'みやびと',
+  subtitle = 'ローカルメディアで宮崎の魅力を発信',
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`${classes?.container ?? ''}`}>
+  <div class="bg-gradient-to-br from-bond-yellow-main/5 to-bond-yellow-deep/5 rounded-2xl overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <!-- 左側：コンテンツ -->
+        <div>
+          <div class="mb-6">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-bond-yellow-main text-bond-navy">
+              ローカルメディア
+            </span>
+          </div>
+          
+          <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-6">
+            {title}
+          </h2>
+          
+          <p class="text-lg text-bond-text-sub mb-6">
+            {subtitle}
+          </p>
+          
+          <div class="space-y-4 mb-8">
+            <p class="text-bond-text-main leading-relaxed">
+              「みやびと」は、宮崎で活躍する人々や企業の物語を伝えるローカルメディアです。
+              地域の魅力を掘り起こし、事業者とお客さまをつなぐ架け橋となることを目指しています。
+            </p>
+            
+            <p class="text-bond-text-main leading-relaxed">
+              なぜWeb制作会社がメディアを運営するのか。それは、地域の価値を正しく伝え、
+              持続的な経済圏を作るには、ストーリーの発信が不可欠だと考えているからです。
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-6 mb-8">
+            <div class="flex items-start">
+              <Icon name="tabler:users" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
+              <div>
+                <p class="font-semibold text-bond-navy">地域の人々</p>
+                <p class="text-sm text-bond-text-sub">挑戦する人の物語</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <Icon name="tabler:building-store" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
+              <div>
+                <p class="font-semibold text-bond-navy">地域の企業</p>
+                <p class="text-sm text-bond-text-sub">事業への想い</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <Icon name="tabler:sparkles" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
+              <div>
+                <p class="font-semibold text-bond-navy">地域の魅力</p>
+                <p class="text-sm text-bond-text-sub">知られざる価値</p>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <Icon name="tabler:heart-handshake" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
+              <div>
+                <p class="font-semibold text-bond-navy">地域の繋がり</p>
+                <p class="text-sm text-bond-text-sub">コミュニティ形成</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button href="/media/miyabito" class="btn-primary">
+              インタビュー記事を読む
+            </Button>
+            <Button href="/contact" class="btn-secondary">
+              取材のご相談
+            </Button>
+          </div>
+        </div>
+        
+        <!-- 右側：ビジュアル -->
+        <div class="relative">
+          <div class="aspect-w-4 aspect-h-3 rounded-xl overflow-hidden bg-gradient-to-br from-bond-yellow-main/20 to-bond-yellow-deep/20">
+            <div class="flex items-center justify-center h-96">
+              <div class="text-center">
+                <Icon name="tabler:notebook" class="w-24 h-24 text-bond-navy/20 mb-4" />
+                <p class="text-bond-text-sub">みやびとイメージ</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 装飾要素 -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 bg-bond-yellow-main/10 rounded-full blur-2xl"></div>
+          <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-bond-yellow-deep/10 rounded-full blur-2xl"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>

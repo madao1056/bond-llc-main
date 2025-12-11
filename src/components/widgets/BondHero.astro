@@ -1,0 +1,110 @@
+---
+import Button from '~/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  actions?: Array<{
+    variant?: string;
+    text?: string;
+    href?: string;
+    target?: '_blank' | '_self' | '_parent' | '_top' | '_unfencedTop';
+    rel?: string;
+    icon?: string;
+  }>;
+  image?: {
+    src: string;
+    alt?: string;
+  };
+}
+
+const {
+  title = '地域の挑戦とお客さまをつなぐ、\n絆（きずな）のような存在へ。',
+  subtitle = '宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援・ローカルメディア運営を通じて、事業者とお客さまの関係性が続く仕組みをデザインします。',
+  tagline,
+  actions = [],
+  image,
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden">
+  <!-- 背景要素 -->
+  <div class="absolute inset-0 bg-bond-yellow-main">
+    <div class="absolute inset-0 bg-gradient-to-br from-bond-yellow-main via-bond-yellow-main to-bond-yellow-deep opacity-60"></div>
+    <!-- 装飾パターン -->
+    <div class="absolute inset-0">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full opacity-5 -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 bg-white rounded-full opacity-5 translate-y-1/2 -translate-x-1/2"></div>
+    </div>
+  </div>
+
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
+    <div class="py-20 md:py-28 lg:py-32">
+      <div class="mx-auto max-w-5xl text-center">
+        {tagline && (
+          <p class="text-base font-semibold uppercase tracking-wide text-bond-navy md:text-lg">
+            {tagline}
+          </p>
+        )}
+        
+        {title && (
+          <h1 class="mb-8 text-4xl font-bold tracking-tight text-bond-navy md:text-5xl lg:text-6xl">
+            {title.split('\n').map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                <span set:html={line} />
+              </>
+            ))}
+          </h1>
+        )}
+
+        {subtitle && (
+          <p class="mb-10 text-lg text-bond-navy/90 md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed">
+            {subtitle}
+          </p>
+        )}
+
+        {actions && actions.length > 0 && (
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {actions.map(({ text, href, variant = 'primary', icon, ...rest }) => (
+              <Button variant={variant} href={href} class={variant === 'primary' ? 'btn-primary' : 'btn-secondary'} {...rest}>
+                {icon && <Icon name={icon} class="w-5 h-5 mr-2 -ml-1.5" />}
+                {text}
+              </Button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {image && (
+        <div class="mt-12 flex justify-center">
+          <img
+            src={image.src}
+            alt={image.alt || ''}
+            class="w-full max-w-4xl rounded-lg shadow-xl"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      )}
+    </div>
+  </div>
+
+  <!-- 下部の波形装飾 -->
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg
+      class="w-full h-auto"
+      viewBox="0 0 1440 60"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="none"
+    >
+      <path
+        d="M0 30C240 10 480 50 720 30C960 10 1200 50 1440 30V60H0V30Z"
+        fill="var(--bond-background)"
+      />
+    </svg>
+  </div>
+</section>

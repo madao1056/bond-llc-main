@@ -1,63 +1,68 @@
 ---
 import '@fontsource-variable/inter';
-
-// 'DM Sans'
-// Nunito
-// Dosis
-// Outfit
-// Roboto
-// Literata
-// 'IBM Plex Sans'
-// Karla
-// Poppins
-// 'Fira Sans'
-// 'Libre Franklin'
-// Inconsolata
-// Raleway
-// Oswald
-// 'Space Grotesk'
-// Urbanist
 ---
 
 <style is:inline>
   :root {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: 'Inter Variable';
-    --aw-font-heading: 'Inter Variable';
+    --aw-font-sans: 'Inter Variable', system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    --aw-font-serif: 'Inter Variable', 'Noto Serif JP', serif;
+    --aw-font-heading: 'Inter Variable', system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
 
-    --aw-color-primary: rgb(1 97 239);
-    --aw-color-secondary: rgb(1 84 207);
-    --aw-color-accent: rgb(109 40 217);
+    /* ぼんどブランドカラー */
+    --bond-yellow-main: rgb(250 215 7);
+    --bond-yellow-deep: rgb(208 165 29);
+    --bond-navy: rgb(31 46 108);
+    --bond-brown: rgb(115 74 39);
+    --bond-surface: rgb(255 255 255);
+    --bond-background: rgb(250 250 249);
+    --bond-text-main: rgb(28 28 30);
+    --bond-text-sub: rgb(82 82 91);
+    --bond-border: rgb(228 228 231);
+    
+    /* Tailwind用カラーマッピング */
+    --aw-color-primary: var(--bond-navy);
+    --aw-color-secondary: var(--bond-yellow-main);
+    --aw-color-accent: var(--bond-yellow-deep);
 
-    --aw-color-text-heading: rgb(0 0 0);
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: rgb(255 255 255);
+    --aw-color-text-heading: var(--bond-navy);
+    --aw-color-text-default: var(--bond-text-main);
+    --aw-color-text-muted: var(--bond-text-sub);
+    --aw-color-bg-page: var(--bond-background);
 
-    --aw-color-bg-page-dark: rgb(3 6 32);
+    --aw-color-bg-page-dark: var(--bond-navy);
 
     ::selection {
-      background-color: lavender;
+      background-color: rgb(250 215 7 / 30%);
     }
   }
 
   .dark {
-    --aw-font-sans: 'Inter Variable';
-    --aw-font-serif: 'Inter Variable';
-    --aw-font-heading: 'Inter Variable';
+    --aw-font-sans: 'Inter Variable', system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+    --aw-font-serif: 'Inter Variable', 'Noto Serif JP', serif;
+    --aw-font-heading: 'Inter Variable', system-ui, -apple-system, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
 
-    --aw-color-primary: rgb(1 97 239);
-    --aw-color-secondary: rgb(1 84 207);
-    --aw-color-accent: rgb(109 40 217);
+    /* ダークモード用カラー */
+    --bond-yellow-main: rgb(250 215 7);
+    --bond-yellow-deep: rgb(208 165 29);
+    --bond-navy: rgb(31 46 108);
+    --bond-surface: rgb(22 24 44);
+    --bond-background: rgb(15 17 30);
+    --bond-text-main: rgb(245 245 247);
+    --bond-text-sub: rgb(180 180 188);
+    --bond-border: rgb(55 57 82);
+    
+    --aw-color-primary: var(--bond-yellow-main);
+    --aw-color-secondary: var(--bond-yellow-deep);
+    --aw-color-accent: rgb(250 215 7 / 80%);
 
     --aw-color-text-heading: rgb(247, 248, 248);
     --aw-color-text-default: rgb(229 236 246);
     --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: rgb(3 6 32);
+    --aw-color-bg-page: var(--bond-background);
 
     ::selection {
-      background-color: black;
-      color: snow;
+      background-color: rgb(250 215 7 / 20%);
+      color: white;
     }
   }
 </style>

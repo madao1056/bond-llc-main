@@ -1,0 +1,115 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+
+export interface Props {
+  id?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  actions?: Array<{
+    variant?: string;
+    text?: string;
+    href?: string;
+    icon?: string;
+  }>;
+}
+
+const {
+  id,
+  title = 'まずはお気軽にご相談ください',
+  subtitle = '何から相談すれば良いか分からない段階からでも大丈夫です',
+  description = 'Web制作、EC構築、集客支援、DX化など、デジタルに関することならなんでもご相談ください。宮崎の事業者さまの「困った」を一緒に解決します。',
+  actions = [
+    {
+      variant: 'primary',
+      text: 'お問い合わせフォーム',
+      href: '/contact',
+      icon: 'tabler:mail',
+    },
+    {
+      variant: 'accent',
+      text: 'LINE で相談',
+      href: 'https://lin.ee/xxxxxx',
+      icon: 'tabler:brand-line',
+    },
+  ],
+} = Astro.props;
+---
+
+<section id={id} class="relative overflow-hidden">
+  <div class="bg-bond-navy relative">
+    <!-- 背景パターン -->
+    <div class="absolute inset-0">
+      <div class="absolute inset-0 bg-gradient-to-br from-bond-navy via-bond-navy to-black/20 opacity-50"></div>
+      <div class="absolute top-0 left-0 w-96 h-96 bg-bond-yellow-main rounded-full opacity-5 -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-bond-yellow-main rounded-full opacity-5 translate-x-1/2 translate-y-1/2 blur-3xl"></div>
+    </div>
+    
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+      <div class="text-center max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          {title}
+        </h2>
+        
+        {subtitle && (
+          <p class="text-xl text-white/80 mb-8">
+            {subtitle}
+          </p>
+        )}
+        
+        {description && (
+          <p class="text-lg text-white/70 mb-10 leading-relaxed">
+            {description}
+          </p>
+        )}
+        
+        {actions && actions.length > 0 && (
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            {actions.map(({ text, href, variant = 'primary', icon }) => {
+              const isAccent = variant === 'accent';
+              const isLine = text?.includes('LINE');
+              return (
+                <a
+                  href={href}
+                  class={`inline-flex items-center justify-center rounded-lg font-semibold text-base py-4 px-8 transition-all duration-200 ${
+                    isLine
+                      ? 'bg-green-500 text-white hover:bg-green-600 hover:shadow-lg'
+                      : isAccent 
+                      ? 'bg-bond-yellow-main text-bond-navy hover:bg-bond-yellow-deep hover:shadow-lg' 
+                      : 'bg-white text-bond-navy hover:bg-gray-100 hover:shadow-lg'
+                  }`}
+                  target={href?.startsWith('http') ? '_blank' : undefined}
+                  rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
+                  {icon && <Icon name={icon} class="w-5 h-5 mr-2" />}
+                  {text}
+                </a>
+              );
+            })}
+          </div>
+        )}
+        
+        <!-- 営業時間・連絡先情報 -->
+        <div class="mt-12 pt-8 border-t border-white/10">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-white/60">
+            <div class="flex items-center justify-center">
+              <Icon name="tabler:clock" class="w-5 h-5 mr-2" />
+              <span>平日 9:00-18:00</span>
+            </div>
+            <div class="flex items-center justify-center">
+              <Icon name="tabler:phone" class="w-5 h-5 mr-2" />
+              <a href="tel:0985-XX-XXXX" class="hover:text-white transition-colors">
+                0985-XX-XXXX
+              </a>
+            </div>
+            <div class="flex items-center justify-center">
+              <Icon name="tabler:map-pin" class="w-5 h-5 mr-2" />
+              <span>宮崎県宮崎市</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

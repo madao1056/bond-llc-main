@@ -1,0 +1,78 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+export interface Props {
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  id,
+  isDark = false,
+  classes = {},
+  title = 'ぼんどとは',
+  subtitle = '地域と事業者の「つながり」を大切にする会社です',
+} = Astro.props;
+
+const items = [
+  {
+    title: 'Mission',
+    subtitle: '使命',
+    description: '地域の事業者とお客さまをつなぎ、価値が正しく届く環境をつくる',
+    icon: 'tabler:target',
+  },
+  {
+    title: 'Vision',
+    subtitle: 'ビジョン',
+    description: '宮崎を起点に、関係性を基盤とした持続的な経済圏を広げる',
+    icon: 'tabler:eye',
+  },
+  {
+    title: 'Values',
+    subtitle: '価値観',
+    description: 'よしなに力・共創スタンス・仕組み化と再現性',
+    icon: 'tabler:heart-handshake',
+  },
+];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`}>
+  <Headline title={title} subtitle={subtitle} classes={classes?.headline ?? ''} />
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+    {items.map((item) => (
+      <div class="relative group">
+        <div class="absolute -inset-1 bg-gradient-to-r from-bond-yellow-main to-bond-yellow-deep rounded-lg blur opacity-10 group-hover:opacity-20 transition duration-300"></div>
+        <div class="relative bg-white rounded-lg p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 border border-bond-border">
+          <div class="flex items-center justify-center w-14 h-14 bg-bond-yellow-main/10 rounded-lg mb-4">
+            <Icon name={item.icon} class="w-7 h-7 text-bond-navy" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy mb-1">
+            {item.title}
+          </h3>
+          <p class="text-sm text-bond-text-sub mb-3">
+            {item.subtitle}
+          </p>
+          <p class="text-bond-text-main leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="mt-12 text-center">
+    <a
+      href="/about"
+      class="inline-flex items-center text-bond-navy hover:text-bond-yellow-deep transition-colors duration-200 font-medium"
+    >
+      詳しく見る
+      <Icon name="tabler:arrow-right" class="w-5 h-5 ml-2" />
+    </a>
+  </div>
+</WidgetWrapper>

@@ -1,0 +1,109 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+
+export interface Props {
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  id,
+  isDark = false,
+  classes = {},
+  title = 'ぼんどの強み',
+  subtitle = '地域事業者さまに選ばれる3つの理由',
+} = Astro.props;
+
+const strengths = [
+  {
+    title: 'よしなに力',
+    subtitle: '期待を超える対応',
+    description: '「こうしたい」という想いを汲み取り、言葉にならない要望まで形にします。細かな相談も遠慮なくどうぞ。',
+    icon: 'tabler:sparkles',
+    points: [
+      '曖昧な要望も形に',
+      '期待以上の提案',
+      '細やかなフォロー',
+    ],
+  },
+  {
+    title: '共創スタンス',
+    subtitle: '一緒に作り上げる',
+    description: 'お客さまと並走し、事業の成長を自分ごととして捉えます。単なる外注先ではなく、パートナーとして。',
+    icon: 'tabler:users-group',
+    points: [
+      '事業理解から始める',
+      '定期的な振り返り',
+      '改善提案の継続',
+    ],
+  },
+  {
+    title: '仕組み化と再現性',
+    subtitle: '持続可能な成長',
+    description: '一過性の施策ではなく、継続的に成果が出る仕組みを構築。誰でも運用できる形で引き継ぎます。',
+    icon: 'tabler:settings',
+    points: [
+      '運用マニュアル作成',
+      'データ分析と改善',
+      '属人化の解消',
+    ],
+  },
+];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`}>
+  <Headline title={title} subtitle={subtitle} classes={classes?.headline ?? ''} />
+  
+  <div class="mt-12 space-y-16">
+    {strengths.map((strength, index) => (
+      <div class={`flex flex-col lg:flex-row gap-8 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+        <!-- コンテンツ側 -->
+        <div class="flex-1 lg:max-w-xl">
+          <div class="flex items-center mb-6">
+            <div class="flex items-center justify-center w-14 h-14 bg-bond-yellow-main rounded-lg mr-4">
+              <Icon name={strength.icon} class="w-7 h-7 text-bond-navy" />
+            </div>
+            <div>
+              <h3 class="text-2xl font-bold text-bond-navy">
+                {strength.title}
+              </h3>
+              <p class="text-sm text-bond-text-sub">
+                {strength.subtitle}
+              </p>
+            </div>
+          </div>
+          
+          <p class="text-bond-text-main mb-6 leading-relaxed text-lg">
+            {strength.description}
+          </p>
+          
+          <ul class="space-y-3">
+            {strength.points.map((point) => (
+              <li class="flex items-start">
+                <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-3 flex-shrink-0" />
+                <span class="text-bond-text-main">{point}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <!-- ビジュアル側 -->
+        <div class="flex-1 flex justify-center">
+          <div class="relative w-full max-w-md">
+            <div class="aspect-square rounded-2xl bg-gradient-to-br from-bond-yellow-main/10 to-bond-yellow-deep/10 flex items-center justify-center">
+              <Icon name={strength.icon} class="w-32 h-32 text-bond-navy/10" />
+            </div>
+            <div class="absolute -inset-4">
+              <div class="w-full h-full rounded-2xl bg-gradient-to-br from-bond-yellow-main/5 to-transparent blur-xl"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</WidgetWrapper>

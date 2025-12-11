@@ -1,0 +1,205 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import { Icon } from 'astro-icon/components';
+
+const metadata = {
+  title: '会社概要',
+  description: '合同会社ぼんどの会社概要・事業内容・アクセス情報をご紹介します。',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <Hero2
+    tagline="Company Information"
+    actions={[]}
+  >
+    <Fragment slot="title">
+      会社概要
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      合同会社ぼんどの基本情報をご紹介します。
+    </Fragment>
+  </Hero2>
+
+  <!-- 会社情報 -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-bond-border">
+        <!-- 会社概要テーブル -->
+        <div class="p-8 md:p-12">
+          <h2 class="text-2xl md:text-3xl font-bold text-bond-navy mb-8">基本情報</h2>
+          
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-b border-bond-border">
+              <div class="font-semibold text-bond-navy">会社名</div>
+              <div class="md:col-span-2 text-bond-text-main">合同会社ぼんど</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-b border-bond-border">
+              <div class="font-semibold text-bond-navy">設立</div>
+              <div class="md:col-span-2 text-bond-text-main">2025年（令和7年）11月21日</div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 border-b border-bond-border">
+              <div class="font-semibold text-bond-navy">代表者</div>
+              <div class="md:col-span-2 text-bond-text-main">
+                代表社員　橋口　真幸（はしぐち　まさゆき）
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 事業内容 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          事業内容
+        </h2>
+        <p class="text-lg text-bond-text-sub">定款に定める事業</p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-bond-border">
+        <div class="space-y-4">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">1</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              Webサイトの企画、制作、販売、運営及び管理
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">2</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              インターネットを利用した各種情報提供サービス
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">3</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              EC（電子商取引）サイトの企画、制作、販売、運営及び管理
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">4</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              各種アプリケーションソフトの企画、制作、販売、運営及び管理
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">5</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              各種マーケティングリサーチ業務
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">6</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              経営コンサルティング業務
+            </p>
+          </div>
+
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-8 h-8 bg-bond-yellow-main/10 rounded-full flex items-center justify-center mt-0.5">
+              <span class="text-sm font-bold text-bond-navy">7</span>
+            </div>
+            <p class="ml-4 text-bond-text-main">
+              前各号に附帯又は関連する一切の事業
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- アクセス -->
+  <section id="access" class="py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          アクセス
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- 地図 -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-bond-border">
+          <div class="aspect-w-16 aspect-h-9 bg-bond-background flex items-center justify-center h-96">
+            <div class="text-center">
+              <Icon name="tabler:map-2" class="w-16 h-16 text-bond-text-sub/30 mb-4" />
+              <p class="text-bond-text-sub">Google Maps</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- アクセス情報 -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-bond-border">
+          <h3 class="text-xl font-bold text-bond-navy mb-6">所在地</h3>
+          
+          <div class="space-y-6">
+            <div>
+              <p class="text-sm text-bond-text-sub mb-2">住所</p>
+              <p class="text-bond-text-main">
+                〒880-1300<br />
+                宮崎県東諸県郡国富町大字本庄1886番地1<br />
+                フェニックスⅢ 106号室
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm text-bond-text-sub mb-2">最寄り駅からのアクセス</p>
+              <p class="text-bond-text-main">
+                JR日豊本線 宮崎駅より車で約25分<br />
+                宮崎空港より車で約30分
+              </p>
+            </div>
+
+            <div>
+              <p class="text-sm text-bond-text-sub mb-2">駐車場</p>
+              <p class="text-bond-text-main">
+                あり（無料）
+              </p>
+            </div>
+
+            <div class="pt-6 border-t border-bond-border">
+              <p class="text-sm text-bond-text-sub mb-3">お問い合わせ</p>
+              <div class="space-y-2">
+                <a href="/contact" class="flex items-center text-bond-navy hover:text-bond-yellow-deep transition-colors">
+                  <Icon name="tabler:mail" class="w-5 h-5 mr-2" />
+                  お問い合わせフォーム
+                </a>
+                <a href="https://lin.ee/xxxxxx" class="flex items-center text-bond-navy hover:text-bond-yellow-deep transition-colors">
+                  <Icon name="tabler:brand-line" class="w-5 h-5 mr-2" />
+                  LINE公式アカウント
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

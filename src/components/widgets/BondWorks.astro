@@ -1,0 +1,126 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import Image from '~/components/common/Image.astro';
+
+export interface Props {
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  id,
+  isDark = false,
+  classes = {},
+  title = '実績',
+  subtitle = '地域の事業者さまと共に歩んできました',
+} = Astro.props;
+
+const works = [
+  {
+    title: '地域農園のECサイト構築',
+    category: '農業',
+    description: '宮崎県産マンゴーの直販ECサイトを構築。売上が前年比200%に成長。',
+    image: '/images/works/farm-ec.jpg',
+    tags: ['EC構築', 'Shopify', 'SNS連携'],
+    result: '売上200%UP',
+  },
+  {
+    title: '飲食店の集客強化',
+    category: '飲食',
+    description: 'MEO対策とLINE公式アカウントの活用で、予約数が3倍に増加。',
+    image: '/images/works/restaurant.jpg',
+    tags: ['MEO対策', 'LINE構築', 'Web制作'],
+    result: '予約数3倍',
+  },
+  {
+    title: '観光施設のDX化',
+    category: '観光',
+    description: '予約管理システムの導入で、業務時間を月40時間削減。',
+    image: '/images/works/tourism.jpg',
+    tags: ['システム導入', '業務効率化', 'DX'],
+    result: '業務40h削減',
+  },
+  {
+    title: '美容室のWeb集客',
+    category: '美容',
+    description: 'Webサイトリニューアルで新規顧客が月20名増加。',
+    image: '/images/works/salon.jpg',
+    tags: ['Web制作', 'SEO対策', '予約システム'],
+    result: '新規20名/月',
+  },
+  {
+    title: '地域特産品のブランディング',
+    category: '製造業',
+    description: 'ブランドサイト構築とSNS運用で認知度が大幅向上。',
+    image: '/images/works/product.jpg',
+    tags: ['ブランディング', 'Web制作', 'SNS運用'],
+    result: '認知度UP',
+  },
+  {
+    title: '宿泊施設の予約最適化',
+    category: '宿泊',
+    description: 'オンライン予約システムで直接予約が60%増加。',
+    image: '/images/works/hotel.jpg',
+    tags: ['予約システム', 'Web制作', 'SEO'],
+    result: '直予約60%UP',
+  },
+];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`}>
+  <Headline title={title} subtitle={subtitle} classes={classes?.headline ?? ''} />
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+    {works.map((work) => (
+      <article class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-bond-border">
+        <div class="aspect-w-16 aspect-h-10 bg-bond-background">
+          {/* プレースホルダー画像 */}
+          <div class="w-full h-48 bg-gradient-to-br from-bond-yellow-main/10 to-bond-yellow-deep/10 flex items-center justify-center">
+            <Icon name="tabler:photo" class="w-12 h-12 text-bond-text-sub/30" />
+          </div>
+        </div>
+        
+        <div class="p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-bond-yellow-main/10 text-bond-navy">
+              {work.category}
+            </span>
+            <span class="text-sm font-bold text-bond-yellow-deep">
+              {work.result}
+            </span>
+          </div>
+          
+          <h3 class="text-lg font-bold text-bond-navy mb-2">
+            {work.title}
+          </h3>
+          
+          <p class="text-sm text-bond-text-sub mb-4 line-clamp-2">
+            {work.description}
+          </p>
+          
+          <div class="flex flex-wrap gap-1">
+            {work.tags.map((tag) => (
+              <span class="text-xs text-bond-text-sub">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="mt-12 text-center">
+    <a
+      href="/works"
+      class="btn-secondary"
+    >
+      すべての実績を見る
+    </a>
+  </div>
+</WidgetWrapper>

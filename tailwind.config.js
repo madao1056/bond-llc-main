@@ -12,6 +12,21 @@ export default {
         accent: 'var(--aw-color-accent)',
         default: 'var(--aw-color-text-default)',
         muted: 'var(--aw-color-text-muted)',
+        bond: {
+          yellow: {
+            main: 'var(--bond-yellow-main)',
+            deep: 'var(--bond-yellow-deep)',
+          },
+          navy: 'var(--bond-navy)',
+          brown: 'var(--bond-brown)',
+          surface: 'var(--bond-surface)',
+          background: 'var(--bond-background)',
+          text: {
+            main: 'var(--bond-text-main)',
+            sub: 'var(--bond-text-sub)',
+          },
+          border: 'var(--bond-border)',
+        },
       },
       fontFamily: {
         sans: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],

@@ -1,228 +1,243 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Content from '~/components/widgets/Content.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Icon } from 'astro-icon/components';
 
 const metadata = {
-  title: 'About us',
+  title: 'ぼんどについて',
+  description: '株式会社ぼんどは、宮崎を拠点に地域の事業者とお客さまをつなぐ、接着剤のような存在を目指しています。',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    tagline="About us"
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
-    }}
+  <!-- ヒーローセクション -->
+  <Hero2
+    tagline="About Bond LLC"
+    actions={[]}
   >
     <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
+      地域に深い絆を育み<br />
+      <span class="text-bond-yellow-main">人と人をつなぐ存在へ</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
+      株式会社ぼんどは、宮崎を拠点に地域の事業者さまの課題解決に取り組むデジタルパートナーです。<br />
+      「Bond（絆）」という社名に込めた想いの通り、事業者とお客さまの間に深い信頼関係を築き、<br />
+      持続的な絆が生まれる仕組みづくりをお手伝いします。
     </Fragment>
-  </Hero>
+  </Hero2>
 
-  <!-- Stats Widget ****************** -->
+  <!-- ミッション・ビジョン・バリュー -->
+  <section id="mvv" class="py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          Mission, Vision & Values
+        </h2>
+        <p class="text-lg text-bond-text-sub">私たちの使命と価値観</p>
+      </div>
 
+      <div class="space-y-12">
+        <!-- Mission -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-bond-border">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-bond-yellow-main/10 rounded-lg flex items-center justify-center">
+              <Icon name="tabler:target" class="w-8 h-8 text-bond-navy" />
+            </div>
+            <div class="ml-6 flex-1">
+              <h3 class="text-2xl font-bold text-bond-navy mb-2">Mission（使命）</h3>
+              <p class="text-xl text-bond-text-main mb-4">
+                地域の事業者とお客さまをつなぎ、価値が正しく届く環境をつくる
+              </p>
+              <p class="text-bond-text-sub leading-relaxed">
+                地域で頑張る事業者の価値が、適切にお客さまに伝わり、選ばれる。
+                そんな当たり前のことが当たり前に起きる環境を、デジタルの力で実現します。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vision -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-bond-border">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-bond-yellow-main/10 rounded-lg flex items-center justify-center">
+              <Icon name="tabler:eye" class="w-8 h-8 text-bond-navy" />
+            </div>
+            <div class="ml-6 flex-1">
+              <h3 class="text-2xl font-bold text-bond-navy mb-2">Vision（ビジョン）</h3>
+              <p class="text-xl text-bond-text-main mb-4">
+                宮崎を起点に、関係性を基盤とした持続的な経済圏を広げる
+              </p>
+              <p class="text-bond-text-sub leading-relaxed">
+                一時的な売上ではなく、お客さまとの関係性が続く仕組みを作る。
+                それが地域経済の持続的な成長につながると信じています。
+                宮崎から始まるこのモデルを、全国へと広げていきます。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Values -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 border border-bond-border">
+          <div class="flex items-start">
+            <div class="flex-shrink-0 w-16 h-16 bg-bond-yellow-main/10 rounded-lg flex items-center justify-center">
+              <Icon name="tabler:heart-handshake" class="w-8 h-8 text-bond-navy" />
+            </div>
+            <div class="ml-6 flex-1">
+              <h3 class="text-2xl font-bold text-bond-navy mb-4">Values（価値観）</h3>
+              
+              <div class="space-y-6">
+                <div>
+                  <h4 class="text-lg font-bold text-bond-navy mb-2">よしなに力</h4>
+                  <p class="text-bond-text-sub leading-relaxed">
+                    「こうしたい」という想いを汲み取り、言葉にならない要望まで形にします。
+                    期待を超える対応で、お客さまの「困った」を解決します。
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 class="text-lg font-bold text-bond-navy mb-2">共創スタンス</h4>
+                  <p class="text-bond-text-sub leading-relaxed">
+                    お客さまと並走し、事業の成長を自分ごととして捉えます。
+                    単なる外注先ではなく、パートナーとして一緒に成功を目指します。
+                  </p>
+                </div>
+                
+                <div>
+                  <h4 class="text-lg font-bold text-bond-navy mb-2">仕組み化と再現性</h4>
+                  <p class="text-bond-text-sub leading-relaxed">
+                    一過性の施策ではなく、継続的に成果が出る仕組みを構築。
+                    誰でも運用できる形で引き継ぎ、持続可能な成長を支援します。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 社名の由来 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          社名「ぼんど」の由来
+        </h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 border border-bond-border">
+        <div class="prose prose-lg max-w-none text-bond-text-main">
+          <p class="leading-relaxed mb-6">
+            社名の「ぼんど」は、英語の「Bond（絆・きずな）」から来ています。
+          </p>
+          <p class="leading-relaxed mb-6">
+            私たちが最も大切にしたいのは、人と人との「絆」です。
+            地域の事業者とお客さまの間に、単なる売買関係を超えた、
+            深い信頼と継続的な関係性を築きたい。
+          </p>
+          <p class="leading-relaxed mb-6">
+            Bondには「接着剤」という意味もあります。
+            まさに私たちは、地域の中で人と人、事業者とお客さまを
+            しっかりとつなぐ接着剤のような存在でありたいと考えています。
+          </p>
+          <p class="leading-relaxed mb-6">
+            絆は一朝一夕には生まれません。
+            時間をかけて、丁寧に、誠実に関係を育てていく。
+            そんな想いを込めて、この社名を選びました。
+          </p>
+          <p class="leading-relaxed">
+            あえてひらがなの「ぼんど」としたのは、
+            親しみやすさと柔らかさ、そして日本の地域に根ざした
+            温かい企業でありたいという願いからです。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 代表メッセージ -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          代表メッセージ
+        </h2>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-bond-border">
+        <div class="md:flex">
+          <div class="md:w-1/3 bg-gradient-to-br from-bond-yellow-main/10 to-bond-yellow-deep/10 p-8 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-32 h-32 mx-auto bg-bond-navy/10 rounded-full flex items-center justify-center mb-4">
+                <Icon name="tabler:user" class="w-16 h-16 text-bond-navy/50" />
+              </div>
+              <h3 class="font-bold text-bond-navy">代表取締役</h3>
+              <p class="text-bond-text-sub">橋口　真幸</p>
+            </div>
+          </div>
+          
+          <div class="md:w-2/3 p-8 md:p-12">
+            <div class="prose prose-lg max-w-none text-bond-text-main">
+              <p class="leading-relaxed mb-6">
+                宮崎には素晴らしい事業者がたくさんいます。
+                しかし、その価値が十分に伝わっていない、
+                デジタル化の波に乗り遅れている、そんな現実があります。
+              </p>
+              <p class="leading-relaxed mb-6">
+                私たちぼんどは、そんな地域の事業者の皆さまに寄り添い、
+                デジタルの力で課題を解決していきたいと考えています。
+              </p>
+              <p class="leading-relaxed mb-6">
+                大切にしているのは「よしなに対応」すること。
+                完璧な要件定義ができなくても、言葉にできない想いがあっても、
+                私たちが汲み取って形にします。
+              </p>
+              <p class="leading-relaxed">
+                宮崎から、地域経済の新しいモデルを作る。
+                そんな挑戦を、一緒にしていきましょう。
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数字で見るぼんど -->
   <Stats
-    title="Statistics about us"
     stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
+      { title: '設立', amount: '2025年11月21日' },
+      { title: '拠点', amount: '宮崎' },
     ]}
   />
 
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
-    columns={3}
-    isBeforeContent={true}
-    items={[
+  <!-- CTA -->
+  <CallToAction
+    actions={[
       {
-        title: 'Educational',
-        description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
+        text: 'お問い合わせ',
+        href: '/contact',
+        variant: 'primary',
       },
       {
-        title: 'Interior Design',
-        description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Photography',
-        description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
+        text: 'サービスを見る',
+        href: '/services',
       },
     ]}
-  />
+  >
+    <Fragment slot="title">
+      一緒に地域の未来を作りましょう
+    </Fragment>
 
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Business',
-        description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
-    items={[
-      {
-        title: 'Customer-centric approach',
-        description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
-      },
-      {
-        title: 'Constant Improvement',
-        description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
-      },
-      {
-        title: 'Ethical Practices',
-        description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-      },
-    ]}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
-    isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
-      },
-    ]}
-  />
+    <Fragment slot="subtitle">
+      まずはお気軽にご相談ください。<br />
+      あなたの「困った」を一緒に解決します。
+    </Fragment>
+  </CallToAction>
 </Layout>
