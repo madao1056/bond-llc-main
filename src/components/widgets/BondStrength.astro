@@ -1,7 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+
+import imgYoshinani from '~/assets/images/strength-yoshinani.png';
+import imgCocreation from '~/assets/images/strength-cocreation.png';
+import imgSystem from '~/assets/images/strength-system.png';
 
 export interface Props {
   id?: string;
@@ -22,87 +27,96 @@ const {
 const strengths = [
   {
     title: 'よしなに力',
-    subtitle: '期待を超える対応',
+    subtitle: 'Expectation Exceeded',
     description: '「こうしたい」という想いを汲み取り、言葉にならない要望まで形にします。細かな相談も遠慮なくどうぞ。',
     icon: 'tabler:sparkles',
-    points: [
-      '曖昧な要望も形に',
-      '期待以上の提案',
-      '細やかなフォロー',
-    ],
+    image: imgYoshinani,
+    points: ['曖昧な要望も形に', '期待以上の提案', '細やかなフォロー'],
   },
   {
     title: '共創スタンス',
-    subtitle: '一緒に作り上げる',
+    subtitle: 'Co-Creation',
     description: 'お客さまと並走し、事業の成長を自分ごととして捉えます。単なる外注先ではなく、パートナーとして。',
     icon: 'tabler:users-group',
-    points: [
-      '事業理解から始める',
-      '定期的な振り返り',
-      '改善提案の継続',
-    ],
+    image: imgCocreation,
+    points: ['事業理解から始める', '定期的な振り返り', '改善提案の継続'],
   },
   {
     title: '仕組み化と再現性',
-    subtitle: '持続可能な成長',
+    subtitle: 'Systemization',
     description: '一過性の施策ではなく、継続的に成果が出る仕組みを構築。誰でも運用できる形で引き継ぎます。',
     icon: 'tabler:settings',
-    points: [
-      '運用マニュアル作成',
-      'データ分析と改善',
-      '属人化の解消',
-    ],
+    image: imgSystem,
+    points: ['運用マニュアル作成', 'データ分析と改善', '属人化の解消'],
   },
 ];
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`}>
-  <Headline title={title} subtitle={subtitle} classes={classes?.headline ?? ''} />
+  <!-- Section Header -->
+  <div class="text-center mb-20 relative">
+    <div class="inline-block relative z-10 bg-bond-background px-8">
+      <h2 class="font-serif text-5xl font-bold text-bond-navy tracking-tight">{title}</h2>
+      <p class="font-mono text-sm text-bond-yellow-deep mt-2 tracking-[0.2em] uppercase">選ばれる理由</p>
+    </div>
+    <div class="absolute top-1/2 left-0 w-full h-px bg-bond-navy/10 z-0"></div>
+  </div>
   
-  <div class="mt-12 space-y-16">
+  <div class="space-y-24">
     {strengths.map((strength, index) => (
-      <div class={`flex flex-col lg:flex-row gap-8 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+      <div class={`flex flex-col lg:flex-row gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+        
         <!-- コンテンツ側 -->
-        <div class="flex-1 lg:max-w-xl">
-          <div class="flex items-center mb-6">
-            <div class="flex items-center justify-center w-14 h-14 bg-bond-yellow-main rounded-lg mr-4">
-              <Icon name={strength.icon} class="w-7 h-7 text-bond-navy" />
-            </div>
-            <div>
-              <h3 class="text-2xl font-bold text-bond-navy">
-                {strength.title}
-              </h3>
-              <p class="text-sm text-bond-text-sub">
-                {strength.subtitle}
-              </p>
-            </div>
+        <div class="flex-1 lg:max-w-xl relative">
+          <!-- Decorative Number -->
+          <div class="absolute -top-24 -left-8 text-[8rem] font-bold text-bond-navy opacity-20 font-serif leading-none select-none z-0">
+            0{index + 1}
           </div>
-          
-          <p class="text-bond-text-main mb-6 leading-relaxed text-lg">
-            {strength.description}
-          </p>
-          
-          <ul class="space-y-3">
-            {strength.points.map((point) => (
-              <li class="flex items-start">
-                <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-3 flex-shrink-0" />
-                <span class="text-bond-text-main">{point}</span>
-              </li>
-            ))}
-          </ul>
+
+          <div class="relative z-10">
+            <h3 class="text-3xl font-bold text-bond-navy mb-2 font-serif flex items-center gap-4">
+              {strength.title}
+              <div class="flex-grow h-px bg-bond-navy/20"></div>
+            </h3>
+            <p class="font-mono text-sm text-bond-text-sub uppercase tracking-widest mb-8">
+              {strength.subtitle}
+            </p>
+            
+            <p class="text-bond-text-main mb-8 leading-relaxed text-lg border-l-2 border-bond-yellow-main pl-6">
+              {strength.description}
+            </p>
+            
+            <ul class="grid grid-cols-1 gap-4">
+              {strength.points.map((point) => (
+                <li class="group flex items-center bg-white p-3 border border-bond-navy/10 hover:border-bond-navy transition-colors">
+                  <span class="w-1.5 h-1.5 bg-bond-yellow-main mr-4 group-hover:bg-bond-navy transition-colors"></span>
+                  <span class="text-bond-navy font-bold">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
         
-        <!-- ビジュアル側 -->
-        <div class="flex-1 flex justify-center">
-          <div class="relative w-full max-w-md">
-            <div class="aspect-square rounded-2xl bg-gradient-to-br from-bond-yellow-main/10 to-bond-yellow-deep/10 flex items-center justify-center">
-              <Icon name={strength.icon} class="w-32 h-32 text-bond-navy/10" />
-            </div>
-            <div class="absolute -inset-4">
-              <div class="w-full h-full rounded-2xl bg-gradient-to-br from-bond-yellow-main/5 to-transparent blur-xl"></div>
+        <!-- ビジュアル側 (Image with Constructivist Frame) -->
+        <div class="flex-1 w-full flex justify-center">
+          <div class="relative w-full max-w-md aspect-square">
+            <!-- Back Geomtry -->
+            <div class="absolute top-4 right-4 w-full h-full border border-bond-navy z-0"></div>
+            <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-bond-yellow-main z-10 opacity-80 mix-blend-multiply"></div>
+            
+            <!-- Main Image -->
+            <div class="relative z-20 w-full h-full overflow-hidden grayscale contrast-125 border-2 border-bond-background shadow-xl">
+               <Image
+                  src={strength.image}
+                  alt={strength.title}
+                  width={500}
+                  height={500}
+                  class="w-full h-full object-cover"
+                />
             </div>
           </div>
         </div>
+        
       </div>
     ))}
   </div>

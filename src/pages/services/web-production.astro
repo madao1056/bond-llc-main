@@ -1,0 +1,261 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import { Icon } from 'astro-icon/components';
+import lineIcon from '~/icons/LINE.png';
+import heroImage from '~/assets/images/hero-web-production.png';
+
+const metadata = {
+  title: 'Web制作・運用サービス | 合同会社ぼんど',
+  description: '宮崎でWeb制作・運用をお探しなら合同会社ぼんどへ。SEO対策、レスポンシブデザイン、保守運用まで一貫してサポート。',
+};
+
+
+const process = [
+  {
+    title: 'ヒアリング',
+    description: 'お客さまのビジネスや課題を詳しくお聞きします',
+    icon: 'tabler:message-circle',
+  },
+  {
+    title: '企画・提案',
+    description: '戦略的な企画と具体的な提案をいたします',
+    icon: 'tabler:bulb',
+  },
+  {
+    title: 'デザイン制作',
+    description: 'ブランドイメージに合わせたデザインを作成',
+    icon: 'tabler:palette',
+  },
+  {
+    title: '開発・実装',
+    description: '最新技術でスピーディに構築します',
+    icon: 'tabler:code',
+  },
+  {
+    title: 'テスト・公開',
+    description: '入念なテストを行い、安全に公開します',
+    icon: 'tabler:rocket',
+  },
+  {
+    title: '運用・改善',
+    description: '公開後も継続的にサポートいたします',
+    icon: 'tabler:chart-line',
+  },
+];
+
+const faqs = [
+  {
+    title: '制作期間はどれくらいかかりますか？',
+    description: 'サイトの規模や機能により異なりますが、シンプルなサイトで約3週間〜1ヶ月、本格的な企業サイトで約1〜2ヶ月、高機能サイトで約2〜3ヶ月が目安です。',
+  },
+  {
+    title: '制作費用の支払い方法は？',
+    description: '着手時に50%、納品時に50%のお支払いが基本となります。月額保守は毎月のお支払いです。分割払いのご相談も承っております。',
+  },
+  {
+    title: 'どんな業種でも対応可能ですか？',
+    description: 'はい、幅広い業種に対応しております。飲食店、美容室、医療機関、製造業、サービス業など、様々な実績があります。',
+  },
+  {
+    title: '自分で更新できるようになりますか？',
+    description: '一定以上の規模のサイトではCMS（更新システム）を導入しますので、ブログやお知らせなどはご自身で更新いただけます。操作方法もしっかりサポートいたします。',
+  },
+  {
+    title: 'スマホ対応は含まれていますか？',
+    description: 'はい、すべてのサイトでレスポンシブデザイン（PC・スマホ・タブレット対応）が標準で含まれています。',
+  },
+  {
+    title: '写真撮影はお願いできますか？',
+    description: '一定以上の規模のサイトでは撮影も含まれています。シンプルなサイトでもオプションで承ることが可能です。',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <FullWidthHero
+    tagline="Web Production & Management"
+    title="Web制作・運用サービス"
+    subtitle="見つけてもらえる、選んでもらえる<br />結果を出すWebサイトを"
+    description="宮崎で10年以上の実績を持つ私たちが、お客さまのビジネスを深く理解し、成果の出るWebサイトを制作します。"
+    backgroundImage={heroImage.src}
+    actions={[
+      {
+        text: '無料相談はこちら',
+        href: '/contact',
+        variant: 'primary',
+        icon: 'tabler:message-circle',
+      },
+      {
+        text: '制作の流れを見る',
+        href: '#process',
+        variant: 'secondary',
+      },
+    ]}
+  />
+
+  <!-- サービス概要 -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-6 tracking-tight">
+          地域ビジネスに最適なWeb制作
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">OPTIMIZED WEB PRODUCTION</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub max-w-3xl mx-auto leading-relaxed">
+          宮崎で10年以上の実績を持つ私たちが、お客さまのビジネスを深く理解し、
+          成果の出るWebサイトを制作します。見た目だけでなく、集客・売上につながる
+          戦略的なWebサイトをご提供いたします。
+        </p>
+      </div>
+
+      <!-- 特徴カード -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-bond-border border border-bond-border">
+        <div class="bg-bond-surface dark:bg-gray-800 p-8 group hover:bg-white transition-colors duration-300">
+          <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
+            <Icon name="tabler:search" class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">SEO対策込み</h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            検索エンジンで見つけてもらいやすいサイト構造と、地域SEOに強い設計で集客力を高めます。
+          </p>
+        </div>
+        <div class="bg-bond-surface dark:bg-gray-800 p-8 group hover:bg-white transition-colors duration-300">
+          <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
+            <Icon name="tabler:devices" class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">レスポンシブ対応</h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            スマホ・タブレット・PCすべてで最適な表示。どんなデバイスからでも快適に閲覧できます。
+          </p>
+        </div>
+        <div class="bg-bond-surface dark:bg-gray-800 p-8 group hover:bg-white transition-colors duration-300">
+          <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
+            <Icon name="tabler:rocket" class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">高速表示</h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            最新技術で高速化を実現。表示速度の改善は、SEO効果と離脱率の改善につながります。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 制作の流れ -->
+  <section id="process" class="py-16 lg:py-24 bg-bond-navy text-white relative">
+    <div class="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-yellow-main mb-4 tracking-tight">
+          制作の流れ
+          <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">WORK FLOW</span>
+        </h2>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+          お問い合わせから公開まで、丁寧にサポートいたします
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {process.map((step, index) => (
+          <div class="relative group">
+            <div class="border border-white/20 p-8 h-full hover:border-bond-yellow-main transition-colors duration-300 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-16 h-16 bg-white/5 -mr-8 -mt-8 rotate-45 group-hover:bg-bond-yellow-main/20 transition-colors duration-300"></div>
+              <div class="flex items-start mb-6">
+                <div class="text-4xl font-mono font-bold text-white/20 group-hover:text-bond-yellow-main transition-colors duration-300 mr-4">
+                  0{index + 1}
+                </div>
+                <div>
+                   <h3 class="text-xl font-bold text-white mb-2 font-serif group-hover:text-bond-yellow-main transition-colors duration-300">{step.title}</h3>
+                </div>
+              </div>
+              <p class="text-sm text-gray-400 ml-12 leading-relaxed">{step.description}</p>
+            </div>
+            {index < process.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-white/20 z-10"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 実績紹介 -->
+  <section class="py-16 lg:py-24 bg-bond-background relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          こんなサイトを制作しています
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">ACHIEVEMENTS</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:building-store" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">飲食店</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">メニュー表示 / 予約システム / テイクアウト注文</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:scissors" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">美容室・サロン</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">スタイルギャラリー / 予約システム / スタッフ紹介</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+           <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:stethoscope" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">医療機関</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">診療案内 / オンライン予約 / 問診票ダウンロード</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:building" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">建設・不動産</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">施工事例 / 物件検索 / VRツアー</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:package" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">製造業</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">製品カタログ / 技術情報 / お問い合わせ</p>
+        </div>
+         <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:briefcase" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">士業・コンサル</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">サービス案内 / 実績紹介 / セミナー申込み</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQs
+    title="よくあるご質問"
+    subtitle="Web制作に関してお客さまからよくいただくご質問をまとめました"
+    items={faqs}
+  />
+
+  <!-- CTA -->
+  <BondCTA
+    title="Web制作のご相談はお気軽に"
+    subtitle="まずは無料相談で、お客さまのご要望をお聞かせください"
+    description="現在のサイトの課題分析から、新規制作、リニューアルまで幅広く対応いたします。"
+  />
+</Layout>

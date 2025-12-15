@@ -23,88 +23,100 @@ export interface Props {
 const {
   title = '地域の挑戦とお客さまをつなぐ、\n絆（きずな）のような存在へ。',
   subtitle = '宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援・ローカルメディア運営を通じて、事業者とお客さまの関係性が続く仕組みをデザインします。',
-  tagline,
+  tagline = 'Architecture of Intelligence',
   actions = [],
   image,
 } = Astro.props;
 ---
 
-<section class="relative overflow-hidden">
-  <!-- 背景要素 -->
-  <div class="absolute inset-0 bg-bond-yellow-main">
-    <div class="absolute inset-0 bg-gradient-to-br from-bond-yellow-main via-bond-yellow-main to-bond-yellow-deep opacity-60"></div>
-    <!-- 装飾パターン -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-white rounded-full opacity-5 -translate-y-1/2 translate-x-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-72 h-72 bg-white rounded-full opacity-5 translate-y-1/2 -translate-x-1/2"></div>
-    </div>
+<section class="relative min-h-[90vh] flex items-center overflow-hidden bg-bond-background bg-blueprint-grid">
+  <!-- Layout Grid Lines (Structure) -->
+  <div class="absolute inset-x-0 inset-y-0 pointer-events-none z-0 flex justify-between px-4 sm:px-6 max-w-7xl mx-auto">
+    <div class="w-px h-full bg-bond-navy/10 border-r border-bond-navy/10"></div>
+    <div class="w-px h-full bg-bond-navy/10 border-r border-bond-navy/10 hidden md:block"></div>
+    <div class="w-px h-full bg-bond-navy/10 border-r border-bond-navy/10"></div>
   </div>
 
-  <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
-    <div class="py-20 md:py-28 lg:py-32">
-      <div class="mx-auto max-w-5xl text-center">
-        {tagline && (
-          <p class="text-base font-semibold uppercase tracking-wide text-bond-navy md:text-lg">
+  <!-- Geometric Decorations (Neon) -->
+  <div class="absolute top-[10%] left-[5%] w-32 h-32 border border-bond-yellow-main rounded-full opacity-60 z-0"></div>
+  <div class="absolute bottom-[20%] right-[5%] w-48 h-48 border border-bond-navy/20 rotate-45 z-0"></div>
+  <div class="absolute top-[20%] right-[15%] w-4 h-4 bg-bond-yellow-main z-0"></div>
+  
+  <div class="relative mx-auto max-w-7xl px-4 sm:px-6 w-full z-10 grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+    
+    <!-- Left Column: Text Content -->
+    <div class="md:col-span-7 lg:col-span-6 relative">
+      <!-- Tagline (Mono) -->
+      {tagline && (
+        <div class="flex items-center gap-4 mb-6">
+          <span class="h-px w-12 bg-bond-navy"></span>
+          <p class="font-mono text-sm tracking-widest text-bond-text-sub uppercase">
             {tagline}
           </p>
-        )}
-        
-        {title && (
-          <h1 class="mb-8 text-4xl font-bold tracking-tight text-bond-navy md:text-5xl lg:text-6xl">
-            {title.split('\n').map((line, i) => (
-              <>
-                {i > 0 && <br />}
-                <span set:html={line} />
-              </>
-            ))}
-          </h1>
-        )}
+        </div>
+      )}
+      
+      <!-- Title (Serif Mixture) -->
+      {title && (
+        <h1 class="font-serif text-[4rem] font-bold tracking-tight text-bond-navy leading-[1.2] mb-8">
+          {title.split('\n').map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              <span set:html={line} />
+            </>
+          ))}
+        </h1>
+      )}
 
-        {subtitle && (
-          <p class="mb-10 text-lg text-bond-navy/90 md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed">
-            {subtitle}
-          </p>
-        )}
+      <!-- Subtitle (Sans) -->
+      {subtitle && (
+        <p class="mb-10 text-lg md:text-xl font-sans text-bond-text-sub leading-relaxed max-w-lg border-l-2 border-bond-yellow-main pl-6">
+          {subtitle}
+        </p>
+      )}
 
-        {actions && actions.length > 0 && (
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            {actions.map(({ text, href, variant = 'primary', icon, ...rest }) => (
-              <Button variant={variant} href={href} class={variant === 'primary' ? 'btn-primary' : 'btn-secondary'} {...rest}>
-                {icon && <Icon name={icon} class="w-5 h-5 mr-2 -ml-1.5" />}
-                {text}
-              </Button>
-            ))}
-          </div>
-        )}
-      </div>
+      <!-- Actions -->
+      {actions && actions.length > 0 && (
+        <div class="flex flex-col sm:flex-row gap-4">
+          {actions.map(({ text, href, variant = 'primary', icon, ...rest }) => (
+            <Button variant={variant} href={href} class={variant === 'primary' ? 'btn-primary' : 'btn-secondary'} {...rest}>
+              {icon && <Icon name={icon} class="w-4 h-4 mr-2" />}
+              {text}
+            </Button>
+          ))}
+        </div>
+      )}
+    </div>
 
+    <!-- Right Column: Visual Collage -->
+    <div class="md:col-span-5 lg:col-span-6 relative mt-12 md:mt-0">
       {image && (
-        <div class="mt-12 flex justify-center">
-          <img
-            src={image.src}
-            alt={image.alt || ''}
-            class="w-full max-w-4xl rounded-lg shadow-xl"
-            loading="eager"
-            decoding="async"
-          />
+        <div class="relative">
+          <!-- Back Layer: Neon Circle -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-bond-navy/10 rounded-full animate-[spin_60s_linear_infinite]"></div>
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] border border-bond-yellow-main/50 rounded-full"></div>
+
+          <!-- Middle Layer: Image (Cut-out & Monochrome) -->
+          <div class="relative z-10 cut-out-image">
+            <img
+              src={image.src}
+              alt={image.alt || ''}
+              class="w-full h-auto object-cover grayscale contrast-125"
+              loading="eager"
+            />
+          </div>
+
+          <!-- Front Layer: Floating Numbers/Data -->
+          <div class="absolute -bottom-8 -left-8 bg-bond-yellow-main p-4 z-20 shadow-[8px_8px_0_0_#1f2e6c]">
+            <p class="font-mono text-3xl font-bold text-bond-navy">est.2025</p>
+            <p class="font-sans text-xs tracking-widest uppercase text-bond-navy/80 mt-1">Miyazaki, JP</p>
+          </div>
         </div>
       )}
     </div>
   </div>
 
-  <!-- 下部の波形装飾 -->
-  <div class="absolute bottom-0 left-0 right-0">
-    <svg
-      class="w-full h-auto"
-      viewBox="0 0 1440 60"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="none"
-    >
-      <path
-        d="M0 30C240 10 480 50 720 30C960 10 1200 50 1440 30V60H0V30Z"
-        fill="var(--bond-background)"
-      />
-    </svg>
+  <!-- Decorative Footer Line -->
+  <div class="absolute bottom-0 left-0 w-full h-1 bg-bond-navy/10 flex">
   </div>
 </section>

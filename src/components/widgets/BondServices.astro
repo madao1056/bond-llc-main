@@ -1,7 +1,6 @@
 ---
 import { Icon } from 'astro-icon/components';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
 
 export interface Props {
   id?: string;
@@ -21,6 +20,7 @@ const {
 
 const services = [
   {
+    id: '01',
     title: 'Web制作・運用',
     description: 'お客さまに「見つけてもらえる」「選んでもらえる」Webサイトを制作。更新や改善もお任せください。',
     icon: 'tabler:world-www',
@@ -28,6 +28,7 @@ const services = [
     features: ['レスポンシブ対応', 'SEO最適化', '保守運用'],
   },
   {
+    id: '02',
     title: 'EC構築・オンライン販売支援',
     description: '商品の魅力が伝わるECサイトを構築。在庫管理から配送まで、売上アップをトータルサポート。',
     icon: 'tabler:shopping-cart',
@@ -35,6 +36,7 @@ const services = [
     features: ['Shopify構築', '商品撮影', '運用代行'],
   },
   {
+    id: '03',
     title: 'MEO・LINE・集客導線設計',
     description: 'Googleマップでの上位表示、LINE公式アカウント活用で、地域のお客さまとの接点を増やします。',
     icon: 'tabler:map-pin',
@@ -42,6 +44,7 @@ const services = [
     features: ['MEO対策', 'LINE構築', 'SNS運用'],
   },
   {
+    id: '04',
     title: 'ローカルDX・業務効率化',
     description: '手作業の自動化、データ活用で業務を効率化。本業に集中できる環境づくりをサポートします。',
     icon: 'tabler:cpu',
@@ -52,56 +55,71 @@ const services = [
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`}>
-  <Headline title={title} subtitle={subtitle} classes={classes?.headline ?? ''} />
+  <!-- Section Header (Technical Style) -->
+  <div class="mb-16 relative">
+    <div class="absolute left-0 top-1/2 w-full h-px bg-bond-navy/20 -z-10"></div>
+    <div class="inline-block bg-bond-background pr-6">
+      <h2 class="font-serif text-4xl font-bold text-bond-navy">
+        {title}
+      </h2>
+      <p class="font-mono text-sm text-bond-yellow-deep mt-1 tracking-widest uppercase">
+        // サービス概要
+      </p>
+    </div>
+  </div>
   
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-bond-navy/20 border border-bond-navy/20">
     {services.map((service) => (
-      <div class="group relative bg-white rounded-xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden border border-bond-border">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-bond-yellow-main to-bond-yellow-deep"></div>
-        
-        <div class="p-8">
-          <div class="flex items-start">
-            <div class="flex-shrink-0">
-              <div class="flex items-center justify-center w-12 h-12 bg-bond-yellow-main/10 rounded-lg group-hover:bg-bond-yellow-main/20 transition-colors duration-300">
-                <Icon name={service.icon} class="w-6 h-6 text-bond-navy" />
-              </div>
+      <div class="group relative bg-bond-background p-8 hover:bg-bond-surface transition-colors duration-300">
+        <!-- Technical Annotation Line -->
+        <div class="absolute top-4 right-4 text-xs font-mono text-bond-navy/40">
+          Fig.{service.id}
+        </div>
+
+        <div class="flex items-start gap-6">
+          <div class="flex-shrink-0 relative">
+            <div class="w-12 h-12 border border-bond-navy flex items-center justify-center group-hover:bg-bond-yellow-main transition-colors duration-300">
+              <Icon name={service.icon} class="w-6 h-6 text-bond-navy" />
             </div>
-            <div class="ml-4 flex-1">
-              <h3 class="text-xl font-bold text-bond-navy mb-2">
-                {service.title}
-              </h3>
-              <p class="text-bond-text-sub mb-4 leading-relaxed">
-                {service.description}
-              </p>
-              
-              <div class="flex flex-wrap gap-2 mb-4">
-                {service.features.map((feature) => (
-                  <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-bond-background text-bond-text-main">
-                    {feature}
-                  </span>
-                ))}
-              </div>
-              
-              <a
-                href={service.href}
-                class="inline-flex items-center text-sm font-medium text-bond-navy hover:text-bond-yellow-deep transition-colors duration-200"
-              >
-                詳しく見る
-                <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1" />
-              </a>
+            <!-- Connection Line -->
+            <div class="absolute top-1/2 left-full w-4 h-px bg-bond-navy mt-[-0.5px]"></div>
+          </div>
+
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-bond-navy mb-3 font-serif">
+              {service.title}
+            </h3>
+            <p class="text-bond-text-sub mb-6 text-sm leading-relaxed font-sans">
+              {service.description}
+            </p>
+            
+            <div class="flex flex-wrap gap-2 mb-6">
+              {service.features.map((feature) => (
+                <span class="inline-flex items-center px-2 py-1 text-[10px] font-mono border border-bond-navy/20 text-bond-navy/60 uppercase tracking-wider">
+                  {feature}
+                </span>
+              ))}
             </div>
+            
+            <a
+              href={service.href}
+              class="inline-flex items-center text-xs font-bold text-bond-navy hover:text-bond-yellow-deep transition-colors duration-200 uppercase tracking-widest border-b border-bond-navy pb-1"
+            >
+              Details [PDF]
+              <Icon name="tabler:arrow-right" class="w-3 h-3 ml-2" />
+            </a>
           </div>
         </div>
       </div>
     ))}
   </div>
 
-  <div class="mt-12 text-center">
+  <div class="mt-16 text-center">
     <a
       href="/services"
       class="btn-secondary"
     >
-      すべてのサービスを見る
+      View All Services ->
     </a>
   </div>
 </WidgetWrapper>

@@ -26,7 +26,15 @@ const {
 
   {
     inputs && (
-      <div class="flex flex-col max-w-xl mx-auto rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow p-4 sm:p-6 lg:p-8 w-full">
+      <div class="flex flex-col max-w-2xl mx-auto border border-bond-navy/10 bg-white/90 p-8 sm:p-12 w-full relative">
+        <!-- Tech Decoration -->
+        <div class="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-bond-yellow-main"></div>
+        <div class="absolute -top-1 -right-1 w-3 h-3 border-t border-r border-bond-yellow-main"></div>
+        <div class="absolute -bottom-1 -left-1 w-3 h-3 border-b border-l border-bond-yellow-main"></div>
+        <div class="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-bond-yellow-main"></div>
+
+        <div class="absolute top-4 right-4 text-xs font-mono text-bond-navy/20 tracking-widest uppercase">Form 01 // Contact</div>
+
         <FormContainer
           inputs={inputs}
           textarea={textarea}

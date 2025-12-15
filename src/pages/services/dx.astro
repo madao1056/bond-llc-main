@@ -1,0 +1,387 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import { Icon } from 'astro-icon/components';
+import heroImage from '~/assets/images/hero-dx.png';
+
+const metadata = {
+  title: 'ローカルDX・業務効率化サービス | 合同会社ぼんど',
+  description: '宮崎の地域企業のDX推進をサポート。業務自動化、データ分析、システム導入により生産性を大幅に向上させます。',
+};
+
+const solutions = [
+  {
+    title: '業務自動化ソリューション',
+    icon: 'tabler:robot',
+    description: '繰り返し作業をシステム化し、人的ミスの削減と時間の節約を実現',
+    items: [
+      'Excelマクロ・VBA開発',
+      'RPAツール導入（Power Automate等）',
+      '定型書類の自動生成',
+      'データ入力・転記の自動化',
+      'メール送信の自動化',
+    ],
+  },
+  {
+    title: 'データ活用・分析',
+    icon: 'tabler:chart-dots',
+    description: 'データを見える化し、経営判断に役立つインサイトを提供',
+    items: [
+      'BIツール導入（Looker Studio、Tableau等）',
+      'ダッシュボード構築',
+      '売上・在庫データ分析',
+      '顧客データ分析',
+      'KPI設定・モニタリング',
+    ],
+  },
+  {
+    title: 'クラウド化・システム導入',
+    icon: 'tabler:cloud',
+    description: '最新のクラウドツールで、どこでも働ける環境を実現',
+    items: [
+      'Google Workspace導入',
+      'Microsoft 365導入',
+      'クラウド会計ソフト導入',
+      'CRM・SFAツール導入',
+      'プロジェクト管理ツール導入',
+    ],
+  },
+  {
+    title: 'セキュリティ強化',
+    icon: 'tabler:shield',
+    description: 'サイバー攻撃から企業を守る、適切なセキュリティ対策',
+    items: [
+      'セキュリティ診断',
+      'ウイルス対策ソフト導入',
+      'バックアップシステム構築',
+      'アクセス権限管理',
+      'セキュリティ研修',
+    ],
+  },
+];
+
+const benefits = [
+  {
+    title: '生産性向上',
+    value: '平均40%',
+    description: '業務時間削減',
+    icon: 'tabler:trending-up',
+  },
+  {
+    title: 'コスト削減',
+    value: '年間30%',
+    description: '人件費・運用費削減',
+    icon: 'tabler:coin',
+  },
+  {
+    title: 'ミス削減',
+    value: '90%減少',
+    description: '人的ミスの削減',
+    icon: 'tabler:check',
+  },
+  {
+    title: '働き方改革',
+    value: '満足度85%',
+    description: '従業員満足度向上',
+    icon: 'tabler:users',
+  },
+];
+
+const process = [
+  {
+    title: '現状分析',
+    description: '業務フローの可視化と課題抽出',
+    detail: '現在の業務プロセスを詳細にヒアリングし、改善ポイントを明確化します。',
+  },
+  {
+    title: '改善提案',
+    description: '費用対効果の高い施策を提案',
+    detail: '投資対効果（ROI）を明示し、優先順位をつけた改善計画を策定します。',
+  },
+  {
+    title: 'システム選定',
+    description: '最適なツール・システムの選択',
+    detail: '業界や規模、予算に応じて、最適なソリューションを選定します。',
+  },
+  {
+    title: '導入支援',
+    description: '設定から運用開始までサポート',
+    detail: 'システムの初期設定、データ移行、テスト運用まで一貫してサポートします。',
+  },
+  {
+    title: '教育・研修',
+    description: '全員が使えるようになるまで支援',
+    detail: '操作マニュアルの作成と、実践的な研修で定着を支援します。',
+  },
+  {
+    title: '運用サポート',
+    description: '導入後も継続的に改善',
+    detail: '運用状況をモニタリングし、さらなる改善提案を行います。',
+  },
+];
+
+const cases = [
+  {
+    industry: '製造業',
+    company: 'A社（従業員50名）',
+    challenge: '受注から納品までの管理が紙ベースで、進捗把握が困難',
+    solution: 'クラウド型生産管理システムの導入とExcel業務の自動化',
+    result: '納期遅延が80%減少、残業時間30%削減',
+    icon: 'tabler:building-factory',
+  },
+  {
+    industry: '小売業',
+    company: 'B店（スタッフ15名）',
+    challenge: '在庫管理と売上分析に多大な時間がかかっていた',
+    solution: 'POSシステム連携とBIツールによる自動レポート作成',
+    result: '在庫管理時間90%削減、売上10%向上',
+    icon: 'tabler:shopping-cart',
+  },
+  {
+    industry: '医療・福祉',
+    company: 'C施設（職員30名）',
+    challenge: 'シフト管理と勤怠管理が複雑で、ミスが頻発',
+    solution: 'クラウド勤怠システムと自動シフト作成ツール導入',
+    result: '管理業務50%削減、シフトミスゼロ達成',
+    icon: 'tabler:heart',
+  },
+];
+
+const faqs = [
+  {
+    title: 'DX推進にはどれくらいの費用がかかりますか？',
+    description: '業務内容や規模、必要なシステムによって大きく異なります。まずは貴社の現状を詳しくお聞きして、最適なソリューションと概算をご提案いたします。無料診断で段階的な導入計画も作成しますので、お気軽にご相談ください。',
+  },
+  {
+    title: '業種別にどんなDXが可能ですか？',
+    description: '【飲食店】予約管理システム、キャッシュレス決済、在庫管理の自動化により、ホールスタッフが接客に集中できます。【農業】IoTセンサーで土壌・気象データを収集し、最適な守稫時期を判断。作業記録のデジタル化で品質管理も向上します。【不動産】VR内覧、電子契約、顧客管理システムで業務効率が大幅に改善します。【美容・サロン】予約管理、顧客カルテ、LINE連携でリピート率が向上します。【士業】書類作成の自動化、クラウド保管、オンライン相談で業務時間を大幅に削減できます。',
+  },
+  {
+    title: 'DXを導入するとどんなメリットがありますか？',
+    description: 'ルーティン作業から解放され、スタッフが本来の価値ある業務に集中できます。例えば、データ入力や書類作成の時間が80%削減され、その時間を顧客サービスや新規事業開発に充てられます。また、データの可視化により経営判断が迅速になり、ミスも減少します。結果として、売上向上とコスト削減が同時に実現し、従業員の満足度も向上します。',
+  },
+  {
+    title: 'ITに詳しくない社員でも使えるようになりますか？',
+    description: 'はい、大丈夫です。導入するシステムは直感的に使えるものを選定し、丁寧な研修とマニュアル作成でサポートします。定着するまでフォローいたします。',
+  },
+  {
+    title: 'どこから始めればいいか分かりません',
+    description: 'まずは現状分析から始めましょう。無料診断で、貴社の課題と優先的に取り組むべき領域を明確にし、段階的な導入計画をご提案します。',
+  },
+  {
+    title: '既存システムとの連携は可能ですか？',
+    description: '多くの場合、連携可能です。API連携やCSVインポート・エクスポートなど、様々な方法で既存システムとのデータ連携を実現します。',
+  },
+  {
+    title: 'セキュリティは大丈夫ですか？',
+    description: '導入するシステムは全てセキュリティ基準を満たしたものを選定します。また、従業員向けのセキュリティ研修も実施し、人的リスクも軽減します。',
+  },
+  {
+    title: '導入後のサポートはありますか？',
+    description: 'はい、導入後も継続的にサポートします。システムのアップデート対応、トラブル対応、追加研修など、安心して使い続けられる体制を整えています。',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <FullWidthHero
+    tagline="Digital Transformation"
+    title="ローカルDX・業務効率化"
+    subtitle="デジタルの力で、本業に集中できる環境を<br />宮崎の企業のDX推進をサポート"
+    description="手作業からの解放で、価値ある仕事に集中。業務自動化、データ分析、システム導入により生産性を大幅に向上させます。"
+    backgroundImage={heroImage.src}
+    actions={[
+      {
+        text: '無料診断を申し込む',
+        href: '/contact',
+        variant: 'primary',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        text: 'ソリューション詳細',
+        href: '#solutions',
+        variant: 'secondary',
+        icon: 'tabler:bulb',
+      },
+    ]}
+  />
+
+  <!-- サービス概要 -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-6 tracking-tight">
+          手作業からの解放で、価値ある仕事に集中
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">VALUE DRIVEN WORK</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub max-w-3xl mx-auto leading-relaxed">
+          毎日の繰り返し作業、Excelでの集計作業、紙の書類管理…
+          これらの「当たり前」を見直し、デジタル化することで、
+          本来注力すべき業務に時間を使えるようになります。
+        </p>
+      </div>
+
+      <!-- 効果・メリット -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-bond-border border border-bond-border mb-16">
+        {benefits.map((benefit) => (
+          <div class="bg-bond-surface dark:bg-gray-800 p-8 text-center group hover:bg-white transition-colors duration-300">
+            <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mx-auto mb-4 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
+              <Icon name={benefit.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
+            </div>
+            <p class="text-3xl font-bold text-bond-navy dark:text-sky-400 mb-1 font-mono">{benefit.value}</p>
+            <p class="text-sm font-semibold text-bond-text-main dark:text-gray-300 mb-2 font-serif">{benefit.title}</p>
+            <p class="text-xs text-bond-text-sub dark:text-gray-400 leading-tight">{benefit.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ソリューション -->
+  <section id="solutions" class="py-16 lg:py-24 bg-bond-background relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          提供するソリューション
+           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">SOLUTIONS</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub dark:text-gray-300">
+          お客さまの課題に合わせた最適なDXソリューションを提供
+        </p>
+      </div>
+
+  <!-- ソリューション詳細 -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {solutions.map((solution) => (
+      <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+        <div class="flex items-start mb-6">
+          <div class="w-12 h-12 border border-bond-yellow-main flex items-center justify-center mr-4 flex-shrink-0 group-hover:bg-bond-yellow-main transition-colors duration-300">
+            <Icon name={solution.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-bond-navy" />
+          </div>
+          <div>
+            <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-2 font-serif">{solution.title}</h3>
+            <p class="text-sm text-bond-text-sub dark:text-gray-300">{solution.description}</p>
+          </div>
+        </div>
+        <ul class="space-y-2">
+          {solution.items.map((item) => (
+            <li class="flex items-start">
+              <Icon name="tabler:corner-down-right" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+              <span class="text-sm text-bond-text-main dark:text-gray-300 font-mono">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+    </div>
+  </section>
+
+  <!-- 導入プロセス -->
+  <section class="py-16 lg:py-24 bg-bond-navy text-white relative">
+    <div class="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-yellow-main mb-4 tracking-tight">
+          DX推進の進め方
+          <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">IMPLEMENTATION</span>
+        </h2>
+        <p class="text-lg text-gray-300">
+          段階的に、確実に、成果を出しながら進めます
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {process.map((step, index) => (
+          <div class="relative group">
+            <div class="group h-full p-8 border border-white/20 hover:border-bond-yellow-main transition-colors duration-300 bg-bond-navy overflow-hidden relative">
+              <div class="absolute top-0 right-0 w-20 h-20 bg-white/5 -mr-10 -mt-10 rotate-45 group-hover:bg-bond-yellow-main/20 transition-colors duration-300"></div>
+              <div class="flex items-center mb-6">
+                <div class="w-12 h-12 border-2 border-white/30 flex items-center justify-center mr-4 font-mono text-xl font-bold text-white group-hover:border-bond-yellow-main group-hover:text-bond-yellow-main transition-colors duration-300">
+                  0{index + 1}
+                </div>
+                <h3 class="text-lg font-bold text-white group-hover:text-bond-yellow-main transition-colors duration-300 font-serif">{step.title}</h3>
+              </div>
+              <p class="text-sm font-semibold text-gray-300 mb-2 border-l-2 border-bond-yellow-main pl-3">{step.description}</p>
+              <p class="text-xs text-gray-400 leading-relaxed">{step.detail}</p>
+            </div>
+            {index < process.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-white/20 z-10"></div>
+            )}
+           </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 無料診断 -->
+  <section class="py-16 lg:py-24 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="bg-bond-surface border-2 border-bond-yellow-main p-8 md:p-12 relative overflow-hidden group">
+         <div class="absolute top-0 right-0 w-32 h-32 bg-bond-yellow-main/10 -mr-16 -mt-16 rotate-45"></div>
+         <div class="absolute bottom-0 left-0 w-32 h-32 bg-bond-navy/5 -ml-16 -mb-16 rotate-45"></div>
+        
+        <div class="text-center relative z-10">
+          <div class="inline-flex items-center justify-center w-20 h-20 border-2 border-bond-navy bg-white mb-8 shadow-[4px_4px_0_0_#1f2e6c]">
+             <Icon name="tabler:clipboard-check" class="w-10 h-10 text-bond-navy dark:text-sky-400" />
+          </div>
+          <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+            無料DX診断実施中
+          </h2>
+          <p class="text-lg text-bond-text-sub mb-8 max-w-2xl mx-auto leading-relaxed">
+            貴社の現状を分析し、最適なDX推進計画をご提案します。
+            まずは何から始めるべきか、投資対効果はどれくらいか、
+            具体的にお示しします。
+          </p>
+          
+          <div class="bg-white dark:bg-gray-800 p-8 mb-10 text-left max-w-2xl mx-auto border border-bond-border shadow-[4px_4px_0_0_#dadada]">
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 mb-4 font-serif text-lg border-b border-bond-border pb-2">DIAGNOSIS CONTENT</h3>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <li class="flex items-start">
+                <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+                <span class="text-sm text-bond-text-main dark:text-gray-300 font-mono">現状の業務フロー分析</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+                <span class="text-sm text-bond-text-main dark:text-gray-300 font-mono">改善ポイントの洗い出し</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+                <span class="text-sm text-bond-text-main dark:text-gray-300 font-mono">推奨ソリューションの提案</span>
+              </li>
+              <li class="flex items-start">
+                <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+                <span class="text-sm text-bond-text-main dark:text-gray-300 font-mono">概算費用とROI試算</span>
+              </li>
+            </ul>
+          </div>
+          
+          <a href="/contact" class="btn-primary inline-flex items-center px-8 py-4 text-base tracking-widest">
+            無料診断を申し込む <Icon name="tabler:arrow-right" class="ml-2 w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQs
+    title="よくあるご質問"
+    subtitle="DX推進・業務効率化に関してよくいただくご質問"
+    items={faqs}
+  />
+
+  <!-- CTA -->
+  <BondCTA
+    title="DXで働き方を変えませんか？"
+    subtitle="まずは無料診断から始めましょう"
+    description="貴社の課題を分析し、最適なDX推進計画をご提案します。小さな一歩から、確実な成果へ。"
+  />
+</Layout>

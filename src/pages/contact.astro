@@ -1,79 +1,233 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import { Icon } from 'astro-icon/components';
+import heroContact from '~/assets/images/hero-contact.png';
 
 const metadata = {
-  title: 'Contact',
+  title: 'お問い合わせ',
+  description: '合同会社ぼんどへのお問い合わせはこちらから。無料相談も受け付けています。',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
-
-  <HeroText tagline="Contact" title="Let's Connect!" />
-
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
+  <!-- Hero Section -->
+  <Hero2
+    tagline="Contact"
+    title="お問い合わせ"
+    subtitle="お気軽にご相談ください"
+    actions={[]}
+    image={{
+      src: heroContact,
+      alt: 'Contact Bond LLC',
     }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
   />
 
-  <!-- Features2 Widget ************** -->
+  <section class="relative">
+      <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+      <ContactUs
+        id="form"
+        title="無料相談・お問い合わせ"
+        subtitle="まずはお気軽にご相談ください。よくあるご質問はFAQページもご覧ください。"
+        inputs={[
+          {
+            type: 'text',
+            name: 'company',
+            label: '会社名・店舗名',
+          },
+          {
+            type: 'text',
+            name: 'name',
+            label: 'お名前 *',
+            required: true,
+          },
+          {
+            type: 'email',
+            name: 'email',
+            label: 'メールアドレス *',
+            required: true,
+          },
+          {
+            type: 'tel',
+            name: 'phone',
+            label: '電話番号',
+          },
+          {
+            type: 'select',
+            name: 'service',
+            label: 'ご興味のあるサービス',
+            options: [
+              { value: '', label: '選択してください' },
+              { value: 'web', label: 'Web制作・運用' },
+              { value: 'ec', label: 'EC構築・オンライン販売支援' },
+              { value: 'marketing', label: 'MEO・LINE・集客導線設計' },
+              { value: 'dx', label: 'ローカルDX・業務効率化' },
+              { value: 'other', label: 'その他' },
+            ],
+          },
+        ]}
+        textarea={{
+          label: 'お問い合わせ内容 *',
+          placeholder: 'お困りごとや実現したいことをお聞かせください',
+          rows: 6,
+        }}
+        disclaimer={{
+          label:
+            'お問い合わせいただいた内容は、当社のプライバシーポリシーに基づき適切に管理いたします。',
+        }}
+        description="通常1〜2営業日以内にご返信いたします。"
+        button="お問い合わせ"
+      />
+  </section>
 
-  <Features2
-    title="We are here to help!"
-    items={[
-      {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
-      },
-      {
-        title: 'Contact sales',
-        description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
-      },
-      {
-        title: 'Technical support',
-        description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
-      },
-      {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Email',
-        description: 'contact@support.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
+  <!-- その他のお問い合わせ方法 -->
+  <section class="py-16 lg:py-24 bg-bond-surface border-y border-bond-navy/10 relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-serif font-bold text-bond-navy mb-4">その他のお問い合わせ</h2>
+        <p class="font-mono text-sm tracking-widest text-bond-text-sub uppercase">Other Methods</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- LINE -->
+        <div class="bg-white p-8 border border-bond-navy/10 group hover:border-bond-yellow-main transition-colors relative">
+           <div class="absolute top-0 left-0 w-full h-1 bg-[#06C755]"></div>
+           <div class="mb-6 flex justify-center">
+             <div class="w-16 h-16 bg-[#06C755]/10 flex items-center justify-center">
+               <Icon name="tabler:brand-line" class="w-8 h-8 text-[#06C755]" />
+             </div>
+           </div>
+           <h3 class="text-xl font-bold text-bond-navy text-center mb-4">LINEで相談</h3>
+           <p class="text-sm text-bond-text-sub text-center mb-6 leading-relaxed">
+             LINE公式アカウントから気軽にご相談いただけます。友だち追加後、メッセージをお送りください。
+           </p>
+           <div class="text-center">
+             <a href="https://lin.ee/xxxxxx" class="inline-block py-2 px-6 border border-[#06C755] text-[#06C755] hover:bg-[#06C755] hover:text-white transition-colors font-bold text-sm">
+               LINE友だち追加
+             </a>
+           </div>
+        </div>
+
+        <!-- Email -->
+        <div class="bg-white p-8 border border-bond-navy/10 group hover:border-bond-yellow-main transition-colors relative">
+           <div class="absolute top-0 left-0 w-full h-1 bg-bond-navy"></div>
+           <div class="mb-6 flex justify-center">
+             <div class="w-16 h-16 bg-bond-navy/10 flex items-center justify-center">
+               <Icon name="tabler:mail" class="w-8 h-8 text-bond-navy" />
+             </div>
+           </div>
+           <h3 class="text-xl font-bold text-bond-navy text-center mb-4">メールで相談</h3>
+           <p class="text-sm text-bond-text-sub text-center mb-6 leading-relaxed">
+             メールでのお問い合わせも承っています。詳細なご相談内容をお送りください。
+           </p>
+           <div class="text-center">
+             <a href="mailto:info@bond-llc.jp" class="inline-block py-2 px-6 border border-bond-navy text-bond-navy hover:bg-bond-navy hover:text-white transition-colors font-bold text-sm">
+               info@bond-llc.jp
+             </a>
+           </div>
+        </div>
+
+        <!-- Visit -->
+        <div class="bg-white p-8 border border-bond-navy/10 group hover:border-bond-yellow-main transition-colors relative">
+           <div class="absolute top-0 left-0 w-full h-1 bg-bond-yellow-main"></div>
+           <div class="mb-6 flex justify-center">
+             <div class="w-16 h-16 bg-bond-yellow-main/10 flex items-center justify-center">
+               <Icon name="tabler:map-pin" class="w-8 h-8 text-bond-navy" />
+             </div>
+           </div>
+           <h3 class="text-xl font-bold text-bond-navy text-center mb-4">訪問相談</h3>
+           <p class="text-sm text-bond-text-sub text-center mb-6 leading-relaxed">
+             宮崎県内であれば直接お伺いしてのご相談も可能です。まずはお問い合わせください。
+           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ誘導 -->
+  <section class="py-16 lg:py-20 bg-bond-navy text-white relative overflow-hidden">
+     <!-- Grid -->
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+      <div class="bg-white/5 backdrop-blur-sm p-8 md:p-12 border border-white/10 relative inline-block w-full">
+         <div class="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-bond-yellow-main"></div>
+         <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-bond-yellow-main"></div>
+
+        <Icon name="tabler:help-hexagon" class="w-16 h-16 text-bond-yellow-main mx-auto mb-6" />
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-4 font-serif">
+          よくあるご質問
+        </h2>
+        <p class="text-white/70 mb-8 font-mono text-sm">
+          お問い合わせ前に、よくあるご質問もご確認ください。
+        </p>
+        <a href="/faq" class="btn-secondary border-white text-white hover:bg-white hover:text-bond-navy">
+          FAQを見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 営業時間・対応エリア -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-bond-navy/10 border border-bond-navy/10">
+        <!-- 営業時間 -->
+        <div class="bg-white p-8 md:p-12">
+          <h3 class="text-xl font-bold text-bond-navy mb-8 flex items-center font-serif">
+            <Icon name="tabler:clock" class="w-6 h-6 mr-3 text-bond-yellow-main" />
+            営業時間 <span class="text-xs font-mono ml-3 text-bond-text-sub font-normal">BUSINESS HOURS</span>
+          </h3>
+          <dl class="space-y-4 font-mono">
+            <div class="flex justify-between py-2 border-b border-dashed border-bond-navy/10">
+              <dt class="text-bond-text-sub">平日</dt>
+              <dd class="text-bond-navy font-bold">9:00 - 18:00</dd>
+            </div>
+            <div class="flex justify-between py-2 border-b border-dashed border-bond-navy/10">
+              <dt class="text-bond-text-sub">土曜日</dt>
+              <dd class="text-bond-navy font-bold">10:00 - 15:00</dd>
+            </div>
+            <div class="flex justify-between py-2">
+              <dt class="text-bond-text-sub">日曜・祝日</dt>
+              <dd class="text-bond-navy font-bold">休業</dd>
+            </div>
+          </dl>
+          <p class="text-xs text-bond-text-sub mt-6 flex items-center">
+            <Icon name="tabler:info-circle" class="w-4 h-4 mr-1 text-bond-yellow-main" />
+            メール・LINEは24時間受付中
+          </p>
+        </div>
+
+        <!-- 対応エリア -->
+        <div class="bg-white p-8 md:p-12">
+          <h3 class="text-xl font-bold text-bond-navy mb-8 flex items-center font-serif">
+            <Icon name="tabler:map-2" class="w-6 h-6 mr-3 text-bond-yellow-main" />
+            対応エリア <span class="text-xs font-mono ml-3 text-bond-text-sub font-normal">SERVICE AREA</span>
+          </h3>
+          <div class="space-y-8">
+            <div>
+              <h4 class="font-bold text-bond-navy mb-2 flex items-center text-sm">
+                <span class="w-2 h-2 bg-bond-yellow-main mr-2"></span>
+                主要対応エリア
+              </h4>
+              <p class="text-bond-text-main text-sm leading-relaxed pl-4 border-l border-bond-navy/10 ml-1">
+                宮崎市、都城市、延岡市、日向市、日南市、小林市、西都市、えびの市、国富町、綾町、高鍋町、新富町
+              </p>
+            </div>
+            <div>
+              <h4 class="font-bold text-bond-navy mb-2 flex items-center text-sm">
+                 <span class="w-2 h-2 bg-bond-navy mr-2"></span>
+                オンライン対応
+              </h4>
+              <p class="text-bond-text-main text-sm leading-relaxed pl-4 border-l border-bond-navy/10 ml-1">
+                全国対応可能（Web制作、EC構築、DX支援など）
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -1,0 +1,345 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
+import { Icon } from 'astro-icon/components';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import heroImage from '~/assets/images/hero-ec.png';
+
+const metadata = {
+  title: 'EC構築・オンライン販売支援',
+  description: '宮崎の特産品や商品をオンラインで全国へ。Shopifyを中心としたEC構築から運用まで総合サポート。',
+};
+
+const ecTypes = [
+  {
+    title: 'Shopify（自社ECサイト）',
+    icon: 'tabler:shopping-bag',
+    description: '自分だけのお店を自由に作れる、ブランドを育てるのに最適なプラットフォーム',
+    features: [
+      '自由なデザインカスタマイズ',
+      '独自ドメインでブランド構築',
+      '販売手数料が低い',
+      '在庫管理・顧客管理機能充実',
+    ],
+    suitable: [
+      '自社ブランドを育てたい方',
+      '利益率を重視する方',
+      'リピート客を大切にしたい方',
+    ],
+  },
+  {
+    title: '楽天市場（モール型）',
+    icon: 'tabler:building-store',
+    description: 'すでに多くのお客様が集まる場所で販売できる、集客に強いプラットフォーム',
+    features: [
+      '圧倒的な集客力',
+      '楽天ポイントでの購買促進',
+      'イベント・キャンペーンが豊富',
+      '信頼性が高い',
+    ],
+    suitable: [
+      '早く売上を作りたい方',
+      '販売数を重視する方',
+      '楽天ユーザーにアプローチしたい方',
+    ],
+  },
+  {
+    title: 'LP＋決済（単品販売）',
+    icon: 'tabler:file-invoice',
+    description: '1つの商品に特化したページで、最小コストでスタートできるシンプルな仕組み',
+    features: [
+      '初期費用を抑えられる',
+      'シンプルで分かりやすい',
+      '広告との相性が良い',
+      '短期間で構築可能',
+    ],
+    suitable: [
+      'まず1商品で試したい方',
+      '特定商品に集中したい方',
+      '広告運用を考えている方',
+    ],
+  },
+];
+
+
+const process = [
+  { step: 1, title: 'ヒアリング', description: '商品や事業の理解、目標設定' },
+  { step: 2, title: '企画・設計', description: 'サイト構成、デザイン方針の決定' },
+  { step: 3, title: '構築', description: 'ECサイトの制作、機能実装' },
+  { step: 4, title: '商品登録', description: '商品情報、画像の登録作業' },
+  { step: 5, title: 'テスト', description: '動作確認、決済テスト' },
+  { step: 6, title: '公開・運用', description: 'サイト公開と運用サポート開始' },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <FullWidthHero
+    tagline="EC & Online Sales Support"
+    title="EC構築・オンライン販売支援"
+    subtitle="宮崎の魅力を全国へ<br />24時間365日、あなたの商品が売れる仕組みを"
+    description="Shopifyを中心としたEC構築から運用まで、地域の特産品や商品を全国のお客さまにお届けするための総合サポートをご提供します。"
+    backgroundImage={heroImage.src}
+    actions={[
+      {
+        text: '無料相談はこちら',
+        href: '/contact',
+        variant: 'primary',
+        icon: 'tabler:message-circle',
+      },
+      {
+        text: 'プラン詳細を見る',
+        href: '#process',
+        variant: 'secondary',
+        icon: 'tabler:eye',
+      },
+    ]}
+  />
+
+  <!-- サービス概要 -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-6 tracking-tight">
+          小さく始めて、無理なく育てる<br />
+          ECサイトの進め方
+           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">GROWTH STRATEGY</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub max-w-3xl mx-auto leading-relaxed">
+          宮崎の特産品や商品をオンラインで販売したい。でも何から始めればいいか分からない。
+          そんなお悩みに、ぼんどが寄り添います。商品撮影から運用まで、すべてサポートします。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="text-center group p-8 border border-transparent hover:border-bond-border transition-all duration-300">
+          <div class="inline-flex items-center justify-center w-20 h-20 bg-bond-surface border-2 border-bond-navy mb-6 group-hover:bg-bond-navy transition-colors duration-300 relative">
+            <div class="absolute top-1 right-1 w-2 h-2 bg-bond-yellow-main"></div>
+            <Icon name="tabler:chart-line" class="w-8 h-8 text-bond-navy dark:text-sky-400 group-hover:text-white transition-colors duration-300" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-2 font-serif">売上の柱を作る</h3>
+          <p class="text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            実店舗以外の新しい収益源として、24時間販売可能なECサイトを構築
+          </p>
+        </div>
+        <div class="text-center group p-8 border border-transparent hover:border-bond-border transition-all duration-300">
+           <div class="inline-flex items-center justify-center w-20 h-20 bg-bond-surface border-2 border-bond-navy mb-6 group-hover:bg-bond-navy transition-colors duration-300 relative">
+            <div class="absolute top-1 right-1 w-2 h-2 bg-bond-yellow-main"></div>
+            <Icon name="tabler:users" class="w-8 h-8 text-bond-navy dark:text-sky-400 group-hover:text-white transition-colors duration-300" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-2 font-serif">顧客データが資産に</h3>
+          <p class="text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            購入履歴や顧客情報を蓄積し、リピート促進や新商品開発に活用
+          </p>
+        </div>
+        <div class="text-center group p-8 border border-transparent hover:border-bond-border transition-all duration-300">
+           <div class="inline-flex items-center justify-center w-20 h-20 bg-bond-surface border-2 border-bond-navy mb-6 group-hover:bg-bond-navy transition-colors duration-300 relative">
+            <div class="absolute top-1 right-1 w-2 h-2 bg-bond-yellow-main"></div>
+            <Icon name="tabler:rocket" class="w-8 h-8 text-bond-navy dark:text-sky-400 group-hover:text-white transition-colors duration-300" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-2 font-serif">全国への販路拡大</h3>
+          <p class="text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            宮崎の素晴らしい商品を、日本全国のお客さまにお届けできます
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECプラットフォーム比較 -->
+  <section class="py-16 lg:py-24 bg-bond-background">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          あなたに最適なECプラットフォームは？
+           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">PLATFORM SELECTION</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub dark:text-gray-300">
+          ビジネスモデルや商品特性に応じて、最適なプラットフォームをご提案します
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-px bg-bond-border border border-bond-border">
+        {ecTypes.map((type) => (
+          <div class="bg-white dark:bg-gray-800 p-8 group hover:bg-bond-surface transition-colors duration-300">
+            <div class="flex items-center mb-6">
+              <div class="flex items-center justify-center w-14 h-14 bg-bond-navy text-white mr-4 border border-bond-navy group-hover:bg-white group-hover:text-bond-navy transition-colors duration-300">
+                <Icon name={type.icon} class="w-7 h-7" />
+              </div>
+              <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 font-serif">
+                {type.title}
+              </h3>
+            </div>
+            
+            <p class="text-bond-text-main dark:text-gray-300 mb-6 leading-relaxed text-sm font-medium">
+              {type.description}
+            </p>
+
+            <div class="mb-6">
+              <h4 class="font-semibold text-bond-navy dark:text-sky-400 mb-3 text-xs uppercase tracking-wider font-mono border-b border-bond-border pb-1">Features</h4>
+              <ul class="space-y-2">
+                {type.features.map((feature) => (
+                  <li class="flex items-start">
+                    <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+                    <span class="text-sm text-bond-text-main dark:text-gray-300">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="pt-6 border-t border-bond-border dark:border-gray-700">
+              <h4 class="font-semibold text-bond-navy dark:text-sky-400 mb-3 text-xs uppercase tracking-wider font-mono">Recommended For</h4>
+              <ul class="space-y-1">
+                {type.suitable.map((item) => (
+                  <li class="text-sm text-bond-text-sub dark:text-gray-300">・{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 導入の流れ -->
+  <section class="py-16 lg:py-24 bg-bond-navy text-white relative">
+     <div class="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-yellow-main mb-4 tracking-tight">
+          ご依頼から公開までの流れ
+          <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">PROCESS</span>
+        </h2>
+        <p class="text-lg text-gray-300">
+          最初のご相談からショップ公開まで、丁寧にサポートいたします
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        {process.map((item, index) => (
+          <div class="text-center relative group">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-transparent border-2 border-white/20 mb-4 mx-auto font-mono text-2xl font-bold text-white group-hover:border-bond-yellow-main group-hover:text-bond-yellow-main transition-colors duration-300">
+              0{item.step}
+            </div>
+            <h4 class="font-bold text-white mb-2 font-serif group-hover:text-bond-yellow-main transition-colors duration-300">{item.title}</h4>
+            <p class="text-xs text-gray-400 leading-snug">{item.description}</p>
+             {index < process.length - 1 && (
+              <div class="hidden lg:block absolute top-8 -right-1/2 w-full h-px bg-white/20 z-0"></div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-16 bg-white/5 border border-white/10 p-8 max-w-3xl mx-auto text-center relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-1 h-full bg-bond-yellow-main"></div>
+        <p class="text-gray-200">
+          <strong class="text-bond-yellow-main text-lg block mb-2 font-serif">一般的に初回相談から公開まで約1〜3ヶ月</strong>
+          <span class="text-sm opacity-80">シンプルなショップであれば最短2週間程度での構築も可能です</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy dark:text-sky-400 mb-4">
+          EC構築に関するよくある質問
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+            <span class="font-medium text-bond-navy dark:text-sky-400">
+              ネットに詳しくなくても運営できますか？
+            </span>
+            <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="text-bond-text-main dark:text-gray-300">
+              はい、大丈夫です。操作方法は丁寧にお伝えし、マニュアルも作成します。困ったときはいつでもご相談ください。初めての方にもわかりやすく説明いたします。
+            </p>
+          </div>
+        </details>
+
+        <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+            <span class="font-medium text-bond-navy dark:text-sky-400">
+              商品写真や説明文はどう準備すれば良いですか？
+            </span>
+            <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="text-bond-text-main dark:text-gray-300">
+              商品写真はECサイトの生命線です。プロカメラマンと連携して撮影も承ります。説明文はヒアリングしながら一緒に作成します。お持ちの資料やイメージをもとに、魅力的なコンテンツを作成いたします。
+            </p>
+          </div>
+        </details>
+
+        <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+            <span class="font-medium text-bond-navy dark:text-sky-400">
+              どのくらいで売上が上がりますか？
+            </span>
+            <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="text-bond-text-main dark:text-gray-300">
+              商品や集客施策により異なりますが、一般的に3〜6ヶ月で成果が見え始めます。SEO対策、SNS活用、広告運用など、複合的な施策で売上向上をサポートします。
+            </p>
+          </div>
+        </details>
+
+        <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+            <span class="font-medium text-bond-navy dark:text-sky-400">
+              在庫管理や配送はどうなりますか？
+            </span>
+            <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="text-bond-text-main dark:text-gray-300">
+              Shopifyには在庫管理機能が標準装備されています。配送については、ヤマト運輸や佐川急便などと連携可能です。配送料金の設定や、配送業者との連携もサポートいたします。
+            </p>
+          </div>
+        </details>
+
+        <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+            <span class="font-medium text-bond-navy dark:text-sky-400">
+              補助金は使えますか？
+            </span>
+            <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="text-bond-text-main dark:text-gray-300">
+              はい、IT導入補助金や小規模事業者持続化補助金などが活用できます。申請のサポートも行っていますので、お気軽にご相談ください。
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CallToAction
+    actions={[
+      {
+        text: '無料相談を申し込む',
+        href: '/contact',
+        variant: 'primary',
+      },
+      {
+        text: 'サービス一覧に戻る',
+        href: '/services',
+        variant: 'secondary',
+      },
+    ]}
+    title="まずは無料相談から始めませんか？"
+    subtitle="お客さまの商品や事業について、じっくりお話を伺います。最適なEC戦略を一緒に考えましょう。"
+  />
+</Layout>

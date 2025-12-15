@@ -29,9 +29,14 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
-        serif: ['var(--aw-font-serif, ui-serif)', ...defaultTheme.fontFamily.serif],
-        heading: ['var(--aw-font-heading, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--aw-font-sans)', 'Helvetica Neue', 'Helvetica', 'Arial', ...defaultTheme.fontFamily.sans],
+        serif: ['var(--aw-font-serif)', 'Didot', 'Bodoni MT', 'Noto Serif JP', ...defaultTheme.fontFamily.serif],
+        heading: ['var(--aw-font-heading)', 'Didot', 'Bodoni MT', ...defaultTheme.fontFamily.serif],
+        mono: ['var(--aw-font-mono)', 'Courier New', 'Courier', ...defaultTheme.fontFamily.mono],
+      },
+
+      fontSize: {
+        '7xl': ['4.5rem', { lineHeight: '1.3' }],
       },
 
       animation: {

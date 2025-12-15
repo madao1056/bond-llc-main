@@ -1,0 +1,305 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import { Icon } from 'astro-icon/components';
+import lineIcon from '~/icons/LINE.png';
+import heroImage from '~/assets/images/hero-marketing.png';
+
+const metadata = {
+  title: 'MEO・LINE・集客支援サービス | 合同会社ぼんど',
+  description: 'Googleマップ上位表示（MEO対策）、LINE公式アカウント構築、SNS運用など地域ビジネス特化の集客支援。宮崎の事業者さまの集客をトータルサポート。',
+};
+
+
+const benefits = [
+  {
+    title: 'MEO対策で検索上位へ',
+    description: 'Googleマップで「地域名 + 業種」検索時に上位表示。来店見込みの高いお客様に見つけてもらえます。',
+    icon: 'tabler:map-search',
+    stats: '検索上位で来店率2.7倍',
+  },
+  {
+    title: 'LINEでリピーター育成',
+    description: '日本人の95%が使うLINEで顧客と直接つながり、リピート率を向上させます。',
+    icon: 'tabler:brand-line',
+    stats: 'メール比3倍の開封率',
+  },
+  {
+    title: 'SNSで認知度アップ',
+    description: 'Instagram、Facebook、X（旧Twitter）を活用し、若い世代にもアプローチ。',
+    icon: 'tabler:share',
+    stats: '認知度が平均1.8倍向上',
+  },
+  {
+    title: 'データ分析で改善',
+    description: 'アクセス解析、顧客行動分析により、効果的な施策を継続的に実施。',
+    icon: 'tabler:chart-line',
+    stats: '改善により売上20%アップ',
+  },
+];
+
+const process = [
+  {
+    title: '現状分析',
+    description: '競合調査、市場分析、課題の洗い出し',
+    icon: 'tabler:analyze',
+  },
+  {
+    title: '戦略立案',
+    description: 'ターゲット設定、チャネル選定、KPI設定',
+    icon: 'tabler:strategy',
+  },
+  {
+    title: '初期設定',
+    description: '各種アカウント開設、プロフィール最適化',
+    icon: 'tabler:settings',
+  },
+  {
+    title: '運用開始',
+    description: 'コンテンツ制作、投稿、広告運用',
+    icon: 'tabler:rocket',
+  },
+  {
+    title: '効果測定',
+    description: 'データ収集、分析、レポート作成',
+    icon: 'tabler:report',
+  },
+  {
+    title: '改善施策',
+    description: 'PDCAサイクルで継続的に改善',
+    icon: 'tabler:refresh',
+  },
+];
+
+const faqs = [
+  {
+    title: 'MEO対策はどれくらいで効果が出ますか？',
+    description: '業種や競合状況により異なりますが、一般的に3〜6ヶ月程度で順位の改善が見られます。競争の激しいジャンルでは1年程度かかる場合もあります。詳しくはご連絡いただいた際にご相談ください。',
+  },
+  {
+    title: 'LINE公式アカウントの友だちはどうやって増やしますか？',
+    description: '店頭でのQRコード掲示、特典付き登録キャンペーン、既存顧客への案内、SNS連携など、複数の施策を組み合わせて増やしていきます。',
+  },
+  {
+    title: 'SNS運用は自社でもできますか？',
+    description: 'もちろん可能です。運用方法のレクチャーや、部分的なサポートのみのプランもご用意しています。',
+  },
+  {
+    title: '広告費は別途必要ですか？',
+    description: '基本的な運用は運用費に含まれていますが、Web広告を実施する場合は別途広告費（月額3万円〜）が必要です。',
+  },
+  {
+    title: '契約期間の縛りはありますか？',
+    description: '初回は6ヶ月のご契約となり、それ以降は3ヶ月ごとの更新となります。継続的な効果を得るために、長期的な視点での取り組みをおすすめしています。',
+  },
+  {
+    title: '複数店舗でも対応可能ですか？',
+    description: 'はい、対応可能です。複数店舗の運営に応じた効果的な施策をご提案いたします。店舗ごとの特性を活かした戦略立案も可能ですので、お気軽にご相談ください。',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <FullWidthHero
+    tagline="MEO / LINE / Marketing"
+    title="MEO・LINE・集客支援"
+    subtitle="地域のお客さまと<br />つながる最適な導線を"
+    description="Googleマップ、LINE、SNSなど、お客さまとの接点を最適化。地域密着型ビジネスだからこそ効果的な、デジタル集客の仕組みを構築します。"
+    backgroundImage={heroImage.src}
+    actions={[
+      {
+        text: '無料相談はこちら',
+        href: '/contact',
+        variant: 'primary',
+        icon: 'tabler:message-circle',
+      },
+      {
+        text: 'MEO対策を見る',
+        href: '#flow',
+        variant: 'secondary',
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  />
+
+  <!-- サービス概要 -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-6 tracking-tight">
+          宮崎の地域ビジネスに特化した集客支援
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">LOCAL MARKETING</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          Googleマップ、LINE、SNSなど、お客さまとの接点を最適化。
+          地域密着型ビジネスだからこそ効果的な、デジタル集客の仕組みを構築します。
+        </p>
+      </div>
+
+      <!-- 効果・メリット -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-bond-border border border-bond-border">
+        {benefits.map((benefit) => (
+          <div class="bg-bond-surface dark:bg-gray-800 p-8 group hover:bg-white transition-colors duration-300">
+            <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
+              <Icon name={benefit.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
+            </div>
+            <h3 class="text-lg font-bold text-bond-navy dark:text-sky-400 mb-2 font-serif">{benefit.title}</h3>
+            <p class="text-sm text-bond-text-sub dark:text-gray-300 mb-4 leading-relaxed">{benefit.description}</p>
+            <p class="text-xs font-bold text-bond-yellow-deep font-mono tracking-wider border-b border-bond-yellow-main/30 pb-1 inline-block">{benefit.stats}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+
+
+
+  <!-- 導入の流れ -->
+  <section id="flow" class="py-16 lg:py-24 bg-bond-navy text-white relative">
+    <div class="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-yellow-main mb-4 tracking-tight">
+          導入の流れ
+          <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">WORK FLOW</span>
+        </h2>
+        <p class="text-lg text-gray-300">
+          分析から運用まで、成果を出すまでしっかりサポート
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {process.map((step, index) => (
+          <div class="relative group">
+            <div class="border border-white/20 p-8 h-full hover:border-bond-yellow-main transition-colors duration-300 relative overflow-hidden">
+               <div class="absolute top-0 right-0 w-16 h-16 bg-white/5 -mr-8 -mt-8 rotate-45 group-hover:bg-bond-yellow-main/20 transition-colors duration-300"></div>
+              <div class="flex items-start mb-6">
+                <div class="text-4xl font-mono font-bold text-white/20 group-hover:text-bond-yellow-main transition-colors duration-300 mr-4">
+                  0{index + 1}
+                </div>
+                <div>
+                   <h3 class="text-xl font-bold text-white mb-2 font-serif group-hover:text-bond-yellow-main transition-colors duration-300">{step.title}</h3>
+                </div>
+              </div>
+              <p class="text-sm text-gray-400 ml-12 leading-relaxed">{step.description}</p>
+            </div>
+            {index < process.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-white/20 z-10"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 成功事例 -->
+  <section class="py-16 lg:py-24 bg-bond-background relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          導入効果の事例
+           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">CASE STUDIES</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub dark:text-gray-300">
+          実際にサポートさせていただいた事業者さまの成果
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-2 border-b border-bond-border">
+            <span class="inline-block px-3 py-1 bg-bond-navy text-white text-xs font-bold font-mono tracking-wider mb-2">
+              飲食店
+            </span>
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-4 font-serif leading-tight">
+            MEO対策で来店数が2.5倍に
+          </h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 mb-6 leading-relaxed">
+            Googleマップ最適化により「宮崎 ランチ」で1位獲得。
+            新規顧客の70%がマップ経由での来店に。
+          </p>
+          <div class="flex items-center text-bond-yellow-deep font-bold font-mono">
+            <Icon name="tabler:trending-up" class="w-5 h-5 mr-2" />
+            <span>来店数250%UP</span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-2 border-b border-bond-border">
+            <span class="inline-block px-3 py-1 bg-bond-navy text-white text-xs font-bold font-mono tracking-wider mb-2">
+              美容室
+            </span>
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-4 font-serif leading-tight">
+            LINE活用でリピート率80%達成
+          </h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 mb-6 leading-relaxed">
+            LINE公式アカウントでの予約システムとクーポン配信により、
+            リピート率が45%から80%に大幅改善。
+          </p>
+          <div class="flex items-center text-bond-yellow-deep font-bold font-mono">
+             <!-- Use bond-yellow-deep for success metrics for consistency, green is ok but yellow fits the palette better -->
+            <Icon name="tabler:users" class="w-5 h-5 mr-2" />
+            <span>リピート率80%</span>
+          </div>
+        </div>
+
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-2 border-b border-bond-border">
+            <span class="inline-block px-3 py-1 bg-bond-navy text-white text-xs font-bold font-mono tracking-wider mb-2">
+              小売店
+            </span>
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-4 font-serif leading-tight">
+            SNS活用で売上30%アップ
+          </h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 mb-6 leading-relaxed">
+            Instagram運用とMEO対策の組み合わせで、
+            20〜30代の新規顧客獲得に成功。売上が前年比130%に。
+          </p>
+          <div class="flex items-center text-bond-yellow-deep font-bold font-mono">
+            <Icon name="tabler:chart-line" class="w-5 h-5 mr-2" />
+            <span>売上130%達成</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQs
+    title="よくあるご質問"
+    subtitle="MEO・LINE・集客支援に関してよくいただくご質問"
+    items={faqs}
+  />
+
+  <!-- CTA -->
+  <BondCTA
+    title="集客のお悩みを解決します"
+    subtitle="MEO、LINE、SNSを活用した効果的な集客を始めませんか？"
+    description="無料相談で現状分析と最適な集客プランをご提案いたします。"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'お問い合わせ',
+        href: '/contact',
+        icon: 'tabler:mail',
+      },
+      {
+        variant: 'accent',
+        text: 'LINEで相談',
+        href: 'https://lin.ee/xxxxxx',
+        icon: 'tabler:brand-line',
+      },
+    ]}
+  />
+</Layout>

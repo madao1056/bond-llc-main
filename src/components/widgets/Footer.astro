@@ -2,6 +2,7 @@
 import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
+import lineIcon from '~/icons/LINE.png';
 
 interface Link {
   text?: string;
@@ -85,7 +86,11 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                   aria-label={ariaLabel}
                   href={href}
                 >
-                  {icon && <Icon name={icon} class="w-5 h-5" />}
+                  {icon === 'tabler:brand-line' ? (
+                    <img src={lineIcon.src} alt="LINE" class="w-5 h-5" />
+                  ) : icon ? (
+                    <Icon name={icon} class="w-5 h-5" />
+                  ) : null}
                   <Fragment set:html={text} />
                 </a>
               </li>

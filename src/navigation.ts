@@ -3,16 +3,16 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: 'ホーム',
-      href: getPermalink('/'),
-    },
-    {
       text: 'ぼんどについて',
       href: getPermalink('/about'),
     },
     {
       text: 'サービス',
       links: [
+        {
+          text: 'サービス一覧',
+          href: getPermalink('/services'),
+        },
         {
           text: 'Web制作・運用',
           href: getPermalink('/services/web-production'),
@@ -29,10 +29,6 @@ export const headerData = {
           text: 'DX・業務効率化',
           href: getPermalink('/services/dx'),
         },
-        {
-          text: 'サービス一覧',
-          href: getPermalink('/services'),
-        },
       ],
     },
     {
@@ -41,7 +37,7 @@ export const headerData = {
     },
     {
       text: 'みやびと',
-      href: getPermalink('/media/miyabito'),
+      href: 'https://miyabito.bond-llc.jp/',
     },
     {
       text: '会社概要',
@@ -49,8 +45,8 @@ export const headerData = {
     },
   ],
   actions: [
-    { 
-      text: 'お問い合わせ', 
+    {
+      text: 'お問い合わせ',
       href: getPermalink('/contact'),
       class: 'btn-primary'
     }
@@ -81,14 +77,14 @@ export const footerData = {
       title: 'コンテンツ',
       links: [
         { text: '実績・事例', href: getPermalink('/works') },
-        { text: 'みやびと', href: getPermalink('/media/miyabito') },
+        { text: 'みやびと', href: 'https://miyabito.bond-llc.jp/' },
         { text: 'お知らせ', href: getBlogPermalink() },
       ],
     },
     {
       title: 'お問い合わせ',
       links: [
-        { text: 'お問い合わせフォーム', href: getPermalink('/contact') },
+        { text: 'お問い合わせ', href: getPermalink('/contact') },
         { text: 'LINE公式アカウント', href: 'https://lin.ee/xxxxxx' },
         { text: 'よくある質問', href: getPermalink('/faq') },
       ],

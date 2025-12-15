@@ -17,10 +17,7 @@ metadata:
     follow: true
   openGraph:
     site_name: 株式会社ぼんど
-    images:
-      - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
+    images: []
     type: website
   twitter:
     handle: '@bond_llc'

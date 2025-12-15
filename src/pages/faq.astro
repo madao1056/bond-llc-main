@@ -1,0 +1,292 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import { Icon } from 'astro-icon/components';
+import heroFAQ from '~/assets/images/hero-faq.png';
+
+const metadata = {
+  title: 'よくあるご質問',
+  description: '合同会社ぼんどのサービスに関するよくあるご質問と回答をまとめました。',
+};
+
+const faqCategories = [
+  {
+    category: 'サービス全般',
+    icon: 'tabler:help-hexagon',
+    faqs: [
+      {
+        question: '相談は無料ですか？',
+        answer: 'はい、初回のご相談は無料です。お客さまのお悩みや実現したいことをお聞きして、最適なご提案をさせていただきます。オンライン相談も可能です。',
+      },
+      {
+        question: '対応エリアはどこまでですか？',
+        answer: '宮崎県全域に対応しています。Web制作やEC構築、DX支援などはオンラインでの対応も可能なため、全国からのご依頼も承っています。',
+      },
+      {
+        question: '小規模な案件でも対応してもらえますか？',
+        answer: 'もちろん対応可能です。個人事業主さまから中小企業さままで、規模に関わらずご相談ください。予算に応じた最適なプランをご提案します。',
+      },
+      {
+        question: '契約期間の縛りはありますか？',
+        answer: '基本的に最低契約期間は設けていません。ただし、月額サービスについては、効果測定のため3ヶ月以上の継続をお勧めしています。',
+      },
+    ],
+  },
+  {
+    category: 'Web制作について',
+    icon: 'tabler:world-www',
+    faqs: [
+      {
+        question: 'Webサイト制作の期間はどのくらいですか？',
+        answer: '規模により異なりますが、一般的なコーポレートサイトで1.5〜2ヶ月、ECサイトで2〜3ヶ月程度です。詳細はヒアリング後にスケジュールをご提示します。',
+      },
+      {
+        question: 'スマートフォン対応は含まれていますか？',
+        answer: 'はい、すべてのプランでレスポンシブデザイン（PC・スマホ・タブレット対応）を標準実装しています。どのデバイスでも快適に閲覧できるサイトを制作します。',
+      },
+      {
+        question: 'サイト公開後の更新は自分でできますか？',
+        answer: 'CMS（コンテンツ管理システム）を導入することで、お客さま自身で更新可能です。操作方法もしっかりレクチャーします。もちろん、更新代行も承ります。',
+      },
+      {
+        question: 'SEO対策は含まれていますか？',
+        answer: '基本的なSEO対策（タイトル・説明文の最適化、構造化データ、サイトマップ作成など）は標準で含まれています。さらに強化したい場合は別途ご相談ください。',
+      },
+    ],
+  },
+  {
+    category: 'EC・オンライン販売',
+    icon: 'tabler:shopping-cart',
+    faqs: [
+      {
+        question: 'どのECプラットフォームを使用しますか？',
+        answer: '主にShopifyを使用していますが、お客さまのニーズに応じてBASE、STORES、WooCommerceなども対応可能です。商品数や機能要件に応じて最適なものをご提案します。',
+      },
+      {
+        question: '商品撮影もお願いできますか？',
+        answer: 'はい、商品撮影も承っています。プロカメラマンと連携し、商品の魅力が伝わる写真を撮影します。撮影場所は出張対応も可能です。',
+      },
+      {
+        question: '決済手段は何が使えますか？',
+        answer: 'クレジットカード、コンビニ決済、銀行振込、代金引換、PayPayなど、主要な決済手段に対応可能です。お客さまの商材や顧客層に応じて選定します。',
+      },
+      {
+        question: '在庫管理や配送はどうなりますか？',
+        answer: 'ECシステムでの在庫管理機能の提供、配送業者との連携サポートを行います。フルフィルメント（在庫管理から配送まで）の代行も可能です。',
+      },
+    ],
+  },
+  {
+    category: 'MEO・集客支援',
+    icon: 'tabler:map-pin',
+    faqs: [
+      {
+        question: 'MEO対策とは何ですか？',
+        answer: 'Map Engine Optimization（マップエンジン最適化）の略で、Googleマップでの検索順位を上げる施策です。「地域名＋業種」での検索で上位表示を目指します。',
+      },
+      {
+        question: 'どのくらいで効果が出ますか？',
+        answer: 'MEO対策は通常2〜3ヶ月で効果が表れ始めます。競合状況により異なりますが、継続的な施策により着実に順位向上が期待できます。',
+      },
+      {
+        question: 'LINE公式アカウントの運用代行は可能ですか？',
+        answer: 'はい、可能です。アカウント開設、リッチメニュー作成、自動応答設定、定期配信まで、トータルでサポートします。',
+      },
+      {
+        question: 'SNS運用もお願いできますか？',
+        answer: 'Instagram、Facebook、X（Twitter）などの運用代行も承っています。投稿コンテンツの企画・作成から、広告運用まで対応可能です。',
+      },
+    ],
+  },
+  {
+    category: 'DX・業務効率化',
+    icon: 'tabler:cpu',
+    faqs: [
+      {
+        question: 'DXって具体的に何をするのですか？',
+        answer: 'デジタル技術を活用して業務を効率化することです。例えば、紙の書類をデジタル化したり、手作業をシステム化したり、データを活用した経営判断などを支援します。',
+      },
+      {
+        question: 'どんなツールを導入しますか？',
+        answer: 'Google Workspace、Microsoft 365、Slack、Notion、kintoneなど、お客さまの業務に最適なツールを選定・導入します。既存システムとの連携も考慮します。',
+      },
+      {
+        question: 'ITに詳しくなくても大丈夫ですか？',
+        answer: 'もちろん大丈夫です。導入後の操作研修やマニュアル作成、継続的なサポートで、ITが苦手な方でも安心してご利用いただけます。',
+      },
+      {
+        question: '費用対効果は期待できますか？',
+        answer: '多くの企業さまで月20〜40時間の業務時間削減を実現しています。削減した時間を本業に充てることで、売上向上にもつながります。',
+      },
+    ],
+  },
+  {
+    category: '料金・お支払い',
+    icon: 'tabler:coin',
+    faqs: [
+      {
+        question: '見積もりは無料ですか？',
+        answer: 'はい、お見積もりは無料です。ヒアリング後、詳細な見積書をご提示します。ご予算に応じた調整も可能ですので、お気軽にご相談ください。',
+      },
+      {
+        question: '支払い方法は何がありますか？',
+        answer: '銀行振込、クレジットカード決済に対応しています。分割払いのご相談も承りますので、お気軽にお問い合わせください。',
+      },
+      {
+        question: '追加費用が発生することはありますか？',
+        answer: '事前にお見積もりした範囲内であれば追加費用は発生しません。仕様変更や追加作業が必要な場合は、都度お見積もりし、ご了承いただいてから作業します。',
+      },
+      {
+        question: '補助金は使えますか？',
+        answer: 'IT導入補助金、小規模事業者持続化補助金などの活用が可能です。申請のサポートも行っていますので、ご相談ください。',
+      },
+    ],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <Hero2
+    tagline="FAQ"
+    title="よくあるご質問"
+    subtitle="お客さまからよくいただくご質問をカテゴリー別にまとめました"
+    image={{ src: heroFAQ, alt: 'FAQ Hero' }}
+    actions={[
+      {
+        text: 'お問い合わせはこちら',
+        href: '/contact',
+      },
+    ]}
+  />
+
+  <!-- FAQ一覧 -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <!-- カテゴリーナビゲーション -->
+      <div class="mb-12">
+        <div class="flex flex-wrap gap-2 justify-center">
+          {faqCategories.map((cat) => (
+            <a href={`#${cat.category}`} class="inline-flex items-center px-4 py-2 rounded-full bg-white dark:bg-gray-800 text-bond-text-main dark:text-gray-200 text-sm font-medium border border-bond-border dark:border-gray-700 hover:bg-bond-yellow-main/10 dark:hover:bg-bond-yellow-main/20 hover:border-bond-yellow-main transition-colors">
+              <Icon name={cat.icon} class="w-4 h-4 mr-1.5" />
+              {cat.category}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- FAQ本体 -->
+      <div class="space-y-12">
+        {faqCategories.map((category) => (
+          <div id={category.category} class="scroll-mt-20">
+            <div class="flex items-center mb-6">
+              <div class="flex items-center justify-center w-10 h-10 bg-bond-yellow-main rounded-lg mr-3">
+                <Icon name={category.icon} class="w-5 h-5 text-bond-navy" />
+              </div>
+              <h2 class="text-2xl font-bold text-bond-navy">
+                {category.category}
+              </h2>
+            </div>
+
+            <div class="space-y-4">
+              {category.faqs.map((faq, index) => (
+                <details class="group bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+                  <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 transition-colors">
+                    <div class="flex items-start flex-1">
+                      <span class="inline-flex items-center justify-center w-7 h-7 bg-bond-yellow-main/10 text-bond-navy text-sm font-bold rounded-full mr-4 flex-shrink-0">
+                        Q
+                      </span>
+                      <span class="text-bond-navy font-medium pr-4">
+                        {faq.question}
+                      </span>
+                    </div>
+                    <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub flex-shrink-0 transition-transform duration-200 group-open:rotate-180" />
+                  </summary>
+                  <div class="px-6 pb-6">
+                    <div class="flex items-start pl-11">
+                      <span class="inline-flex items-center justify-center w-7 h-7 bg-bond-navy/10 text-bond-navy text-sm font-bold rounded-full mr-4 flex-shrink-0">
+                        A
+                      </span>
+                      <p class="text-bond-text-main leading-relaxed">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ誘導 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 md:p-12 border border-bond-border dark:border-gray-700 text-center">
+        <Icon name="tabler:message-question" class="w-16 h-16 text-bond-yellow-main mx-auto mb-6" />
+        <h2 class="text-2xl md:text-3xl font-bold text-bond-navy mb-4">
+          解決しないお悩みはございませんか？
+        </h2>
+        <p class="text-bond-text-sub mb-8">
+          ご不明な点がございましたら、お気軽にお問い合わせください。<br />
+          専門スタッフが丁寧にお答えいたします。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/contact" class="btn-primary">
+            お問い合わせ
+          </a>
+          <a href="https://lin.ee/xxxxxx" class="btn-secondary">
+            <Icon name="tabler:brand-line" class="w-5 h-5 mr-2" />
+            LINEで質問する
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 関連リンク -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <h2 class="text-2xl md:text-3xl font-bold text-bond-navy text-center mb-8">
+        関連情報
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <a href="/services" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-bond-border dark:border-gray-700 hover:shadow-md transition-all duration-200 group">
+          <div class="flex items-center mb-3">
+            <Icon name="tabler:sparkles" class="w-6 h-6 text-bond-yellow-main mr-2" />
+            <h3 class="font-bold text-bond-navy group-hover:text-bond-yellow-deep transition-colors">
+              サービス一覧
+            </h3>
+          </div>
+          <p class="text-sm text-bond-text-sub">
+            提供サービスの詳細をご確認いただけます
+          </p>
+        </a>
+        <a href="/works" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-bond-border dark:border-gray-700 hover:shadow-md transition-all duration-200 group">
+          <div class="flex items-center mb-3">
+            <Icon name="tabler:trophy" class="w-6 h-6 text-bond-yellow-main mr-2" />
+            <h3 class="font-bold text-bond-navy group-hover:text-bond-yellow-deep transition-colors">
+              実績・事例
+            </h3>
+          </div>
+          <p class="text-sm text-bond-text-sub">
+            これまでの成功事例をご紹介しています
+          </p>
+        </a>
+        <a href="/about" class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-bond-border dark:border-gray-700 hover:shadow-md transition-all duration-200 group">
+          <div class="flex items-center mb-3">
+            <Icon name="tabler:info-circle" class="w-6 h-6 text-bond-yellow-main mr-2" />
+            <h3 class="font-bold text-bond-navy group-hover:text-bond-yellow-deep transition-colors">
+              会社情報
+            </h3>
+          </div>
+          <p class="text-sm text-bond-text-sub">
+            ぼんどの理念や会社概要をご覧いただけます
+          </p>
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

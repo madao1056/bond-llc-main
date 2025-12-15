@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 // ぼんどカスタムコンポーネント
+import heroImage from '~/assets/images/hero.png';
 import BondHero from '~/components/widgets/BondHero.astro';
 import BondAbout from '~/components/widgets/BondAbout.astro';
 import BondServices from '~/components/widgets/BondServices.astro';
@@ -20,7 +21,7 @@ const metadata = {
 <Layout metadata={metadata}>
   <!-- ヒーローセクション -->
   <BondHero
-    title="地域の挑戦とお客さまをつなぐ、\n絆（きずな）のような存在へ。"
+    title="地域の挑戦と\nお客さまをつなぐ、\n絆（きずな）の\nような存在へ。"
     subtitle="宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援・ローカルメディア運営を通じて、事業者とお客さまの関係性が続く仕組みをデザインします。"
     actions={[
       {
@@ -35,6 +36,7 @@ const metadata = {
         href: '#about',
       },
     ]}
+    image={{ src: heroImage.src, alt: 'Bond LLC Creative Director' }}
   />
 
   <!-- ミッション・ビジョン・バリュー -->
@@ -81,7 +83,7 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'お問い合わせフォーム',
+        text: 'お問い合わせ',
         href: '/contact',
         icon: 'tabler:mail',
       },

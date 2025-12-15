@@ -1,0 +1,314 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import { Icon } from 'astro-icon/components';
+import heroWorks from '~/assets/images/hero-works.png';
+
+const metadata = {
+  title: '実績一覧',
+  description: '合同会社ぼんどがサポートさせていただいた地域事業者さまの成功事例をご紹介します。',
+};
+// ... (I'll just target the top imports and the Hero2 section separately or use multi-replace if needed, but here I can probably target the top block easily)
+// Actually, `works` array is between imports and Hero2. I should use `multi_replace`.
+
+const works = [
+  {
+    title: '宮崎マンゴー農園のECサイト構築',
+    client: '〇〇農園様',
+    category: '農業',
+    year: '2025年',
+    description: '宮崎県産完熟マンゴーの直販ECサイトを構築。生産者の想いが伝わるブランディングと、購入しやすいUIデザインを実現。',
+    image: '/images/works/mango-ec.jpg',
+    tags: ['ECサイト構築', 'Shopify', 'ブランディング', '商品撮影'],
+    results: [
+      { label: '売上', value: '200%UP', note: '前年比' },
+      { label: 'リピート率', value: '45%', note: '購入者の約半数がリピート' },
+      { label: '平均単価', value: '1.5倍', note: 'ギフト需要の獲得' },
+    ],
+    testimonial: 'オンライン販売を始めてから、全国のお客さまに届けられるようになりました。',
+    services: ['EC構築・オンライン販売支援'],
+  },
+  {
+    title: '地鶏料理店の集客強化',
+    client: '地鶏の〇〇様',
+    category: '飲食',
+    year: '2025年',
+    description: 'MEO対策とLINE公式アカウントを活用した集客システムを構築。地域密着型の情報発信で認知度向上。',
+    image: '/images/works/restaurant-meo.jpg',
+    tags: ['MEO対策', 'LINE公式', 'Webサイト制作', 'SNS運用'],
+    results: [
+      { label: '予約数', value: '3倍', note: '導入3ヶ月で達成' },
+      { label: 'LINE友だち', value: '500人', note: '6ヶ月で獲得' },
+      { label: '口コミ評価', value: '4.5', note: 'Google評価' },
+    ],
+    testimonial: 'お客さまとの距離が近くなり、常連さんが増えました。',
+    services: ['MEO・LINE・集客導線設計'],
+  },
+  {
+    title: '温泉旅館の予約システムDX化',
+    client: '〇〇温泉旅館様',
+    category: '観光・宿泊',
+    year: '2025年',
+    description: '紙ベースの予約管理をデジタル化。オンライン予約システムの導入で業務効率が大幅改善。',
+    image: '/images/works/ryokan-dx.jpg',
+    tags: ['DX推進', '予約システム', '業務効率化', 'Web制作'],
+    results: [
+      { label: '業務時間', value: '40h削減', note: '月間' },
+      { label: '直予約', value: '60%増', note: '手数料削減' },
+      { label: 'ミス', value: '90%減', note: 'ダブルブッキング解消' },
+    ],
+    testimonial: '予約管理が楽になり、お客さま対応に時間を使えるようになりました。',
+    services: ['ローカルDX・業務効率化', 'Web制作・運用'],
+  },
+  {
+    title: 'ヘアサロンのWeb集客システム',
+    client: 'Hair Salon 〇〇様',
+    category: '美容',
+    year: '2025年',
+    description: 'SEO対策を施したWebサイトリニューアルと、予約システムの導入で新規顧客獲得に成功。',
+    image: '/images/works/salon-web.jpg',
+    tags: ['Web制作', 'SEO対策', '予約システム', 'インスタ運用'],
+    results: [
+      { label: '新規客', value: '20名/月', note: 'Web経由' },
+      { label: '予約率', value: '85%', note: 'オンライン化' },
+      { label: 'キャンセル', value: '50%減', note: '事前決済導入' },
+    ],
+    testimonial: 'Web予約が増えて、電話対応の時間が減りました。',
+    services: ['Web制作・運用'],
+  },
+  {
+    title: '日向夏ブランディング＆EC',
+    client: '〇〇果樹園様',
+    category: '農業・製造',
+    year: '2025年',
+    description: '宮崎特産の日向夏をブランド化。商品開発からEC販売まで一貫してサポート。',
+    image: '/images/works/hyuganatsu.jpg',
+    tags: ['ブランディング', 'EC構築', 'パッケージデザイン', 'SNS'],
+    results: [
+      { label: '認知度', value: '測定中', note: 'SNSフォロワー1000人' },
+      { label: '販売額', value: '150%', note: '前年比' },
+      { label: '取引先', value: '5社増', note: 'BtoB開拓' },
+    ],
+    testimonial: 'ブランドイメージが確立し、商談がスムーズになりました。',
+    services: ['EC構築・オンライン販売支援', 'Web制作・運用'],
+  },
+  {
+    title: '民宿のオンライン集客',
+    client: '海の見える民宿〇〇様',
+    category: '宿泊',
+    year: '2025年',
+    description: 'Webサイト制作とOTA連携により、若年層の集客に成功。インスタ映えスポットとして話題に。',
+    image: '/images/works/minshuku.jpg',
+    tags: ['Web制作', 'OTA連携', 'インスタ運用', 'MEO'],
+    results: [
+      { label: '稼働率', value: '70%', note: '年間平均' },
+      { label: '若年層', value: '40%', note: '20-30代の割合' },
+      { label: 'インスタ', value: '#タグ500件', note: '投稿数' },
+    ],
+    testimonial: '若いお客さまが増えて、活気が出てきました。',
+    services: ['Web制作・運用', 'MEO・LINE・集客導線設計'],
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- ヒーローセクション -->
+  <Hero2
+    tagline="Works & Case Studies"
+    image={{ src: heroWorks, alt: 'Works Hero' }}
+    actions={[
+      {
+        text: 'お問い合わせはこちら',
+        href: '/contact',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      実績・事例
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      地域事業者さまと共に歩んだ<br />
+      成功ストーリー
+    </Fragment>
+  </Hero2>
+
+  <!-- 実績一覧 -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <!-- フィルター（将来的な実装用） -->
+      <div class="mb-12">
+        <div class="flex flex-wrap gap-2 justify-center">
+          <button class="px-4 py-2 rounded-full bg-bond-yellow-main text-bond-navy text-sm font-medium">
+            すべて
+          </button>
+          <button class="px-4 py-2 rounded-full bg-white text-bond-text-sub text-sm font-medium border border-bond-border hover:bg-bond-background transition-colors">
+            農業
+          </button>
+          <button class="px-4 py-2 rounded-full bg-white text-bond-text-sub text-sm font-medium border border-bond-border hover:bg-bond-background transition-colors">
+            飲食
+          </button>
+          <button class="px-4 py-2 rounded-full bg-white text-bond-text-sub text-sm font-medium border border-bond-border hover:bg-bond-background transition-colors">
+            観光・宿泊
+          </button>
+          <button class="px-4 py-2 rounded-full bg-white text-bond-text-sub text-sm font-medium border border-bond-border hover:bg-bond-background transition-colors">
+            美容
+          </button>
+        </div>
+      </div>
+
+      <!-- 実績カード -->
+      <div class="space-y-16">
+        {works.map((work, index) => (
+          <article class={`${index % 2 === 0 ? '' : 'lg:flex-row-reverse'} flex flex-col lg:flex-row gap-8 bg-white rounded-2xl shadow-lg overflow-hidden border border-bond-border`}>
+            <!-- 画像部分 -->
+            <div class="lg:w-1/2">
+              <div class="aspect-video bg-gradient-to-br from-bond-yellow-main/10 to-bond-yellow-deep/10 flex items-center justify-center h-full">
+                <Icon name="tabler:photo" class="w-20 h-20 text-bond-text-sub/30" />
+              </div>
+            </div>
+
+            <!-- コンテンツ部分 -->
+            <div class="lg:w-1/2 p-8 md:p-12">
+              <div class="flex items-center gap-3 mb-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-bond-yellow-main/10 text-bond-navy">
+                  {work.category}
+                </span>
+                <span class="text-sm text-bond-text-sub">
+                  {work.year}
+                </span>
+              </div>
+
+              <h3 class="text-2xl font-bold text-bond-navy mb-2">
+                {work.title}
+              </h3>
+              
+              <p class="text-sm text-bond-text-sub mb-4">
+                {work.client}
+              </p>
+
+              <p class="text-bond-text-main mb-6 leading-relaxed">
+                {work.description}
+              </p>
+
+              <!-- 成果 -->
+              <div class="grid grid-cols-3 gap-4 mb-6">
+                {work.results.map((result) => (
+                  <div class="text-center">
+                    <div class="text-2xl font-bold text-bond-yellow-deep">
+                      {result.value}
+                    </div>
+                    <div class="text-xs text-bond-text-sub">
+                      {result.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <!-- お客様の声 -->
+              {work.testimonial && (
+                <div class="bg-bond-background rounded-lg p-4 mb-6">
+                  <Icon name="tabler:quote" class="w-5 h-5 text-bond-yellow-main mb-2" />
+                  <p class="text-sm text-bond-text-main italic">
+                    「{work.testimonial}」
+                  </p>
+                </div>
+              )}
+
+              <!-- タグ -->
+              <div class="flex flex-wrap gap-2 mb-6">
+                {work.tags.map((tag) => (
+                  <span class="text-xs text-bond-text-sub">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+
+              <!-- 利用サービス -->
+              <div class="pt-6 border-t border-bond-border">
+                <p class="text-xs text-bond-text-sub mb-2">利用サービス</p>
+                <div class="flex flex-wrap gap-2">
+                  {work.services.map((service) => (
+                    <span class="inline-flex items-center px-3 py-1 rounded-md text-xs font-medium bg-white border border-bond-border text-bond-navy">
+                      {service}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 成果サマリー -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          数字で見る成果
+        </h2>
+        <p class="text-lg text-bond-text-sub">
+          お客さまと共に達成した成果の一部をご紹介
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-bond-yellow-deep mb-2">
+            200%
+          </div>
+          <div class="text-sm text-bond-text-sub">
+            平均売上成長率
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-bond-yellow-deep mb-2">
+            85%
+          </div>
+          <div class="text-sm text-bond-text-sub">
+            顧客満足度
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-bond-yellow-deep mb-2">
+            40h
+          </div>
+          <div class="text-sm text-bond-text-sub">
+            月間業務時間削減
+          </div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-bond-yellow-deep mb-2">
+            95%
+          </div>
+          <div class="text-sm text-bond-text-sub">
+            継続率
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-16 lg:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-6">
+        次はあなたの番です
+      </h2>
+      <p class="text-lg text-bond-text-sub mb-8">
+        地域ビジネスの成長を、私たちがサポートします。<br />
+        まずは無料相談から始めてみませんか？
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary">
+          無料相談を申し込む
+        </a>
+        <a href="/services" class="btn-secondary">
+          サービス一覧を見る
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

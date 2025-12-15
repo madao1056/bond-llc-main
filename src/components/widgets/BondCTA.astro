@@ -23,7 +23,7 @@ const {
   actions = [
     {
       variant: 'primary',
-      text: 'お問い合わせフォーム',
+      text: 'お問い合わせ',
       href: '/contact',
       icon: 'tabler:mail',
     },
@@ -37,75 +37,90 @@ const {
 } = Astro.props;
 ---
 
-<section id={id} class="relative overflow-hidden">
-  <div class="bg-bond-navy relative">
-    <!-- 背景パターン -->
-    <div class="absolute inset-0">
-      <div class="absolute inset-0 bg-gradient-to-br from-bond-navy via-bond-navy to-black/20 opacity-50"></div>
-      <div class="absolute top-0 left-0 w-96 h-96 bg-bond-yellow-main rounded-full opacity-5 -translate-x-1/2 -translate-y-1/2 blur-3xl"></div>
-      <div class="absolute bottom-0 right-0 w-96 h-96 bg-bond-yellow-main rounded-full opacity-5 translate-x-1/2 translate-y-1/2 blur-3xl"></div>
-    </div>
+<section id={id} class="relative overflow-hidden bg-bond-navy border-t border-bond-yellow-main/20">
+  <!-- Blueprint Grid Background -->
+  <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+  
+  <!-- Content Container -->
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
     
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
-      <div class="text-center max-w-3xl mx-auto">
-        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+    <!-- Decorative Tech Lines -->
+    <div class="absolute top-0 left-10 w-px h-20 bg-bond-yellow-main/50"></div>
+    <div class="absolute bottom-0 right-10 w-px h-20 bg-bond-yellow-main/50"></div>
+    <div class="absolute top-10 left-0 w-20 h-px bg-bond-yellow-main/50"></div>
+    <div class="absolute bottom-10 right-0 w-20 h-px bg-bond-yellow-main/50"></div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Text Area -->
+      <div class="text-left">
+        <div class="flex items-center gap-4 mb-6">
+          <div class="w-12 h-px bg-bond-yellow-main"></div>
+          <span class="font-mono text-sm tracking-widest uppercase text-bond-yellow-main">お問い合わせ</span>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-6 leading-tight">
           {title}
         </h2>
         
         {subtitle && (
-          <p class="text-xl text-white/80 mb-8">
+          <p class="text-xl text-white/90 mb-8 font-sans border-l-4 border-bond-yellow-main pl-6 py-2">
             {subtitle}
           </p>
         )}
         
         {description && (
-          <p class="text-lg text-white/70 mb-10 leading-relaxed">
+          <p class="text-lg text-white/70 mb-10 leading-relaxed max-w-xl">
             {description}
           </p>
         )}
-        
-        {actions && actions.length > 0 && (
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            {actions.map(({ text, href, variant = 'primary', icon }) => {
-              const isAccent = variant === 'accent';
-              const isLine = text?.includes('LINE');
-              return (
-                <a
-                  href={href}
-                  class={`inline-flex items-center justify-center rounded-lg font-semibold text-base py-4 px-8 transition-all duration-200 ${
-                    isLine
-                      ? 'bg-green-500 text-white hover:bg-green-600 hover:shadow-lg'
-                      : isAccent 
-                      ? 'bg-bond-yellow-main text-bond-navy hover:bg-bond-yellow-deep hover:shadow-lg' 
-                      : 'bg-white text-bond-navy hover:bg-gray-100 hover:shadow-lg'
-                  }`}
-                  target={href?.startsWith('http') ? '_blank' : undefined}
-                  rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                >
-                  {icon && <Icon name={icon} class="w-5 h-5 mr-2" />}
-                  {text}
+      </div>
+
+      <!-- Action Area -->
+      <div class="bg-bond-surface/5 border border-white/10 p-8 lg:p-12 relative backdrop-blur-sm">
+        <!-- Corner Accents -->
+        <div class="absolute -top-1 -left-1 w-4 h-4 border-t border-l border-bond-yellow-main"></div>
+        <div class="absolute -bottom-1 -right-1 w-4 h-4 border-b border-r border-bond-yellow-main"></div>
+
+        <div class="flex flex-col gap-6">
+           {actions && actions.length > 0 && (
+            <div class="flex flex-col sm:flex-row gap-4">
+              {actions.map(({ text, href, variant = 'primary', icon }) => {
+                const isLine = text?.includes('LINE');
+                return (
+                  <Button
+                    variant={variant}
+                    href={href}
+                    class={`w-full sm:w-auto ${
+                      isLine 
+                        ? 'bg-[#06C755] border-[#06C755] text-white hover:bg-[#05b34c]' 
+                        : 'bg-white border-white text-bond-navy hover:bg-bond-yellow-main hover:border-bond-yellow-main hover:text-bond-navy'
+                    }`}
+                    icon={icon}
+                  >
+                    {text}
+                  </Button>
+                );
+              })}
+            </div>
+          )}
+
+          <!-- 営業時間・連絡先情報 -->
+          <div class="pt-8 border-t border-white/10 mt-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 text-white/60 font-mono text-sm">
+              <div class="flex items-center">
+                <Icon name="tabler:clock" class="w-4 h-4 mr-3 text-bond-yellow-main" />
+                <span>Mon-Fri 9:00-18:00</span>
+              </div>
+              <div class="flex items-center">
+                <Icon name="tabler:phone" class="w-4 h-4 mr-3 text-bond-yellow-main" />
+                <a href="tel:0985-XX-XXXX" class="hover:text-white transition-colors">
+                  0985-XX-XXXX
                 </a>
-              );
-            })}
-          </div>
-        )}
-        
-        <!-- 営業時間・連絡先情報 -->
-        <div class="mt-12 pt-8 border-t border-white/10">
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-white/60">
-            <div class="flex items-center justify-center">
-              <Icon name="tabler:clock" class="w-5 h-5 mr-2" />
-              <span>平日 9:00-18:00</span>
-            </div>
-            <div class="flex items-center justify-center">
-              <Icon name="tabler:phone" class="w-5 h-5 mr-2" />
-              <a href="tel:0985-XX-XXXX" class="hover:text-white transition-colors">
-                0985-XX-XXXX
-              </a>
-            </div>
-            <div class="flex items-center justify-center">
-              <Icon name="tabler:map-pin" class="w-5 h-5 mr-2" />
-              <span>宮崎県宮崎市</span>
+              </div>
+              <div class="flex items-center sm:col-span-2">
+                <Icon name="tabler:map-pin" class="w-4 h-4 mr-3 text-bond-yellow-main" />
+                <span>Miyazaki City, Japan</span>
+              </div>
             </div>
           </div>
         </div>

@@ -1,224 +1,373 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import { Icon } from 'astro-icon/components';
+import lineIcon from '~/icons/LINE.png';
+import heroServices from '~/assets/images/hero-services.png';
 
 const metadata = {
-  title: 'Services',
+  title: 'サービス一覧',
+  description: '合同会社ぼんどが提供するデジタルマーケティング・Web制作・DX支援サービスをご紹介します。',
 };
+
+const services = [
+  {
+    id: 'web-production',
+    title: 'Web制作・運用',
+    subtitle: 'High-Performance Web Design',
+    description: 'お客さまのビジネスに最適なWebサイトを企画から制作、運用まで一貫してサポート。SEO対策やアクセス解析も含めた総合的なWeb戦略を提供します。',
+    icon: 'tabler:world-www',
+    href: '/services/web-production',
+    features: [
+      { title: 'レスポンシブデザイン', description: 'PC・スマホ・タブレットすべてに最適化', icon: 'tabler:devices' },
+      { title: 'SEO最適化', description: '検索エンジンで見つけてもらいやすく', icon: 'tabler:search' },
+      { title: '保守運用サポート', description: '更新作業や改善提案を継続的に実施', icon: 'tabler:tool' },
+      { title: 'アクセス解析', description: 'データに基づいた改善提案', icon: 'tabler:chart-line' },
+    ],
+  },
+  {
+    id: 'ec',
+    title: 'EC構築・オンライン販売支援',
+    subtitle: 'E-Commerce Solution',
+    description: '地域の特産品や商品をオンラインで販売。Shopifyを中心としたECサイト構築から、商品撮影、在庫管理、配送まで総合的にサポートします。',
+    icon: 'tabler:shopping-cart',
+    features: [
+      { title: 'Shopify構築', description: '世界標準のECプラットフォーム', icon: 'tabler:building-store' },
+      { title: '商品撮影・登録', description: '魅力的な商品ページ作成', icon: 'tabler:camera' },
+      { title: '決済システム導入', description: '安全で便利な決済手段', icon: 'tabler:credit-card' },
+      { title: '運用代行', description: 'データ分析・ページ改善・商品登録', icon: 'tabler:chart-line' },
+    ],
+  },
+  {
+    id: 'marketing',
+    title: 'MEO・LINE・集客導線設計',
+    subtitle: 'Digital Marketing & CRM',
+    description: 'Googleマップでの上位表示、LINE公式アカウントの構築・運用、SNS活用など、地域ビジネスに特化した集客支援を行います。',
+    icon: 'tabler:map-pin',
+    features: [
+      { title: 'MEO対策', description: 'Googleマップで上位表示', icon: 'tabler:map-search' },
+      { title: 'LINE公式構築', description: 'リピーター獲得の仕組み', icon: 'tabler:brand-line' },
+      { title: 'SNS運用', description: '情報発信と顧客接点強化', icon: 'tabler:share' },
+      { title: '口コミ管理', description: '評価向上と信頼構築', icon: 'tabler:star' },
+    ],
+  },
+  {
+    id: 'dx',
+    title: 'ローカルDX・業務効率化',
+    subtitle: 'Local Digital Transformation',
+    description: '手作業の自動化、データ活用、システム導入により業務効率を大幅に改善。地域企業のDX推進をサポートします。',
+    icon: 'tabler:cpu',
+    features: [
+      { title: '業務自動化', description: '繰り返し作業をシステム化', icon: 'tabler:robot' },
+      { title: 'データ分析', description: '経営判断に役立つ見える化', icon: 'tabler:chart-dots' },
+      { title: 'システム導入', description: '最適なツール選定と導入', icon: 'tabler:settings' },
+      { title: '社員研修', description: 'デジタルツール活用支援', icon: 'tabler:school' },
+    ],
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
-  <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
-    }}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
-    columns={3}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
-      },
-      {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
-        description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Blog',
-        description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
-      },
-    ]}
-  />
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    items={[
-      {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
-      },
-      {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Time Savings',
-        description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Professional Appearance',
-        description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Cost-Efficiency',
-        description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Instant Download',
-        description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
-    </Fragment>
-  </Content>
-
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="Words from real customers"
-    testimonials={[
-      {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
-      },
-      {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
-      },
-      {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
+  <!-- ヒーローセクション -->
+  <Hero2
+    tagline="Our Services"
     actions={[
       {
+        text: '無料相談はこちら',
+        href: '/contact',
         variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
       },
     ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
-  />
+    image={{ src: heroServices, alt: 'Bond LLC Services' }}
+  >
+    <Fragment slot="title">
+      サービス一覧
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      地域ビジネスの成長を支える<br />
+      デジタルソリューション
+    </Fragment>
+  </Hero2>
+
+  <!-- 料金についての考え方 -->
+  <section class="py-16 bg-bond-surface border-y border-bond-navy/10 relative overflow-hidden">
+    <!-- Grid -->
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="bg-white p-8 md:p-12 border border-bond-navy/10 relative">
+        <!-- Decoration -->
+        <div class="absolute top-0 left-0 w-2 h-full bg-bond-yellow-main"></div>
+        <div class="absolute top-4 right-4 text-xs font-mono text-bond-navy/30">FIG. PR-01 // PRICING POLICY</div>
+
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center justify-center w-16 h-16 border-2 border-bond-navy mb-4">
+            <Icon name="tabler:currency-yen" class="w-8 h-8 text-bond-navy" />
+          </div>
+          <h2 class="text-2xl md:text-3xl font-serif font-bold text-bond-navy mb-4">
+            合同会社ぼんどは、<br>見栄えだけの料金プランは掲載しておりません
+          </h2>
+          <p class="text-bond-text-sub font-mono text-sm tracking-widest uppercase">
+            Pricing Strategy & Philosophy
+          </p>
+        </div>
+        
+        <div class="space-y-8 text-bond-text-main">
+          <div class="bg-bond-surface/50 p-6 border border-bond-navy/5">
+            <p class="text-lg font-serif font-bold text-bond-navy mb-3 flex items-center gap-2">
+              <span class="text-bond-yellow-main">💡</span> なぜ料金表を載せないの？
+            </p>
+            <p class="leading-relaxed">
+              「Web制作30万円」「EC構築50万円」といった料金表をよく見かけます。<br />
+              しかし、<strong class="text-bond-navy bg-bond-yellow-main/20 px-1">あなたの事業にとって、本当に必要なものは何でしょうか？</strong>
+            </p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="p-6 border border-bond-navy/10 relative">
+               <h3 class="font-bold text-bond-navy mb-4 font-serif text-xl">お客さまごとに異なる状況</h3>
+               <ul class="space-y-3 font-mono text-sm">
+                  {[
+                    {label: 'Phase', val: '事業フェーズ'},
+                    {label: 'Industry', val: '業種・業界'},
+                    {label: 'Issue', val: '経営課題'},
+                    {label: 'Resource', val: '予算・人員'}
+                  ].map(item => (
+                    <li class="flex items-center justify-between border-b border-dashed border-bond-navy/10 pb-2">
+                      <span class="text-bond-navy/60">{item.label}</span>
+                      <span class="font-bold text-bond-navy">{item.val}</span>
+                    </li>
+                  ))}
+               </ul>
+            </div>
+
+            <div class="p-6 border border-bond-navy/10 relative bg-bond-navy text-white">
+              <h3 class="font-bold text-white mb-4 font-serif text-xl flex items-center gap-2">
+                <Icon name="tabler:bulb" class="w-5 h-5 text-bond-yellow-main" />
+                診断アプローチ
+              </h3>
+               <p class="text-sm leading-relaxed text-white/80 mb-4">
+                頭痛で病院に行ったら、原因はストレスだった。<br>
+                ビジネスも同じで、「Webサイトが欲しい」の裏に「集客」や「採用」の課題が隠れています。
+               </p>
+               <p class="text-bond-yellow-main font-bold text-sm">
+                私たちは「診断」から始め、最適な処方箋（解決策）をご提案します。
+               </p>
+            </div>
+          </div>
+          
+          <div class="border-t border-bond-navy/10 pt-8 mt-8 text-center">
+             <p class="font-serif font-bold text-xl text-bond-navy mb-2">私たちの約束</p>
+             <p class="max-w-2xl mx-auto leading-relaxed">
+               画一的な料金プランに当てはめるのではなく、あなたの事業の現状・課題・目標をしっかりお聞きして、
+               <strong class="border-b-2 border-bond-yellow-main">本当に必要なものを、適正な価格で</strong>ご提案します。
+             </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3つの主要な悩みとアプローチ -->
+  <section class="py-20 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-serif font-bold text-bond-navy mb-4">
+          よくある課題と解決策
+        </h2>
+        <p class="text-sm font-mono text-bond-text-sub uppercase tracking-widest">
+          Solutions for Issues
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Issue 01 -->
+        <div class="group border border-bond-navy/10 hover:border-bond-navy transition-colors bg-white relative">
+          <div class="absolute top-0 right-0 p-4 font-mono text-4xl text-bond-navy/5 font-bold group-hover:text-bond-navy/10">01</div>
+          <div class="p-8">
+            <div class="w-12 h-12 bg-bond-navy text-white flex items-center justify-center mb-6">
+              <Icon name="tabler:users-minus" class="w-6 h-6" />
+            </div>
+            <h3 class="text-xl font-bold text-bond-navy mb-2 font-serif">集客・売上</h3>
+            <p class="text-sm text-bond-text-sub mb-6 h-12">「お客さんが来ない」「Webサイトからの反応がない」</p>
+            
+            <div class="space-y-4">
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 1</p>
+                <p class="text-sm font-bold text-bond-navy">現状分析と課題特定</p>
+              </div>
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 2</p>
+                <p class="text-sm font-bold text-bond-navy">MEO・LINE導入</p>
+              </div>
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 3</p>
+                <p class="text-sm font-bold text-bond-navy">効果測定と改善</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-bond-surface p-4 text-center border-t border-bond-navy/10">
+            <p class="text-xs font-bold text-bond-navy">GOAL: 安定した集客基盤の構築</p>
+          </div>
+        </div>
+
+        <!-- Issue 02 -->
+        <div class="group border border-bond-navy/10 hover:border-bond-navy transition-colors bg-white relative">
+          <div class="absolute top-0 right-0 p-4 font-mono text-4xl text-bond-navy/5 font-bold group-hover:text-bond-navy/10">02</div>
+          <div class="p-8">
+             <div class="w-12 h-12 bg-bond-navy text-white flex items-center justify-center mb-6">
+              <Icon name="tabler:clock-exclamation" class="w-6 h-6" />
+            </div>
+            <h3 class="text-xl font-bold text-bond-navy mb-2 font-serif">業務効率・時間</h3>
+            <p class="text-sm text-bond-text-sub mb-6 h-12">「事務作業に追われている」「情報共有がうまくいかない」</p>
+            
+            <div class="space-y-4">
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 1</p>
+                <p class="text-sm font-bold text-bond-navy">業務フロー可視化</p>
+              </div>
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 2</p>
+                <p class="text-sm font-bold text-bond-navy">ツール選定・導入</p>
+              </div>
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 3</p>
+                <p class="text-sm font-bold text-bond-navy">定着支援</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-bond-surface p-4 text-center border-t border-bond-navy/10">
+            <p class="text-xs font-bold text-bond-navy">GOAL: 本業に集中できる環境</p>
+          </div>
+        </div>
+
+        <!-- Issue 03 -->
+        <div class="group border border-bond-navy/10 hover:border-bond-navy transition-colors bg-white relative">
+          <div class="absolute top-0 right-0 p-4 font-mono text-4xl text-bond-navy/5 font-bold group-hover:text-bond-navy/10">03</div>
+          <div class="p-8">
+            <div class="w-12 h-12 bg-bond-navy text-white flex items-center justify-center mb-6">
+              <Icon name="tabler:help-hexagon" class="w-6 h-6" />
+            </div>
+            <h3 class="text-xl font-bold text-bond-navy mb-2 font-serif">IT未経験</h3>
+            <p class="text-sm text-bond-text-sub mb-6 h-12">「何から始めればいいか分からない」「難しいことは苦手」</p>
+            
+            <div class="space-y-4">
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 1</p>
+                <p class="text-sm font-bold text-bond-navy">やさしい無料相談</p>
+              </div>
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 2</p>
+                <p class="text-sm font-bold text-bond-navy">スモールスタート</p>
+              </div>
+              <div class="border-l-2 border-bond-yellow-main pl-4">
+                <p class="text-xs font-mono text-bond-navy/60 mb-1">STEP 3</p>
+                <p class="text-sm font-bold text-bond-navy">伴走サポート</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-bond-surface p-4 text-center border-t border-bond-navy/10">
+            <p class="text-xs font-bold text-bond-navy">GOAL: デジタルを味方につける</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Summary -->
+      <div class="mt-16 text-center">
+        <div class="inline-block border border-bond-navy/20 p-8 bg-bond-background relative">
+           <div class="absolute -top-1 -left-1 w-2 h-2 bg-bond-navy"></div>
+           <div class="absolute -top-1 -right-1 w-2 h-2 bg-bond-navy"></div>
+           <div class="absolute -bottom-1 -left-1 w-2 h-2 bg-bond-navy"></div>
+           <div class="absolute -bottom-1 -right-1 w-2 h-2 bg-bond-navy"></div>
+           
+           <p class="text-lg font-bold text-bond-navy mb-4">単なる「業者」ではなく「パートナー」として。</p>
+           <a href="/contact" class="btn-primary">
+              無料相談で課題を整理する
+              <Icon name="tabler:arrow-right" class="inline-block w-4 h-4 ml-2" />
+           </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- サービス一覧 -->
+  <section class="py-16 lg:py-24 bg-bond-surface border-t border-bond-navy/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="space-y-20">
+        {services.map((service, index) => (
+          <div id={service.id} class="scroll-mt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+               <!-- Header Side -->
+               <div class="lg:col-span-4">
+                  <div class="sticky top-24">
+                    <div class="text-6xl font-bold font-serif text-bond-navy opacity-20 mb-[-2rem] ml-[-1rem] select-none">0{index + 1}</div>
+                    <div class="relative z-10 pt-4">
+                       <h2 class="text-3xl font-bold text-bond-navy mb-2 font-serif">{service.title}</h2>
+                       <p class="font-mono text-sm uppercase tracking-widest text-bond-yellow-deep mb-6">{service.subtitle}</p>
+                       <p class="text-bond-text-main leading-relaxed mb-6">{service.description}</p>
+                       
+                       {service.href && (
+                        <a href={service.href} class="btn-secondary w-full text-center group">
+                          View Details
+                          <Icon name="tabler:arrow-right" class="inline-block w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+               </div>
+
+               <!-- Features Grid -->
+               <div class="lg:col-span-8">
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-px bg-bond-navy/10 border border-bond-navy/10">
+                    {service.features.map((feature) => (
+                      <div class="bg-white p-6 hover:bg-bond-yellow-main/5 transition-colors">
+                         <div class="flex items-start gap-4">
+                           <div class="w-10 h-10 border border-bond-navy/20 flex items-center justify-center flex-shrink-0">
+                              <Icon name={feature.icon} class="w-5 h-5 text-bond-navy" />
+                           </div>
+                           <div>
+                             <h4 class="font-bold text-bond-navy mb-1">{feature.title}</h4>
+                             <p class="text-sm text-bond-text-sub leading-snug">{feature.description}</p>
+                           </div>
+                         </div>
+                      </div>
+                    ))}
+                 </div>
+               </div>
+            </div>
+
+            {index < services.length - 1 && (
+              <div class="mt-20 border-b border-dashed border-bond-navy/20"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 lg:py-24 bg-bond-navy relative overflow-hidden text-center">
+    <!-- Grid -->
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+      <h2 class="text-3xl md:text-5xl font-serif font-bold text-white mb-6">
+        無料相談から始める
+      </h2>
+      <p class="text-lg text-white/80 mb-10">
+        お客さまの課題やご要望をお聞きして、最適なプランをご提案します。<br />
+        オンライン相談も可能です。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary bg-white text-bond-navy border-white hover:bg-gray-100 hover:text-bond-navy">
+          無料相談を申し込む
+        </a>
+        <a href="https://lin.ee/xxxxxx" class="btn-secondary bg-[#06C755] border-[#06C755] text-white hover:bg-[#05b34c] inline-flex items-center justify-center">
+          <img src={lineIcon.src} alt="LINE" class="w-5 h-5 mr-2" />
+          LINEで相談
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>

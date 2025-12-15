@@ -1,8 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
 import Button from '~/components/ui/Button.astro';
+import miyabitoImage from '~/assets/images/miyabito.png';
 
 export interface Props {
   id?: string;
@@ -22,92 +23,93 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`${classes?.container ?? ''}`}>
-  <div class="bg-gradient-to-br from-bond-yellow-main/5 to-bond-yellow-deep/5 rounded-2xl overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
+  <!-- Constructivism Card Style -->
+  <div class="relative bg-bond-background border border-bond-navy/10 overflow-hidden">
+    <!-- Background Grid -->
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 z-0"></div>
+    
+    <!-- Diagonal Slash (Constructivism Element) -->
+    <div class="absolute top-0 right-0 w-2/3 h-full bg-bond-navy/5 -skew-x-12 z-0 hidden lg:block border-l border-bond-navy/10"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <!-- 左側：コンテンツ -->
         <div>
-          <div class="mb-6">
-            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-bond-yellow-main text-bond-navy">
-              ローカルメディア
-            </span>
+          <div class="mb-8 flex items-center gap-4">
+             <div class="w-12 h-1 bg-bond-yellow-main"></div>
+             <span class="font-mono text-sm tracking-widest uppercase text-bond-navy">ローカルメディア運営</span>
           </div>
           
-          <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-6">
+          <h2 class="text-4xl md:text-5xl font-serif font-bold text-bond-navy mb-8 leading-tight">
             {title}
           </h2>
           
-          <p class="text-lg text-bond-text-sub mb-6">
+          <p class="text-xl font-sans text-bond-navy mb-8 border-l-4 border-bond-yellow-main pl-6 py-2">
             {subtitle}
           </p>
           
-          <div class="space-y-4 mb-8">
-            <p class="text-bond-text-main leading-relaxed">
+          <div class="space-y-6 mb-10 text-bond-text-main leading-loose">
+            <p>
               「みやびと」は、宮崎で活躍する人々や企業の物語を伝えるローカルメディアです。
               地域の魅力を掘り起こし、事業者とお客さまをつなぐ架け橋となることを目指しています。
             </p>
-            
-            <p class="text-bond-text-main leading-relaxed">
+            <p>
               なぜWeb制作会社がメディアを運営するのか。それは、地域の価値を正しく伝え、
               持続的な経済圏を作るには、ストーリーの発信が不可欠だと考えているからです。
             </p>
           </div>
           
-          <div class="grid grid-cols-2 gap-6 mb-8">
-            <div class="flex items-start">
-              <Icon name="tabler:users" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
-              <div>
-                <p class="font-semibold text-bond-navy">地域の人々</p>
-                <p class="text-sm text-bond-text-sub">挑戦する人の物語</p>
+          <!-- Key Points Grid -->
+          <div class="grid grid-cols-2 gap-px bg-bond-navy/20 border border-bond-navy/20 mb-10">
+            {[
+              { title: '地域の人々', sub: 'Human Story', icon: 'tabler:users' },
+              { title: '地域の企業', sub: 'Business Soul', icon: 'tabler:building-store' },
+              { title: '地域の魅力', sub: 'Local Value', icon: 'tabler:sparkles' },
+              { title: '地域の繋がり', sub: 'Community', icon: 'tabler:heart-handshake' }
+            ].map((item) => (
+              <div class="bg-bond-background p-4 hover:bg-bond-yellow-main/5 transition-colors">
+                <div class="flex items-center gap-3 mb-2">
+                  <Icon name={item.icon} class="w-5 h-5 text-bond-navy" />
+                  <span class="font-bold text-bond-navy text-sm">{item.title}</span>
+                </div>
+                <p class="text-xs font-mono text-bond-text-sub uppercase tracking-wider pl-8">{item.sub}</p>
               </div>
-            </div>
-            <div class="flex items-start">
-              <Icon name="tabler:building-store" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
-              <div>
-                <p class="font-semibold text-bond-navy">地域の企業</p>
-                <p class="text-sm text-bond-text-sub">事業への想い</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <Icon name="tabler:sparkles" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
-              <div>
-                <p class="font-semibold text-bond-navy">地域の魅力</p>
-                <p class="text-sm text-bond-text-sub">知られざる価値</p>
-              </div>
-            </div>
-            <div class="flex items-start">
-              <Icon name="tabler:heart-handshake" class="w-5 h-5 text-bond-yellow-deep mt-1 mr-3 flex-shrink-0" />
-              <div>
-                <p class="font-semibold text-bond-navy">地域の繋がり</p>
-                <p class="text-sm text-bond-text-sub">コミュニティ形成</p>
-              </div>
-            </div>
+            ))}
           </div>
           
           <div class="flex flex-col sm:flex-row gap-4">
-            <Button href="/media/miyabito" class="btn-primary">
+            <Button href="https://miyabito.bond-llc.jp/" class="btn-primary w-full sm:w-auto">
               インタビュー記事を読む
+              <Icon name="tabler:external-link" class="w-4 h-4 ml-2" />
             </Button>
-            <Button href="/contact" class="btn-secondary">
+            <Button href="/contact" class="btn-secondary w-full sm:w-auto">
               取材のご相談
             </Button>
           </div>
         </div>
         
-        <!-- 右側：ビジュアル -->
-        <div class="relative">
-          <div class="aspect-w-4 aspect-h-3 rounded-xl overflow-hidden bg-gradient-to-br from-bond-yellow-main/20 to-bond-yellow-deep/20">
-            <div class="flex items-center justify-center h-96">
-              <div class="text-center">
-                <Icon name="tabler:notebook" class="w-24 h-24 text-bond-navy/20 mb-4" />
-                <p class="text-bond-text-sub">みやびとイメージ</p>
-              </div>
+        <!-- 右側：ビジュアル (Image) -->
+        <div class="relative mt-8 lg:mt-0">
+          <!-- Neon Frames -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 border-t-2 border-r-2 border-bond-yellow-main z-20"></div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 border-b-2 border-l-2 border-bond-yellow-main z-20"></div>
+          
+          <!-- Image Container with Cut-out Effect -->
+          <div class="relative transform rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
+            <div class="absolute inset-0 bg-bond-navy transform translate-x-2 translate-y-2 z-0"></div>
+            <Image
+              src={miyabitoImage}
+              alt="Miyabito Interview Scene"
+              width={600}
+              height={450}
+              class="relative z-10 w-full h-auto grayscale contrast-110 border border-bond-navy"
+            />
+            
+            <!-- Floating Label -->
+            <div class="absolute bottom-4 right-4 bg-bond-yellow-main text-bond-navy px-4 py-2 z-30 font-bold tracking-widest text-xs uppercase shadow-[4px_4px_0_0_#1f2e6c]">
+              Miyazaki Local Voice
             </div>
           </div>
-          
-          <!-- 装飾要素 -->
-          <div class="absolute -top-4 -right-4 w-24 h-24 bg-bond-yellow-main/10 rounded-full blur-2xl"></div>
-          <div class="absolute -bottom-4 -left-4 w-32 h-32 bg-bond-yellow-deep/10 rounded-full blur-2xl"></div>
         </div>
       </div>
     </div>

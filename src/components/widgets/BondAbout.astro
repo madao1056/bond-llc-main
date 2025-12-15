@@ -21,22 +21,22 @@ const {
 
 const items = [
   {
-    title: 'Mission',
-    subtitle: '使命',
+    title: 'ミッション',
+    subtitle: 'Mission',
     description: '地域の事業者とお客さまをつなぎ、価値が正しく届く環境をつくる',
-    icon: 'tabler:target',
+    icon: 'tabler:crosshair',
   },
   {
-    title: 'Vision',
-    subtitle: 'ビジョン',
+    title: 'ビジョン',
+    subtitle: 'Vision',
     description: '宮崎を起点に、関係性を基盤とした持続的な経済圏を広げる',
-    icon: 'tabler:eye',
+    icon: 'tabler:scan-eye',
   },
   {
-    title: 'Values',
-    subtitle: '価値観',
+    title: 'バリュー',
+    subtitle: 'Values',
     description: 'よしなに力・共創スタンス・仕組み化と再現性',
-    icon: 'tabler:heart-handshake',
+    icon: 'tabler:geometry',
   },
 ];
 ---
@@ -50,9 +50,9 @@ const items = [
         <div class="absolute -inset-1 bg-gradient-to-r from-bond-yellow-main to-bond-yellow-deep rounded-lg blur opacity-10 group-hover:opacity-20 transition duration-300"></div>
         <div class="relative bg-white rounded-lg p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 border border-bond-border">
           <div class="flex items-center justify-center w-14 h-14 bg-bond-yellow-main/10 rounded-lg mb-4">
-            <Icon name={item.icon} class="w-7 h-7 text-bond-navy" />
+            <Icon name={item.icon} class="w-7 h-7 text-bond-navy dark:text-sky-400" />
           </div>
-          <h3 class="text-xl font-bold text-bond-navy mb-1">
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-1">
             {item.title}
           </h3>
           <p class="text-sm text-bond-text-sub mb-3">
@@ -69,7 +69,7 @@ const items = [
   <div class="mt-12 text-center">
     <a
       href="/about"
-      class="inline-flex items-center text-bond-navy hover:text-bond-yellow-deep transition-colors duration-200 font-medium"
+      class="inline-flex items-center text-bond-navy dark:text-sky-400 hover:text-bond-yellow-deep transition-colors duration-200 font-medium"
     >
       詳しく見る
       <Icon name="tabler:arrow-right" class="w-5 h-5 ml-2" />
