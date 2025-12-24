@@ -164,3 +164,147 @@ const strengths = [
     ))}
   </div>
 </WidgetWrapper>
+
+<!-- Modal Container - Outside WidgetWrapper for full screen coverage -->
+<div id="strength-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] opacity-0 pointer-events-none transition-opacity duration-300" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+  <div class="flex items-center justify-center min-h-screen p-4">
+    <div class="bg-white max-w-2xl w-full rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between p-6 border-b border-bond-navy/10">
+        <h3 class="text-xl font-bold text-bond-navy font-serif" id="modal-title">
+          強みの詳細
+        </h3>
+        <button 
+          id="close-modal" 
+          class="text-bond-navy/50 hover:text-bond-navy transition-colors p-2"
+          aria-label="モーダルを閉じる"
+        >
+          <Icon name="tabler:x" class="w-5 h-5" />
+        </button>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="p-6">
+        <p class="text-bond-text-main leading-relaxed" id="modal-description">
+          詳細情報がここに表示されます。
+        </p>
+      </div>
+      
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 bg-bond-background border-t border-bond-navy/10">
+        <button 
+          id="modal-close-btn"
+          class="px-4 py-2 bg-bond-navy text-white font-mono text-sm uppercase tracking-widest hover:bg-bond-yellow-deep transition-colors"
+        >
+          閉じる
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Modal data structure
+  const modalData = {
+    'strength-0-0': {
+      title: '曖昧な要望も形に',
+      description: '完璧な要件定義ができなくても大丈夫。お客さまの「こうしたい」という想いを丁寧にヒアリングし、プロの視点から最適な形に落とし込みます。'
+    },
+    'strength-0-1': {
+      title: '期待以上の提案',
+      description: 'お客さまが思い描いていた以上の価値を提供。業界のトレンドや成功事例を踏まえ、一歩先を行く提案をいたします。'
+    },
+    'strength-0-2': {
+      title: '細やかなフォロー',
+      description: '定期的な進捗報告はもちろん、些細な疑問にも迅速に対応。お客さまに寄り添い、安心感のあるサポートを心がけています。'
+    },
+    'strength-1-0': {
+      title: '事業理解から始める',
+      description: 'まずはお客さまのビジネスを深く理解することから。業界特性、競合環境、強み・弱みを把握し、最適な戦略を立案します。'
+    },
+    'strength-1-1': {
+      title: '定期的な振り返り',
+      description: '月次でのレポート提出と改善提案を実施。PDCAサイクルを回しながら、常に最適な施策へとアップデートしていきます。'
+    },
+    'strength-1-2': {
+      title: '改善提案の継続',
+      description: '現状に満足せず、常により良い方法を模索。新しい技術やトレンドを取り入れながら、継続的な改善を提案します。'
+    },
+    'strength-2-0': {
+      title: '運用マニュアル作成',
+      description: '誰でも理解できる丁寧なマニュアルを作成。担当者が変わっても、同じ品質で運用を継続できる体制を整えます。'
+    },
+    'strength-2-1': {
+      title: 'データ分析と改善',
+      description: 'アクセス解析、売上データ、顧客行動を分析し、数値に基づいた改善を実施。感覚ではなく、データドリブンな施策を展開します。'
+    },
+    'strength-2-2': {
+      title: '属人化の解消',
+      description: '特定の人に依存しない仕組みづくり。業務フローの標準化、ツールの活用により、安定した運用を実現します。'
+    }
+  };
+
+  // DOM elements
+  const modal = document.getElementById('strength-modal');
+  const modalContent = document.getElementById('modal-content');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDescription = document.getElementById('modal-description');
+  const closeModalBtn = document.getElementById('close-modal');
+  const modalCloseBtn = document.getElementById('modal-close-btn');
+
+  // Open modal function
+  function openModal(triggerId) {
+    const data = modalData[triggerId];
+    if (!data) return;
+
+    modalTitle.textContent = data.title;
+    modalDescription.textContent = data.description;
+    
+    modal.classList.remove('opacity-0', 'pointer-events-none');
+    modalContent.classList.remove('scale-95');
+    modalContent.classList.add('scale-100');
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close modal function
+  function closeModal() {
+    modal.classList.add('opacity-0', 'pointer-events-none');
+    modalContent.classList.remove('scale-100');
+    modalContent.classList.add('scale-95');
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+  }
+
+  // Event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add click listeners to strength point triggers
+    const triggers = document.querySelectorAll('[data-modal-trigger]');
+    triggers.forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const triggerId = this.getAttribute('data-modal-trigger');
+        openModal(triggerId);
+      });
+    });
+
+    // Close modal listeners
+    closeModalBtn?.addEventListener('click', closeModal);
+    modalCloseBtn?.addEventListener('click', closeModal);
+
+    // Close on backdrop click
+    modal?.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) {
+        closeModal();
+      }
+    });
+  });
+</script>

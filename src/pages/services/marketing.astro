@@ -17,25 +17,21 @@ const benefits = [
     title: 'MEO対策で検索上位へ',
     description: 'Googleマップで「地域名 + 業種」検索時に上位表示。来店見込みの高いお客様に見つけてもらえます。',
     icon: 'tabler:map-search',
-    stats: '検索上位で来店率2.7倍',
   },
   {
     title: 'LINEでリピーター育成',
     description: '日本人の95%が使うLINEで顧客と直接つながり、リピート率を向上させます。',
     icon: 'tabler:brand-line',
-    stats: 'メール比3倍の開封率',
   },
   {
     title: 'SNSで認知度アップ',
     description: 'Instagram、Facebook、X（旧Twitter）を活用し、若い世代にもアプローチ。',
     icon: 'tabler:share',
-    stats: '認知度が平均1.8倍向上',
   },
   {
     title: 'データ分析で改善',
     description: 'アクセス解析、顧客行動分析により、効果的な施策を継続的に実施。',
     icon: 'tabler:chart-line',
-    stats: '改善により売上20%アップ',
   },
 ];
 
@@ -142,13 +138,12 @@ const faqs = [
       <!-- 効果・メリット -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-bond-border border border-bond-border">
         {benefits.map((benefit) => (
-          <div class="bg-bond-surface dark:bg-gray-800 p-8 group hover:bg-white transition-colors duration-300">
-            <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
-              <Icon name={benefit.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
+          <div class="bg-bond-surface dark:bg-gray-800 p-8">
+            <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6">
+              <Icon name={benefit.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400" />
             </div>
             <h3 class="text-lg font-bold text-bond-navy dark:text-sky-400 mb-2 font-serif">{benefit.title}</h3>
-            <p class="text-sm text-bond-text-sub dark:text-gray-300 mb-4 leading-relaxed">{benefit.description}</p>
-            <p class="text-xs font-bold text-bond-yellow-deep font-mono tracking-wider border-b border-bond-yellow-main/30 pb-1 inline-block">{benefit.stats}</p>
+            <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{benefit.description}</p>
           </div>
         ))}
       </div>
@@ -275,7 +270,7 @@ const faqs = [
   <section class="py-16 lg:py-20 bg-bond-background">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy dark:text-sky-400 mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
           MEO・LINE・集客支援に関するよくある質問
         </h2>
       </div>
@@ -302,7 +297,7 @@ const faqs = [
 
   <!-- CTA -->
   <BondCTA
-    title="集客支援のご相談はお気軽に"
+    title="集客支援の<br>ご相談はお気軽に"
     subtitle="まずは無料相談で、お客さまのご要望をお聞かせください"
     description="MEO、LINE、SNSを活用した効果的な集客プランをご提案いたします。"
   />
