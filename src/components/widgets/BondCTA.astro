@@ -30,7 +30,7 @@ const {
     {
       variant: 'accent',
       text: 'LINE で相談',
-      href: 'https://lin.ee/xxxxxx',
+      href: 'https://lin.ee/LYodITQO',
       icon: 'tabler:brand-line',
     },
   ],
@@ -85,15 +85,18 @@ const {
             <div class="flex flex-col sm:flex-row gap-4">
               {actions.map(({ text, href, variant = 'primary', icon }) => {
                 const isLine = text?.includes('LINE');
+                if (isLine) {
+                  return (
+                    <a href="https://lin.ee/LYodITQO">
+                      <img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0" />
+                    </a>
+                  );
+                }
                 return (
                   <Button
                     variant={variant}
                     href={href}
-                    class={`w-full sm:w-auto ${
-                      isLine 
-                        ? 'bg-[#06C755] border-[#06C755] text-white hover:bg-[#05b34c]' 
-                        : 'bg-white border-white text-bond-navy hover:bg-bond-yellow-main hover:border-bond-yellow-main hover:text-bond-navy'
-                    }`}
+                    class="w-full sm:w-auto bg-white border-white text-bond-navy hover:bg-bond-yellow-main hover:border-bond-yellow-main hover:text-bond-navy"
                     icon={icon}
                   >
                     {text}
