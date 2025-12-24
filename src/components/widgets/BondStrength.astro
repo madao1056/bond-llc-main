@@ -31,7 +31,20 @@ const strengths = [
     description: '「こうしたい」という想いを汲み取り、言葉にならない要望まで形にします。細かな相談も遠慮なくどうぞ。',
     icon: 'tabler:sparkles',
     image: imgYoshinani,
-    points: ['曖昧な要望も形に', '期待以上の提案', '細やかなフォロー'],
+    points: [
+      {
+        title: '曖昧な要望も形に',
+        detail: '完璧な要件定義ができなくても大丈夫。お客さまの「こうしたい」という想いを丁寧にヒアリングし、プロの視点から最適な形に落とし込みます。',
+      },
+      {
+        title: '期待以上の提案',
+        detail: 'お客さまが思い描いていた以上の価値を提供。業界のトレンドや成功事例を踏まえ、一歩先を行く提案をいたします。',
+      },
+      {
+        title: '細やかなフォロー',
+        detail: '定期的な進捗報告はもちろん、些細な疑問にも迅速に対応。お客さまに寄り添い、安心感のあるサポートを心がけています。',
+      },
+    ],
   },
   {
     title: '共創スタンス',
@@ -39,7 +52,20 @@ const strengths = [
     description: 'お客さまと並走し、事業の成長を自分ごととして捉えます。単なる外注先ではなく、パートナーとして。',
     icon: 'tabler:users-group',
     image: imgCocreation,
-    points: ['事業理解から始める', '定期的な振り返り', '改善提案の継続'],
+    points: [
+      {
+        title: '事業理解から始める',
+        detail: 'まずはお客さまのビジネスを深く理解することから。業界特性、競合環境、強み・弱みを把握し、最適な戦略を立案します。',
+      },
+      {
+        title: '定期的な振り返り',
+        detail: '月次でのレポート提出と改善提案を実施。PDCAサイクルを回しながら、常に最適な施策へとアップデートしていきます。',
+      },
+      {
+        title: '改善提案の継続',
+        detail: '現状に満足せず、常により良い方法を模索。新しい技術やトレンドを取り入れながら、継続的な改善を提案します。',
+      },
+    ],
   },
   {
     title: '仕組み化と再現性',
@@ -47,7 +73,20 @@ const strengths = [
     description: '一過性の施策ではなく、継続的に成果が出る仕組みを構築。誰でも運用できる形で引き継ぎます。',
     icon: 'tabler:settings',
     image: imgSystem,
-    points: ['運用マニュアル作成', 'データ分析と改善', '属人化の解消'],
+    points: [
+      {
+        title: '運用マニュアル作成',
+        detail: '誰でも理解できる丁寧なマニュアルを作成。担当者が変わっても、同じ品質で運用を継続できる体制を整えます。',
+      },
+      {
+        title: 'データ分析と改善',
+        detail: 'アクセス解析、売上データ、顧客行動を分析し、数値に基づいた改善を実施。感覚ではなく、データドリブンな施策を展開します。',
+      },
+      {
+        title: '属人化の解消',
+        detail: '特定の人に依存しない仕組みづくり。業務フローの標準化、ツールの活用により、安定した運用を実現します。',
+      },
+    ],
   },
 ];
 ---
@@ -87,10 +126,14 @@ const strengths = [
             </p>
             
             <ul class="grid grid-cols-1 gap-4">
-              {strength.points.map((point) => (
-                <li class="group flex items-center bg-white p-3 border border-bond-navy/10 hover:border-bond-navy transition-colors">
+              {strength.points.map((point, pointIndex) => (
+                <li 
+                  class="group flex items-center bg-white p-3 border border-bond-navy/10 hover:border-bond-navy transition-colors cursor-pointer"
+                  data-modal-trigger={`strength-${index}-${pointIndex}`}
+                >
                   <span class="w-1.5 h-1.5 bg-bond-yellow-main mr-4 group-hover:bg-bond-navy transition-colors"></span>
-                  <span class="text-bond-navy font-bold">{point}</span>
+                  <span class="text-bond-navy font-bold">{point.title}</span>
+                  <Icon name="tabler:chevron-right" class="w-4 h-4 ml-auto text-bond-navy/50 group-hover:text-bond-navy transition-colors" />
                 </li>
               ))}
             </ul>

@@ -1,10 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
 import BondCTA from '~/components/widgets/BondCTA.astro';
 import { Icon } from 'astro-icon/components';
 import lineIcon from '~/icons/LINE.png';
@@ -275,31 +271,39 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
-  <FAQs
-    title="よくあるご質問"
-    subtitle="MEO・LINE・集客支援に関してよくいただくご質問"
-    items={faqs}
-  />
+  <!-- よくある質問 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy dark:text-sky-400 mb-4">
+          MEO・LINE・集客支援に関するよくある質問
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+              <span class="font-medium text-bond-navy dark:text-sky-400">
+                {faq.title}
+              </span>
+              <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-bond-text-main dark:text-gray-300">
+                {faq.description}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <BondCTA
-    title="集客のお悩みを解決します"
-    subtitle="MEO、LINE、SNSを活用した効果的な集客を始めませんか？"
-    description="無料相談で現状分析と最適な集客プランをご提案いたします。"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'お問い合わせ',
-        href: '/contact',
-        icon: 'tabler:mail',
-      },
-      {
-        variant: 'accent',
-        text: 'LINEで相談',
-        href: 'https://lin.ee/xxxxxx',
-        icon: 'tabler:brand-line',
-      },
-    ]}
+    title="集客支援のご相談はお気軽に"
+    subtitle="まずは無料相談で、お客さまのご要望をお聞かせください"
+    description="MEO、LINE、SNSを活用した効果的な集客プランをご提案いたします。"
   />
 </Layout>

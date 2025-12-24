@@ -2,7 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
 import { Icon } from 'astro-icon/components';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
 import heroImage from '~/assets/images/hero-ec.png';
 
 const metadata = {
@@ -326,20 +326,9 @@ const process = [
   </section>
 
   <!-- CTA -->
-  <CallToAction
-    actions={[
-      {
-        text: '無料相談を申し込む',
-        href: '/contact',
-        variant: 'primary',
-      },
-      {
-        text: 'サービス一覧に戻る',
-        href: '/services',
-        variant: 'secondary',
-      },
-    ]}
-    title="まずは無料相談から始めませんか？"
-    subtitle="お客さまの商品や事業について、じっくりお話を伺います。最適なEC戦略を一緒に考えましょう。"
+  <BondCTA
+    title="EC構築のご相談はお気軽に"
+    subtitle="まずは無料相談で、お客さまのご要望をお聞かせください"
+    description="宮崎の魅力ある商品を、全国のお客さまに届けるお手伝いをします。"
   />
 </Layout>

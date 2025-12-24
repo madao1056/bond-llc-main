@@ -1,13 +1,8 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
 import BondCTA from '~/components/widgets/BondCTA.astro';
 import { Icon } from 'astro-icon/components';
-import lineIcon from '~/icons/LINE.png';
 import heroImage from '~/assets/images/hero-web-production.png';
 
 const metadata = {
@@ -83,7 +78,7 @@ const faqs = [
     tagline="Web Production & Management"
     title="Web制作・運用サービス"
     subtitle="見つけてもらえる、選んでもらえる<br />結果を出すWebサイトを"
-    description="宮崎で10年以上の実績を持つ私たちが、お客さまのビジネスを深く理解し、成果の出るWebサイトを制作します。"
+    description="宮崎を拠点とする私たちが、お客さまのビジネスを深く理解し、成果の出るWebサイトを制作します。"
     backgroundImage={heroImage.src}
     actions={[
       {
@@ -110,7 +105,7 @@ const faqs = [
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">OPTIMIZED WEB PRODUCTION</span>
         </h2>
         <p class="text-lg text-bond-text-sub max-w-3xl mx-auto leading-relaxed">
-          宮崎で10年以上の実績を持つ私たちが、お客さまのビジネスを深く理解し、
+          宮崎を拠点とする私たちが、お客さまのビジネスを深く理解し、
           成果の出るWebサイトを制作します。見た目だけでなく、集客・売上につながる
           戦略的なWebサイトをご提供いたします。
         </p>
@@ -245,12 +240,34 @@ const faqs = [
     </div>
   </section>
 
-  <!-- FAQ -->
-  <FAQs
-    title="よくあるご質問"
-    subtitle="Web制作に関してお客さまからよくいただくご質問をまとめました"
-    items={faqs}
-  />
+  <!-- よくある質問 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy dark:text-sky-400 mb-4">
+          Web制作に関するよくある質問
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+              <span class="font-medium text-bond-navy dark:text-sky-400">
+                {faq.title}
+              </span>
+              <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-bond-text-main dark:text-gray-300">
+                {faq.description}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- CTA -->
   <BondCTA
