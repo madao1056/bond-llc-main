@@ -1,5 +1,5 @@
 site:
-  name: 株式会社ぼんど
+  name: 合同会社ぼんど
   site: 'https://bond-llc.jp'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: 株式会社ぼんど | 宮崎のWeb制作・EC構築・DX支援
-    template: '%s | 株式会社ぼんど'
+    default: 合同会社ぼんど | 宮崎のWeb制作・EC構築・DX支援
+    template: '%s | 合同会社ぼんど'
   description: "宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援・ローカルメディア運営を通じて、事業者とお客さまの関係性が続く仕組みをデザインします。"
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: 株式会社ぼんど
+    site_name: 合同会社ぼんど
     images: []
     type: website
   twitter:

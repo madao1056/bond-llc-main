@@ -85,7 +85,7 @@ export const footerData = {
       title: 'お問い合わせ',
       links: [
         { text: 'お問い合わせ', href: getPermalink('/contact') },
-        { text: 'LINE公式アカウント', href: 'https://lin.ee/xxxxxx' },
+        { text: 'LINE公式アカウント', href: 'https://lin.ee/LYodITQO' },
         { text: 'よくある質問', href: getPermalink('/faq') },
       ],
     },
@@ -95,12 +95,9 @@ export const footerData = {
     { text: '利用規約', href: getPermalink('/terms') },
   ],
   socialLinks: [
-    { ariaLabel: 'X（旧Twitter）', icon: 'tabler:brand-x', href: 'https://twitter.com/bond_llc' },
-    { ariaLabel: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://instagram.com/bond_llc' },
-    { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: 'https://facebook.com/bond.llc' },
-    { ariaLabel: 'LINE', icon: 'tabler:brand-line', href: 'https://lin.ee/xxxxxx' },
+    { ariaLabel: 'LINE', icon: 'tabler:brand-line', href: 'https://lin.ee/LYodITQO' },
   ],
   footNote: `
-    <span class="text-sm">© 2025 株式会社ぼんど All rights reserved.</span>
+    <span class="text-sm">© 2025 合同会社ぼんど All rights reserved.</span>
   `,
 };
