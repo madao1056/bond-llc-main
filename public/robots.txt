@@ -1,2 +1,27 @@
+# 検索エンジンクローラー
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI クローラー（AI検索での露出を最大化）
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+# 共通設定
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /tmp/
+
+Sitemap: https://bond-llc.jp/sitemap-index.xml

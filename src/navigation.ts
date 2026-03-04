@@ -29,6 +29,10 @@ export const headerData = {
           text: 'DX・業務効率化',
           href: getPermalink('/services/dx'),
         },
+        {
+          text: 'アプリ制作',
+          href: getPermalink('/services/app'),
+        },
       ],
     },
     {
@@ -62,6 +66,7 @@ export const footerData = {
         { text: 'EC構築・販売支援', href: getPermalink('/services/ec') },
         { text: 'MEO・LINE・集客', href: getPermalink('/services/marketing') },
         { text: 'DX・業務効率化', href: getPermalink('/services/dx') },
+        { text: 'アプリ制作', href: getPermalink('/services/app') },
       ],
     },
     {

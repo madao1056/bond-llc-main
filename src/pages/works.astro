@@ -1,13 +1,20 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import heroWorks from '~/assets/images/hero-works.png';
 
 const metadata = {
   title: '実績一覧',
-  description: '合同会社ぼんどがサポートさせていただいた地域事業者さまの成功事例をご紹介します。',
+  description: '合同会社ぼんどの実績・事例紹介。宮崎の飲食店・農園・旅館・美容室など、地域事業者のWeb集客・EC・DX成功事例を掲載。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: '実績・事例', url: '/works' },
+];
 // ... (I'll just target the top imports and the Hero2 section separately or use multi-replace if needed, but here I can probably target the top block easily)
 // Actually, `works` array is between imports and Hero2. I should use `multi_replace`.
 
@@ -112,6 +119,9 @@ const works = [
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData breadcrumbs={breadcrumbs} />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <Hero2
     tagline="Works & Case Studies"

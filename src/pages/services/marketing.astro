@@ -2,14 +2,22 @@
 import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
 import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import lineIcon from '~/icons/LINE.png';
 import heroImage from '~/assets/images/hero-marketing.png';
 
 const metadata = {
   title: 'MEO・LINE・集客支援サービス | 合同会社ぼんど',
-  description: 'Googleマップ上位表示（MEO対策）、LINE公式アカウント構築、SNS運用など地域ビジネス特化の集客支援。宮崎の事業者さまの集客をトータルサポート。',
+  description: 'Googleマップ上位表示（MEO対策）・LINE公式アカウント・SNS運用で地域の集客を強化。宮崎の事業者さまの集客をトータルサポート。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+  { name: 'MEO・LINE・集客支援', url: '/services/marketing' },
+];
 
 
 const benefits = [
@@ -97,6 +105,13 @@ const faqs = [
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    service={{ name: 'MEO・LINE・集客支援サービス', description: 'Googleマップ上位表示（MEO対策）・LINE公式アカウント・SNS運用で地域の集客を強化。宮崎の事業者さまの集客をトータルサポート。' }}
+    faq={faqs.map(f => ({ question: f.title, answer: f.description }))}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <FullWidthHero
     tagline="MEO / LINE / Marketing"

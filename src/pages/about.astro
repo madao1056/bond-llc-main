@@ -2,17 +2,30 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import profileImage from '~/icons/profile.webp';
 import heroAbout from '~/assets/images/hero-about.png';
 
 const metadata = {
   title: 'ぼんどについて',
-  description: '合同会社ぼんどは、宮崎を拠点に地域の事業者とお客さまをつなぐ、接着剤のような存在を目指しています。',
+  description: '合同会社ぼんどは宮崎を拠点に、Web制作・EC構築・DX支援で地域の事業者とお客さまをつなぐデジタルパートナーです。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'ぼんどについて', url: '/about' },
+];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    type="organization"
+    breadcrumbs={breadcrumbs}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <Hero2
     tagline="About Bond LLC"

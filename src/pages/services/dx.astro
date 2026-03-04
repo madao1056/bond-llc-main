@@ -2,13 +2,21 @@
 import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
 import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import heroImage from '~/assets/images/hero-dx.png';
 
 const metadata = {
   title: 'ローカルDX・業務効率化サービス | 合同会社ぼんど',
-  description: '宮崎の地域企業のDX推進をサポート。業務自動化、データ分析、システム導入により生産性を大幅に向上させます。',
+  description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で生産性を平均40%向上させます。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+  { name: 'ローカルDX・業務効率化', url: '/services/dx' },
+];
 
 const solutions = [
   {
@@ -185,6 +193,13 @@ const faqs = [
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    service={{ name: 'ローカルDX・業務効率化サービス', description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で生産性を大幅に向上させます。' }}
+    faq={faqs.map(f => ({ question: f.title, answer: f.description }))}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <FullWidthHero
     tagline="Digital Transformation"

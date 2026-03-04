@@ -1,13 +1,20 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import heroFAQ from '~/assets/images/hero-faq.png';
 
 const metadata = {
   title: 'よくあるご質問',
-  description: '合同会社ぼんどのサービスに関するよくあるご質問と回答をまとめました。',
+  description: '合同会社ぼんどのWeb制作・EC構築・MEO・DX支援に関するよくある質問と回答。料金・期間・対応エリアなど疑問を解決。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'よくあるご質問', url: '/faq' },
+];
 
 const faqCategories = [
   {
@@ -139,9 +146,18 @@ const faqCategories = [
     ],
   },
 ];
+
+const allFaqs = faqCategories.flatMap((cat) => cat.faqs.map((f) => ({ question: f.question, answer: f.answer })));
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    type="faq"
+    breadcrumbs={breadcrumbs}
+    faq={allFaqs}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <Hero2
     tagline="FAQ"

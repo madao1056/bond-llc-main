@@ -1,0 +1,190 @@
+---
+/**
+ * 構造化データ (JSON-LD) コンポーネント
+ * 仕様: SD-01（JSON-LD形式のみ）、SD-02（head内に配置）、SD-04（@graph使用）
+ */
+export interface Props {
+  type?: 'website' | 'article' | 'service' | 'faq' | 'contact' | 'software' | 'organization';
+  page?: {
+    title?: string;
+    description?: string;
+    url?: string;
+    datePublished?: string;
+    dateModified?: string;
+  };
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  faq?: Array<{ question: string; answer: string }>;
+  service?: {
+    name: string;
+    description: string;
+    provider?: string;
+    areaServed?: string;
+  };
+  software?: {
+    name: string;
+    description: string;
+    applicationCategory?: string;
+    operatingSystem?: string;
+    url?: string;
+  };
+}
+
+const { type = 'website', page = {}, breadcrumbs = [], faq = [], service, software } = Astro.props;
+
+const siteUrl = 'https://bond-llc.jp';
+
+// Organization（全ページ共通）
+const organizationSchema = {
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: '合同会社ぼんど',
+  alternateName: 'Bond LLC',
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${siteUrl}/favicon.svg`,
+  },
+  description: '宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援を通じて、地域の事業者とお客さまをつなぐデジタルパートナーです。',
+  foundingDate: '2025-11-21',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '大字本庄1886番地1 フェニックスⅢ 106号室',
+    addressLocality: '国富町',
+    addressRegion: '宮崎県',
+    postalCode: '880-1300',
+    addressCountry: 'JP',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    email: 'bond.llc.2025@gmail.com',
+    contactType: 'customer service',
+    availableLanguage: 'Japanese',
+  },
+  sameAs: [
+    'https://lin.ee/LYodITQO',
+  ],
+};
+
+// LocalBusiness（トップページ用）
+const localBusinessSchema = {
+  '@type': 'LocalBusiness',
+  '@id': `${siteUrl}/#localbusiness`,
+  name: '合同会社ぼんど',
+  url: siteUrl,
+  description: '宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援・アプリ制作を通じて、地域の事業者とお客さまをつなぐデジタルパートナーです。',
+  address: organizationSchema.address,
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '10:00',
+      closes: '15:00',
+    },
+  ],
+  areaServed: {
+    '@type': 'State',
+    name: '宮崎県',
+  },
+  priceRange: '$$',
+};
+
+// WebSite（トップページ用）
+const webSiteSchema = {
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: '合同会社ぼんど',
+  description: '宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援を通じて、事業者とお客さまの関係性が続く仕組みをデザインします。',
+  publisher: { '@id': `${siteUrl}/#organization` },
+  inLanguage: 'ja',
+};
+
+// BreadcrumbList
+const breadcrumbSchema = breadcrumbs.length > 0 ? {
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbs.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.name,
+    ...(index < breadcrumbs.length - 1 ? { item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}` } : {}),
+  })),
+} : null;
+
+// FAQPage
+const faqSchema = faq.length > 0 ? {
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+} : null;
+
+// Service
+const serviceSchema = service ? {
+  '@type': 'Service',
+  name: service.name,
+  description: service.description,
+  provider: { '@id': `${siteUrl}/#organization` },
+  areaServed: service.areaServed || '宮崎県',
+  serviceType: service.name,
+} : null;
+
+// SoftwareApplication
+const softwareSchema = software ? {
+  '@type': 'SoftwareApplication',
+  name: software.name,
+  description: software.description,
+  applicationCategory: software.applicationCategory || 'BusinessApplication',
+  operatingSystem: software.operatingSystem || 'Chrome',
+  url: software.url,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'JPY',
+    description: '初回1週間無料トライアル',
+  },
+  author: { '@id': `${siteUrl}/#organization` },
+} : null;
+
+// ContactPage
+const contactSchema = type === 'contact' ? {
+  '@type': 'ContactPage',
+  name: 'お問い合わせ',
+  description: page.description || '合同会社ぼんどへのお問い合わせ',
+  url: page.url || `${siteUrl}/contact`,
+  mainEntity: {
+    '@type': 'Organization',
+    '@id': `${siteUrl}/#organization`,
+  },
+} : null;
+
+// @graph の構築
+const graph: Record<string, unknown>[] = [organizationSchema];
+
+if (type === 'website') {
+  graph.push(webSiteSchema, localBusinessSchema);
+}
+
+if (breadcrumbSchema) graph.push(breadcrumbSchema);
+if (faqSchema) graph.push(faqSchema);
+if (serviceSchema) graph.push(serviceSchema);
+if (softwareSchema) graph.push(softwareSchema);
+if (contactSchema) graph.push(contactSchema);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': graph,
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

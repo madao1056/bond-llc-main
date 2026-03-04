@@ -1,0 +1,326 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import tsunagiIcon from '~/assets/images/tsunagi-icon.png';
+
+const metadata = {
+  title: 'アプリ制作サービス | 合同会社ぼんど',
+  description: '宮崎でアプリ制作なら合同会社ぼんど。業務効率化・店舗向け・予約管理アプリやChrome拡張機能を企画から開発・運用まで一貫サポート。',
+};
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+  { name: 'アプリ制作', url: '/services/app' },
+];
+
+const process = [
+  {
+    title: 'ヒアリング',
+    description: '課題や実現したいことを詳しくお聞きします',
+    icon: 'tabler:message-circle',
+  },
+  {
+    title: '要件定義・企画',
+    description: '必要な機能を整理し、最適なアプリの形をご提案',
+    icon: 'tabler:list-check',
+  },
+  {
+    title: 'UI/UXデザイン',
+    description: '使いやすさを重視した画面設計を作成',
+    icon: 'tabler:layout',
+  },
+  {
+    title: '開発・実装',
+    description: '高品質なコードでスピーディに構築します',
+    icon: 'tabler:code',
+  },
+  {
+    title: 'テスト・リリース',
+    description: '入念なテストを行い、安心のリリースへ',
+    icon: 'tabler:device-mobile-check',
+  },
+  {
+    title: '運用・改善',
+    description: 'リリース後もアップデート・保守を継続サポート',
+    icon: 'tabler:refresh',
+  },
+];
+
+const faqs = [
+  {
+    title: 'アプリの制作期間はどれくらいですか？',
+    description: 'アプリの規模や機能により異なりますが、シンプルなアプリで約1〜2ヶ月、中規模アプリで約2〜4ヶ月、大規模アプリで約4〜6ヶ月が目安です。',
+  },
+  {
+    title: 'iOSとAndroid両方に対応できますか？',
+    description: 'はい、クロスプラットフォーム開発により、iOS・Android両方に対応したアプリを効率的に制作できます。Webアプリとしての提供も可能です。',
+  },
+  {
+    title: 'アプリのアイデアが漠然としているのですが相談できますか？',
+    description: 'もちろんです。「こんなことができたらいいな」という段階からご相談ください。ヒアリングを通じて、最適な形をご一緒に考えていきます。',
+  },
+  {
+    title: 'リリース後のアップデートや保守は対応していますか？',
+    description: 'はい、リリース後の機能追加やバグ修正、OS対応などの保守・運用サポートも承っております。継続的な改善でアプリの価値を高めます。',
+  },
+  {
+    title: '既存のシステムと連携できますか？',
+    description: 'はい、既存のWebサイトや業務システム、外部サービス（決済、予約、在庫管理など）との連携も対応可能です。',
+  },
+  {
+    title: 'アプリではなくWebアプリでも対応できますか？',
+    description: 'はい、PWA（プログレッシブWebアプリ）など、インストール不要で使えるWebアプリの制作も可能です。用途に応じて最適な形をご提案します。',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    service={{ name: 'アプリ制作サービス', description: '業務効率化アプリ、店舗向けアプリ、Chrome拡張機能など、地域ビジネスに最適なアプリを企画・開発・運用まで一貫してサポートします。' }}
+    faq={faqs.map(f => ({ question: f.title, answer: f.description }))}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
+  <!-- ヒーローセクション -->
+  <FullWidthHero
+    tagline="App Development"
+    title="アプリ制作サービス"
+    subtitle="あなたのビジネスを<br />手のひらに届ける"
+    description="業務効率化・顧客接点の強化・新しいサービス体験の提供。地域ビジネスに最適なアプリを企画・開発・運用まで一貫してサポートします。"
+    actions={[
+      {
+        text: '無料相談はこちら',
+        href: '/contact',
+        variant: 'primary',
+        icon: 'tabler:message-circle',
+      },
+      {
+        text: '制作の流れを見る',
+        href: '#process',
+        variant: 'secondary',
+      },
+    ]}
+  />
+
+  <!-- サービス概要 -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-6 tracking-tight">
+          地域ビジネスに最適なアプリ開発
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">APP DEVELOPMENT FOR LOCAL BUSINESS</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub max-w-3xl mx-auto leading-relaxed">
+          「アプリを作りたいけど、何から始めればいいかわからない」そんなお悩みに寄り添います。
+          店舗アプリ、業務効率化ツール、顧客管理システムなど、
+          お客さまの課題に合わせた最適なアプリをご提案します。
+        </p>
+      </div>
+
+      <!-- 特徴カード -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-bond-border border border-bond-border">
+        <div class="bg-bond-surface dark:bg-gray-800 p-8">
+          <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6">
+            <Icon name="tabler:devices" class="w-6 h-6 text-bond-navy dark:text-sky-400" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">クロスプラットフォーム</h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            iOS・Android・Webに対応。一度の開発で複数プラットフォームに展開し、コストを抑えます。
+          </p>
+        </div>
+        <div class="bg-bond-surface dark:bg-gray-800 p-8">
+          <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6">
+            <Icon name="tabler:puzzle" class="w-6 h-6 text-bond-navy dark:text-sky-400" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">柔軟なカスタマイズ</h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            テンプレートではなく、お客さまのビジネスに合わせたオーダーメイド開発で最適な体験を実現します。
+          </p>
+        </div>
+        <div class="bg-bond-surface dark:bg-gray-800 p-8">
+          <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mb-6">
+            <Icon name="tabler:shield-check" class="w-6 h-6 text-bond-navy dark:text-sky-400" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">安心の運用サポート</h3>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            リリース後のアップデート、機能追加、不具合対応まで継続的にサポートいたします。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 制作の流れ -->
+  <section id="process" class="py-16 lg:py-24 bg-bond-navy text-white relative">
+    <div class="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-yellow-main mb-4 tracking-tight">
+          制作の流れ
+          <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">WORK FLOW</span>
+        </h2>
+        <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+          お問い合わせからリリースまで、丁寧にサポートいたします
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {process.map((step, index) => (
+          <div class="relative group">
+            <div class="border border-white/20 p-8 h-full hover:border-bond-yellow-main transition-colors duration-300 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-16 h-16 bg-white/5 -mr-8 -mt-8 rotate-45 group-hover:bg-bond-yellow-main/20 transition-colors duration-300"></div>
+              <div class="flex items-start mb-6">
+                <div class="text-4xl font-mono font-bold text-white/20 group-hover:text-bond-yellow-main transition-colors duration-300 mr-4">
+                  0{index + 1}
+                </div>
+                <div>
+                   <h3 class="text-xl font-bold text-white mb-2 font-serif group-hover:text-bond-yellow-main transition-colors duration-300">{step.title}</h3>
+                </div>
+              </div>
+              <p class="text-sm text-gray-400 ml-12 leading-relaxed">{step.description}</p>
+            </div>
+            {index < process.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-4 w-8 h-px bg-white/20 z-10"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- こんなアプリを制作できます -->
+  <section class="py-16 lg:py-24 bg-bond-background relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          こんなアプリを制作できます
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">USE CASES</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:building-store" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">店舗向けアプリ</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">ポイントカード / クーポン配信 / プッシュ通知</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:calendar-event" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">予約管理アプリ</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">オンライン予約 / 空き状況管理 / リマインド通知</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:clipboard-list" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">業務効率化アプリ</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">日報管理 / 在庫管理 / タスク管理</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:users-group" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">顧客管理アプリ</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">顧客情報管理 / 対応履歴 / フォローアップ</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:shopping-bag" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">ECアプリ</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">モバイルEC / 注文管理 / 配送追跡</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+          <div class="mb-6 pb-4 border-b border-bond-border group-hover:border-bond-yellow-main transition-colors duration-300">
+            <Icon name="tabler:apps" class="w-10 h-10 text-bond-navy dark:text-sky-400 mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 text-lg font-serif">その他カスタムアプリ</h3>
+          </div>
+          <p class="text-sm text-bond-text-sub dark:text-gray-300 font-mono">社内ツール / 会員向けアプリ / IoT連携</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 自社プロダクト -->
+  <section class="py-16 lg:py-24 border-t border-bond-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          自社プロダクト
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">OUR PRODUCT</span>
+        </h2>
+      </div>
+
+      <a href="/services/app/tsunagi" class="block bg-white dark:bg-gray-800 border border-bond-border hover:border-bond-navy dark:hover:border-sky-400 transition-all duration-300 group">
+        <div class="md:flex items-center">
+          <div class="md:w-1/4 p-8 flex items-center justify-center bg-bond-navy">
+            <div class="text-center">
+              <Image src={tsunagiIcon} alt="Tsunagi" class="w-16 h-16 rounded-xl mx-auto mb-2" width={64} height={64} />
+              <span class="text-xs font-mono text-white/60">Chrome Extension</span>
+            </div>
+          </div>
+          <div class="md:w-3/4 p-8">
+            <h3 class="text-2xl font-bold text-bond-navy dark:text-sky-400 font-serif mb-2 group-hover:text-bond-yellow-deep transition-colors">
+              Tsunagi（ツナギ）
+            </h3>
+            <p class="text-bond-text-sub dark:text-gray-400 mb-4 leading-relaxed">
+              Web制作者のためのAIチャットアシスタント。7つのチャットツールに対応し、クライアント対応の質とスピードを向上させるChrome拡張機能です。
+            </p>
+            <span class="inline-flex items-center text-sm font-bold text-bond-navy dark:text-sky-400 group-hover:text-bond-yellow-deep transition-colors">
+              詳しく見る
+              <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          アプリ制作に関するよくある質問
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+              <span class="font-medium text-bond-navy dark:text-sky-400">
+                {faq.title}
+              </span>
+              <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-bond-text-main dark:text-gray-300">
+                {faq.description}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <BondCTA
+    title="アプリ制作の<br>ご相談はお気軽に"
+    subtitle="「こんなアプリが欲しい」をお聞かせください"
+    description="漠然としたアイデアからでも大丈夫。最適なアプリの形を一緒に考えていきましょう。"
+  />
+</Layout>

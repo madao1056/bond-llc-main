@@ -1,0 +1,37 @@
+---
+/**
+ * パンくずリストコンポーネント
+ * 仕様: LINK-02（BreadcrumbListスキーマ必須）、LINK-01（具体的なアンカーテキスト）
+ */
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="パンくずリスト" class="py-3 px-4 sm:px-6">
+  <div class="max-w-7xl mx-auto">
+    <ol class="flex flex-wrap items-center gap-1 text-sm text-bond-text-sub">
+      {items.map((item, index) => (
+        <li class="flex items-center">
+          {index > 0 && <span class="mx-2 text-bond-border" aria-hidden="true">/</span>}
+          {index < items.length - 1 ? (
+            <a href={item.url} class="hover:text-bond-navy dark:hover:text-sky-400 transition-colors">
+              {item.name}
+            </a>
+          ) : (
+            <span aria-current="page" class="text-bond-navy dark:text-sky-400 font-medium">
+              {item.name}
+            </span>
+          )}
+        </li>
+      ))}
+    </ol>
+  </div>
+</nav>

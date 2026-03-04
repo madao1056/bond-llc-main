@@ -1,18 +1,31 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import heroContact from '~/assets/images/hero-contact.png';
 
 const metadata = {
   title: 'お問い合わせ',
-  description: '合同会社ぼんどへのお問い合わせはこちらから。無料相談も受け付けています。',
+  description: '合同会社ぼんどへの無料相談・お問い合わせ。Web制作・EC構築・DX支援など、宮崎の事業者さまのお悩みをお聞かせください。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'お問い合わせ', url: '/contact' },
+];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    type="contact"
+    breadcrumbs={breadcrumbs}
+    page={{ description: metadata.description, url: '/contact' }}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- Hero Section -->
   <Hero2
     tagline="Contact"

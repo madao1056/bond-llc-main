@@ -1,0 +1,286 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import tsunagiIcon from '~/assets/images/tsunagi-icon.png';
+import logoChatwork from '~/assets/images/logo-chatwork.png';
+import logoSlack from '~/assets/images/logo-slack.png';
+import logoBacklog from '~/assets/images/logo-backlog.png';
+import logoGmail from '~/assets/images/logo-gmail.webp';
+import logoLark from '~/assets/images/logo-lark.png';
+import logoDiscord from '~/assets/images/logo-discord.png';
+import logoGoogleChat from '~/assets/images/logo-google-chat.png';
+
+const metadata = {
+  title: 'Tsunagi（ツナギ） - AIチャットアシスタント | 合同会社ぼんど',
+  description: 'Tsunagiは、Web制作者のためのAIチャットアシスタント。7つのチャットツールに対応し、クライアント対応の質とスピードを向上させるChrome拡張機能です。',
+};
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+  { name: 'アプリ制作', url: '/services/app' },
+  { name: 'Tsunagi（ツナギ）', url: '/services/app/tsunagi' },
+];
+
+const chatTools = [
+  { name: 'Chatwork', logo: logoChatwork },
+  { name: 'Slack', logo: logoSlack },
+  { name: 'Backlog', logo: logoBacklog },
+  { name: 'Gmail', logo: logoGmail },
+  { name: 'Lark', logo: logoLark },
+  { name: 'Discord', logo: logoDiscord },
+  { name: 'Google Chat', logo: logoGoogleChat },
+];
+
+const painPoints = [
+  '返信の言い回しに毎回悩んで時間がかかる',
+  '伝え方ひとつで信頼関係が崩れないか不安になる',
+  '複数のチャットツールを行き来して、情報共有に手間がかかる',
+  '忙しいときほど、返信が雑になってしまう',
+];
+
+const targetUsers = [
+  'Web制作のフリーランスで、クライアント対応に時間を取られている方',
+  '制作会社のディレクターで、複数のチャットツールを日常的に使い分けている方',
+  'チームメンバーへの情報共有を効率化したい方',
+  '返信の質を落とさずに、対応スピードを上げたい方',
+];
+---
+
+<Layout metadata={metadata}>
+  <StructuredData
+    type="software"
+    breadcrumbs={breadcrumbs}
+    software={{
+      name: 'Tsunagi（ツナギ）',
+      description: 'Web制作者のためのAIチャットアシスタント。Chatwork・Slack・Gmail等7つのチャットツールに対応し、クライアント対応力をAIがサポートするChrome拡張機能。',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Chrome',
+      url: 'https://bond-llc.jp/services/app/tsunagi',
+    }}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
+  <!-- ヒーロー -->
+  <section class="py-20 lg:py-28 bg-bond-navy text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <Image src={tsunagiIcon} alt="Tsunagi アイコン" width={96} height={96} class="mx-auto mb-6 rounded-2xl" />
+      <p class="text-sm font-mono text-bond-yellow-main tracking-widest uppercase mb-4">Chrome Extension</p>
+      <h1 class="text-4xl md:text-6xl font-bold font-serif mb-6">
+        Tsunagi<span class="text-bond-yellow-main">（ツナギ）</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-white/80 mb-4 font-serif">
+        Web制作者のための<br class="md:hidden" />AIチャットアシスタント
+      </p>
+      <p class="text-lg text-white/60 max-w-2xl mx-auto mb-10">
+        Web制作の現場で必要なクライアント対応力をAIがサポート。<br />
+        7つのチャットツールに対応し、信頼関係を築く丁寧なコミュニケーションを実現します。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/contact" class="btn-primary bg-bond-yellow-main text-bond-navy border-bond-yellow-main hover:bg-bond-yellow-deep">
+          お問い合わせ
+        </a>
+      </div>
+      <p class="text-sm text-white/40 mt-4">初回1週間は無料でお試しいただけます</p>
+    </div>
+  </section>
+
+  <!-- こんな悩みありませんか？ -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          こんな悩みありませんか？
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {painPoints.map((point) => (
+          <div class="flex items-start gap-4 p-6 border border-bond-border bg-white dark:bg-gray-800">
+            <Icon name="tabler:alert-circle" class="w-6 h-6 text-bond-yellow-deep flex-shrink-0 mt-0.5" />
+            <p class="text-bond-text-main dark:text-gray-300">{point}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 主な機能 -->
+  <section class="py-16 lg:py-24 bg-bond-surface border-y border-bond-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          主な機能
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">FEATURES</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border">
+          <div class="w-14 h-14 bg-bond-navy text-white flex items-center justify-center mb-6">
+            <Icon name="tabler:message-chatbot" class="w-7 h-7" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">AIチャット返信アシスト</h3>
+          <p class="text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            開いているチャットの文脈を読み取り、適切な返信候補を提案。クライアントへの報告、確認依頼、お礼、お断りなど、場面に応じた対応をサポートします。
+          </p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border">
+          <div class="w-14 h-14 bg-bond-navy text-white flex items-center justify-center mb-6">
+            <Icon name="tabler:arrows-exchange" class="w-7 h-7" />
+          </div>
+          <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">クロスチャット連携</h3>
+          <p class="text-bond-text-sub dark:text-gray-300 leading-relaxed">
+            あるチャットツールでのやりとりを、別のチャットツールに要約・展開して共有。Slackでの社内相談の結果をChatworkでクライアントに報告するなど、ツール間の橋渡しをAIが行います。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 対応チャットツール -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          対応チャットツール
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">SUPPORTED TOOLS</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
+        {chatTools.map((tool) => (
+          <div class="flex flex-col items-center gap-3 p-6 border border-bond-border bg-white dark:bg-gray-800 hover:border-bond-navy transition-colors">
+            <Image src={tool.logo} alt={`${tool.name} ロゴ`} width={40} height={40} class="w-10 h-10 object-contain" />
+            <span class="text-sm font-bold text-bond-navy dark:text-sky-400">{tool.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- こんな方におすすめ -->
+  <section class="py-16 lg:py-24 bg-bond-background">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          こんな方におすすめ
+        </h2>
+      </div>
+      <div class="space-y-4 max-w-3xl mx-auto">
+        {targetUsers.map((user) => (
+          <div class="flex items-start gap-4 p-5 bg-white dark:bg-gray-800 border border-bond-border">
+            <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep flex-shrink-0 mt-0.5" />
+            <p class="text-bond-text-main dark:text-gray-300">{user}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 料金プラン -->
+  <section class="py-16 lg:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          プラン
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">PLAN</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- クリエイタープラン -->
+        <div class="border border-bond-border bg-white dark:bg-gray-800 p-8 relative">
+          <div class="absolute top-0 left-0 w-full h-1 bg-bond-navy"></div>
+          <div class="flex items-center gap-2 mb-1">
+            <Icon name="tabler:code" class="w-5 h-5 text-bond-navy dark:text-sky-400" />
+            <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 font-serif">クリエイタープラン</h3>
+          </div>
+          <p class="text-xs font-bold text-bond-yellow-deep mb-4">コーダー・デザイナー向け</p>
+          <p class="text-sm text-bond-text-sub dark:text-gray-400 mb-6 leading-relaxed">
+            チャット上でのAI返信アシストを利用できるプランです。自分のタスクに集中しながら、日々の返信対応を効率化したい方に。
+          </p>
+          <ul class="space-y-2 text-sm text-bond-text-main dark:text-gray-300 mb-6">
+            <li class="flex items-center gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-bond-yellow-deep flex-shrink-0" />
+              AI返信アシスト
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-bond-yellow-deep flex-shrink-0" />
+              対応ツールすべてで利用可能
+            </li>
+            <li class="flex items-center gap-2 text-bond-text-sub">
+              <Icon name="tabler:x" class="w-4 h-4 text-bond-border flex-shrink-0" />
+              クロスチャット連携は含まれません
+            </li>
+          </ul>
+          <div class="pt-4 border-t border-bond-border">
+            <p class="text-xs text-bond-text-sub leading-relaxed">
+              <Icon name="tabler:bulb" class="w-3.5 h-3.5 inline text-bond-yellow-deep" />
+              ツール間の情報共有が不要で、目の前のチャット返信を効率化したい方はこちら
+            </p>
+          </div>
+        </div>
+
+        <!-- ディレクタープラン -->
+        <div class="border-2 border-bond-navy bg-white dark:bg-gray-800 p-8 relative">
+          <div class="absolute top-0 left-0 w-full h-1 bg-bond-yellow-main"></div>
+          <div class="flex items-center gap-2 mb-1">
+            <Icon name="tabler:users" class="w-5 h-5 text-bond-navy dark:text-sky-400" />
+            <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 font-serif">ディレクタープラン</h3>
+          </div>
+          <p class="text-xs font-bold text-bond-yellow-deep mb-4">ディレクター・PM・統括者向け</p>
+          <p class="text-sm text-bond-text-sub dark:text-gray-400 mb-6 leading-relaxed">
+            AI返信アシストに加え、クロスチャット連携が利用可能。複数のチャットツールを横断してクライアント・チーム間の情報共有を行う方に。
+          </p>
+          <ul class="space-y-2 text-sm text-bond-text-main dark:text-gray-300 mb-6">
+            <li class="flex items-center gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-bond-yellow-deep flex-shrink-0" />
+              AI返信アシスト
+            </li>
+            <li class="flex items-center gap-2">
+              <Icon name="tabler:check" class="w-4 h-4 text-bond-yellow-deep flex-shrink-0" />
+              対応ツールすべてで利用可能
+            </li>
+            <li class="flex items-center gap-2 font-bold">
+              <Icon name="tabler:check" class="w-4 h-4 text-bond-yellow-deep flex-shrink-0" />
+              クロスチャット連携
+            </li>
+          </ul>
+          <div class="pt-4 border-t border-bond-border">
+            <p class="text-xs text-bond-text-sub leading-relaxed">
+              <Icon name="tabler:bulb" class="w-3.5 h-3.5 inline text-bond-yellow-deep" />
+              Slackの社内相談をChatworkでクライアントに報告するなど、ツール間の橋渡しが必要な方はこちら
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-8">
+        <p class="text-sm text-bond-text-sub dark:text-gray-400">
+          いずれのプランも、初回1週間は無料でお試しいただけます。<br />
+          詳しいプラン内容・料金は、拡張機能内からご確認ください。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <BondCTA
+    title="Tsunagiを<br>試してみませんか？"
+    subtitle="初回1週間は無料でお試しいただけます"
+    description="Web制作の現場でのコミュニケーションを、AIの力でもっとスムーズに。"
+  />
+
+  <!-- フッターリンク -->
+  <div class="py-8 bg-bond-background border-t border-bond-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <a href="/services/app/tsunagi/privacy" class="text-sm text-bond-text-sub hover:text-bond-navy dark:hover:text-sky-400 underline transition-colors">
+        プライバシーポリシー（Tsunagi）
+      </a>
+    </div>
+  </div>
+</Layout>

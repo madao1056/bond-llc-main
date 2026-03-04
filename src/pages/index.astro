@@ -1,5 +1,6 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
 
 // ぼんどカスタムコンポーネント
 import heroImage from '../assets/images/hero.webp';
@@ -19,6 +20,8 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData type="website" />
+
   <!-- ヒーローセクション -->
   <BondHero
     title="地域の挑戦と\nお客さまをつなぐ、\n絆（きずな）の\nような存在へ。"

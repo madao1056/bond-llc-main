@@ -1,14 +1,21 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import lineIcon from '~/icons/LINE.png';
 import heroServices from '~/assets/images/hero-services.png';
 
 const metadata = {
   title: 'サービス一覧',
-  description: '合同会社ぼんどが提供するデジタルマーケティング・Web制作・DX支援サービスをご紹介します。',
+  description: '合同会社ぼんどのサービス一覧。Web制作・EC構築・MEO/LINE集客・DX業務効率化・アプリ制作で宮崎の事業者を支援します。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+];
 
 const services = [
   {
@@ -64,10 +71,30 @@ const services = [
       { title: '社員研修', description: 'デジタルツール活用支援', icon: 'tabler:school' },
     ],
   },
+  {
+    id: 'app',
+    title: 'アプリ制作',
+    subtitle: 'App Development',
+    description: '業務効率化アプリ、店舗向けアプリ、Chrome拡張機能など、ビジネスに最適なアプリを企画から開発・運用まで一貫してサポートします。',
+    icon: 'tabler:device-mobile',
+    href: '/services/app',
+    features: [
+      { title: 'クロスプラットフォーム', description: 'iOS・Android・Web対応', icon: 'tabler:devices' },
+      { title: 'Chrome拡張機能', description: 'ブラウザ上で動く業務ツール', icon: 'tabler:brand-chrome' },
+      { title: 'カスタム開発', description: 'オーダーメイドで最適な体験', icon: 'tabler:puzzle' },
+      { title: '運用サポート', description: 'リリース後も継続的に改善', icon: 'tabler:refresh' },
+    ],
+  },
 ];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    service={{ name: 'デジタルマーケティング・Web制作・DX支援', description: '宮崎を拠点に、Web制作・EC構築・MEO/LINE集客・DX業務効率化・アプリ制作を提供。地域ビジネスの成長をデジタルで支援します。' }}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <Hero2
     tagline="Our Services"

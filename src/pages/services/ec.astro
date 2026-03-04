@@ -3,12 +3,20 @@ import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
 import { Icon } from 'astro-icon/components';
 import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import heroImage from '~/assets/images/hero-ec.png';
 
 const metadata = {
   title: 'EC構築・オンライン販売支援 | 合同会社ぼんど',
-  description: '宮崎の特産品や商品をオンラインで全国へ。Shopifyを中心としたEC構築から運用まで総合サポート。',
+  description: '宮崎の特産品・商品をオンラインで全国へ届けるEC構築サービス。Shopify・楽天対応、商品撮影から運用代行まで一貫サポート。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+  { name: 'EC構築・オンライン販売支援', url: '/services/ec' },
+];
 
 const ecTypes = [
   {
@@ -73,6 +81,12 @@ const process = [
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    service={{ name: 'EC構築・オンライン販売支援', description: '宮崎の特産品・商品をオンラインで全国へ届けるEC構築サービス。Shopify・楽天対応、商品撮影から運用代行まで一貫サポート。' }}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <FullWidthHero
     tagline="EC & Online Sales Support"

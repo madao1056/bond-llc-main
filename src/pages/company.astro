@@ -1,17 +1,29 @@
-
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import heroCompany from '~/assets/images/hero-company.png';
 
 const metadata = {
   title: '会社概要',
-  description: '合同会社ぼんどの会社概要・事業内容・アクセス情報をご紹介します。',
+  description: '合同会社ぼんどの会社概要です。宮崎県国富町に拠点を置き、Web制作・EC構築・DX支援で地域事業者を支援しています。',
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: '会社概要', url: '/company' },
+];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    type="organization"
+    breadcrumbs={breadcrumbs}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
   <!-- ヒーローセクション -->
   <Hero2
     tagline="Company Information"
