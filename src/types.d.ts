@@ -181,6 +181,7 @@ export interface Textarea {
   name?: string;
   placeholder?: string;
   rows?: number;
+  required?: boolean;
 }
 
 export interface Disclaimer {

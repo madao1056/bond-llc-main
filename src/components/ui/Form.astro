@@ -55,6 +55,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
           name={textarea.name ? textarea.name : 'message'}
           rows={textarea.rows ? textarea.rows : 4}
           placeholder={textarea.placeholder}
+          required={textarea.required}
           class="py-3 px-4 block w-full text-md border border-bond-navy/20 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-bond-yellow-main focus:border-bond-yellow-main transition-colors rounded-none"
         />
       </div>
@@ -101,7 +102,7 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
       送信中...
     </div>
     <div id="form-success" class="hidden text-center py-4 px-6 bg-green-50 border border-green-200 text-green-800 text-sm">
-      お問い合わせありがとうございます。確認メールをお送りしましたのでご確認ください。
+      送信されました。確認メールをお送りしましたのでご確認ください。
     </div>
     <div id="form-error" class="hidden text-center py-4 px-6 bg-red-50 border border-red-200 text-red-800 text-sm">
     </div>
