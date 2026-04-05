@@ -95,6 +95,78 @@ const breadcrumbs = [
       />
   </section>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form') as HTMLFormElement | null;
+      if (!form) return;
+
+      const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+      const statusEl = document.getElementById('form-status')!;
+      const loadingEl = document.getElementById('form-loading')!;
+      const successEl = document.getElementById('form-success')!;
+      const errorEl = document.getElementById('form-error')!;
+
+      function showStatus(type: 'loading' | 'success' | 'error', message?: string) {
+        statusEl.classList.remove('hidden');
+        loadingEl.classList.add('hidden');
+        successEl.classList.add('hidden');
+        errorEl.classList.add('hidden');
+
+        if (type === 'loading') loadingEl.classList.remove('hidden');
+        if (type === 'success') successEl.classList.remove('hidden');
+        if (type === 'error') {
+          errorEl.textContent = message ?? 'エラーが発生しました。';
+          errorEl.classList.remove('hidden');
+        }
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const name = (formData.get('name') as string)?.trim();
+        const email = (formData.get('email') as string)?.trim();
+        const message = (formData.get('message') as string)?.trim();
+
+        if (!name || !email || !message) {
+          showStatus('error', 'お名前・メールアドレス・お問い合わせ内容は必須です。');
+          return;
+        }
+
+        if (submitBtn) submitBtn.disabled = true;
+        showStatus('loading');
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              company: formData.get('company') ?? '',
+              name,
+              email,
+              phone: formData.get('phone') ?? '',
+              service: formData.get('service') ?? '',
+              message,
+            }),
+          });
+
+          const result = await res.json();
+
+          if (res.ok) {
+            showStatus('success');
+            form.reset();
+          } else {
+            showStatus('error', result.error ?? '送信に失敗しました。');
+          }
+        } catch {
+          showStatus('error', '通信エラーが発生しました。時間をおいて再度お試しください。');
+        } finally {
+          if (submitBtn) submitBtn.disabled = false;
+        }
+      });
+    });
+  </script>
+
   <!-- その他のお問い合わせ方法 -->
   <section class="py-16 lg:py-24 bg-bond-surface border-y border-bond-navy/10 relative">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">

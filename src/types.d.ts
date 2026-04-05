@@ -161,12 +161,19 @@ export interface Testimonial {
   image?: string | unknown;
 }
 
+export interface SelectOption {
+  value: string;
+  label: string;
+}
+
 export interface Input {
-  type: HTMLInputTypeAttribute;
+  type: HTMLInputTypeAttribute | 'select';
   name: string;
   label?: string;
   autocomplete?: string;
   placeholder?: string;
+  options?: SelectOption[];
+  required?: boolean;
 }
 
 export interface Textarea {

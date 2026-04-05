@@ -8,6 +8,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
+import vercel from '@astrojs/vercel';
 import compress from 'astro-compress';
 import type { AstroIntegration } from 'astro';
 
@@ -23,6 +24,7 @@ const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroInteg
 
 export default defineConfig({
   output: 'static',
+  adapter: vercel(),
 
   integrations: [
     tailwind({
