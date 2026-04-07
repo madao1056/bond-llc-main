@@ -16,7 +16,7 @@ import logoGoogleChat from '~/assets/images/logo-google-chat.png';
 
 const metadata = {
   title: 'Tsunagi（ツナギ） - AIチャットアシスタント | 合同会社ぼんど',
-  description: 'Tsunagiは、Web制作者のためのAIチャットアシスタント。7つのチャットツールに対応し、クライアント対応の質とスピードを向上させるChrome拡張機能です。',
+  description: 'Tsunagiは、クリエイター・ディレクターのためのAIチャットアシスタント。7つのチャットツールに対応し、クライアント対応の質とスピードを向上させるChrome拡張機能です。',
 };
 
 const breadcrumbs = [
@@ -57,7 +57,7 @@ const targetUsers = [
     breadcrumbs={breadcrumbs}
     software={{
       name: 'Tsunagi（ツナギ）',
-      description: 'Web制作者のためのAIチャットアシスタント。Chatwork・Slack・Gmail等7つのチャットツールに対応し、クライアント対応力をAIがサポートするChrome拡張機能。',
+      description: 'クリエイター・ディレクターのためのAIチャットアシスタント。Chatwork・Slack・Gmail等7つのチャットツールに対応し、クライアント対応力をAIがサポートするChrome拡張機能。',
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Chrome',
       url: 'https://bond-llc.jp/services/app/tsunagi',
@@ -75,7 +75,7 @@ const targetUsers = [
         Tsunagi<span class="text-bond-yellow-main">（ツナギ）</span>
       </h1>
       <p class="text-xl md:text-2xl text-white/80 mb-4 font-serif">
-        Web制作者のための<br class="md:hidden" />AIチャットアシスタント
+        クリエイター・ディレクターのための<br class="md:hidden" />AIチャットアシスタント
       </p>
       <p class="text-lg text-white/60 max-w-2xl mx-auto mb-10">
         Web制作の現場で必要なクライアント対応力をAIがサポート。<br />
@@ -153,7 +153,7 @@ const targetUsers = [
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-4">
         {chatTools.map((tool) => (
-          <div class="flex flex-col items-center gap-3 p-6 border border-bond-border bg-white dark:bg-gray-800 hover:border-bond-navy transition-colors">
+          <div class="flex flex-col items-center gap-2 p-3 border border-bond-border bg-white dark:bg-gray-800 hover:border-bond-navy transition-colors">
             <Image src={tool.logo} alt={`${tool.name} ロゴ`} width={40} height={40} class="w-10 h-10 object-contain" />
             <span class="text-sm font-bold text-bond-navy dark:text-sky-400">{tool.name}</span>
           </div>

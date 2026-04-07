@@ -1,0 +1,151 @@
+---
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Button from '~/components/ui/Button.astro';
+import tsunagiIcon from '~/assets/images/tsunagi-icon.png';
+import logoChatwork from '~/assets/images/logo-chatwork.png';
+import logoSlack from '~/assets/images/logo-slack.png';
+import logoBacklog from '~/assets/images/logo-backlog.png';
+import logoGmail from '~/assets/images/logo-gmail.webp';
+import logoLark from '~/assets/images/logo-lark.png';
+import logoDiscord from '~/assets/images/logo-discord.png';
+import logoGoogleChat from '~/assets/images/logo-google-chat.png';
+
+export interface Props {
+  id?: string;
+  isDark?: boolean;
+  classes?: Record<string, string>;
+  title?: string;
+}
+
+const {
+  id,
+  isDark = false,
+  classes = {},
+  title = '自社プロダクト',
+} = Astro.props;
+
+const chatTools = [
+  { name: 'Chatwork', logo: logoChatwork },
+  { name: 'Slack', logo: logoSlack },
+  { name: 'Backlog', logo: logoBacklog },
+  { name: 'Gmail', logo: logoGmail },
+  { name: 'Lark', logo: logoLark },
+  { name: 'Discord', logo: logoDiscord },
+  { name: 'Google Chat', logo: logoGoogleChat },
+];
+
+const features = [
+  { icon: 'tabler:message-chatbot', label: 'AI返信アシスト' },
+  { icon: 'tabler:arrows-exchange', label: 'クロスチャット連携' },
+  { icon: 'tabler:brand-chrome', label: 'Chrome拡張機能' },
+];
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`${classes?.container ?? ''}`}>
+  <!-- Section Header (Technical Style) -->
+  <div class="mb-12 relative">
+    <div class="absolute left-0 top-1/2 w-full h-px bg-bond-navy/20 -z-10"></div>
+    <div class="inline-block bg-bond-background pr-6">
+      <h2 class="font-serif text-4xl font-bold text-bond-navy">
+        {title}
+      </h2>
+      <p class="font-mono text-sm text-bond-yellow-deep mt-1 tracking-widest uppercase">
+        // Our Product
+      </p>
+    </div>
+  </div>
+
+  <!-- Product Showcase Card (Dark Treatment) -->
+  <div class="relative bg-bond-navy text-white overflow-hidden border border-bond-navy">
+    <!-- Background Grid -->
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+
+    <!-- Diagonal Accent -->
+    <div class="absolute top-0 right-0 w-1/2 h-full bg-white/5 -skew-x-12 hidden lg:block"></div>
+
+    <div class="relative z-10 px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- 左側：プロダクト情報 -->
+        <div class="lg:col-span-7">
+          <!-- Label -->
+          <div class="mb-6 flex items-center gap-4">
+            <div class="w-12 h-1 bg-bond-yellow-main"></div>
+            <span class="font-mono text-xs tracking-widest uppercase text-bond-yellow-main">Chrome Extension</span>
+          </div>
+
+          <!-- Logo + Title -->
+          <div class="flex items-center gap-5 mb-6">
+            <Image
+              src={tsunagiIcon}
+              alt="Tsunagi アイコン"
+              width={72}
+              height={72}
+              class="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-2xl border border-white/20"
+            />
+            <div>
+              <h3 class="text-3xl md:text-4xl font-bold font-serif">
+                Tsunagi<span class="text-bond-yellow-main">（ツナギ）</span>
+              </h3>
+              <p class="text-sm text-white/60 font-sans mt-1">クリエイター・ディレクターのためのAIチャットアシスタント</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-base text-white/80 leading-relaxed mb-8 border-l-2 border-bond-yellow-main pl-5">
+            7つのチャットツールに対応し、クライアント対応の質とスピードを向上させる<br class="hidden md:inline" />
+            Chrome拡張機能。返信の言い回しに悩む時間を、本来の制作業務に取り戻します。
+          </p>
+
+          <!-- Features -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-8">
+            {features.map((feature) => (
+              <div class="flex items-center gap-2 px-3 py-2 border border-white/20 bg-white/5">
+                <Icon name={feature.icon} class="w-4 h-4 text-bond-yellow-main flex-shrink-0" />
+                <span class="text-xs font-bold tracking-wide">{feature.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTA -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button
+              href="/services/app/tsunagi"
+              class="btn-primary bg-bond-yellow-main text-bond-navy border-bond-yellow-main hover:bg-bond-yellow-deep w-full sm:w-auto"
+            >
+              Tsunagiの詳細を見る
+              <Icon name="tabler:arrow-right" class="w-4 h-4 ml-2" />
+            </Button>
+            <p class="text-xs text-white/50 self-center">初回1週間無料でお試しいただけます</p>
+          </div>
+        </div>
+
+        <!-- 右側：対応ツール -->
+        <div class="lg:col-span-5">
+          <p class="font-mono text-xs tracking-widest uppercase text-white/40 mb-4 text-center lg:text-left">
+            // Supported Tools
+          </p>
+          <div class="grid grid-cols-4 gap-px bg-white/10 border border-white/10">
+            {chatTools.map((tool) => (
+              <div class="bg-bond-navy hover:bg-white/5 transition-colors flex flex-col items-center justify-center gap-2 p-4 aspect-square">
+                <Image
+                  src={tool.logo}
+                  alt={`${tool.name} ロゴ`}
+                  width={32}
+                  height={32}
+                  class="w-7 h-7 object-contain"
+                />
+                <span class="text-[10px] font-bold text-white/70 text-center leading-tight">{tool.name}</span>
+              </div>
+            ))}
+            <!-- Empty 8th cell as accent -->
+            <div class="bg-bond-navy flex items-center justify-center aspect-square">
+              <span class="text-[10px] font-mono text-bond-yellow-main/60 tracking-widest">+more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</WidgetWrapper>
