@@ -7,6 +7,7 @@ import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import tsunagiIcon from '~/assets/images/tsunagi-icon.png';
+import mdClipperIcon from '~/assets/images/md-clipper-icon.png';
 
 const metadata = {
   title: 'アプリ制作サービス | 合同会社ぼんど',
@@ -259,32 +260,60 @@ const faqs = [
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
           自社プロダクト
-          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">OUR PRODUCT</span>
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">OUR PRODUCTS</span>
         </h2>
       </div>
 
-      <a href="/services/app/tsunagi" class="block bg-white dark:bg-gray-800 border border-bond-border hover:border-bond-navy dark:hover:border-sky-400 transition-all duration-300 group">
-        <div class="md:flex items-center">
-          <div class="md:w-1/4 p-8 flex items-center justify-center bg-bond-navy">
-            <div class="text-center">
-              <Image src={tsunagiIcon} alt="Tsunagi" class="w-16 h-16 rounded-xl mx-auto mb-2" width={64} height={64} />
-              <span class="text-xs font-mono text-white/60">Chrome Extension</span>
+      <div class="space-y-6">
+        <a href="/services/app/tsunagi" class="block bg-white dark:bg-gray-800 border border-bond-border hover:border-bond-navy dark:hover:border-sky-400 transition-all duration-300 group">
+          <div class="md:flex items-center">
+            <div class="md:w-1/4 p-8 flex items-center justify-center bg-bond-navy">
+              <div class="text-center">
+                <Image src={tsunagiIcon} alt="Tsunagi" class="w-16 h-16 rounded-xl mx-auto mb-2" width={64} height={64} />
+                <span class="text-xs font-mono text-white/60">Chrome Extension</span>
+              </div>
+            </div>
+            <div class="md:w-3/4 p-8">
+              <h3 class="text-2xl font-bold text-bond-navy dark:text-sky-400 font-serif mb-2 group-hover:text-bond-yellow-deep transition-colors">
+                Tsunagi（ツナギ）
+              </h3>
+              <p class="text-bond-text-sub dark:text-gray-400 mb-4 leading-relaxed">
+                クリエイター・ディレクターのためのAIチャットアシスタント。7つのチャットツールに対応し、クライアント対応の質とスピードを向上させるChrome拡張機能です。
+              </p>
+              <span class="inline-flex items-center text-sm font-bold text-bond-navy dark:text-sky-400 group-hover:text-bond-yellow-deep transition-colors">
+                詳しく見る
+                <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </span>
             </div>
           </div>
-          <div class="md:w-3/4 p-8">
-            <h3 class="text-2xl font-bold text-bond-navy dark:text-sky-400 font-serif mb-2 group-hover:text-bond-yellow-deep transition-colors">
-              Tsunagi（ツナギ）
-            </h3>
-            <p class="text-bond-text-sub dark:text-gray-400 mb-4 leading-relaxed">
-              クリエイター・ディレクターのためのAIチャットアシスタント。7つのチャットツールに対応し、クライアント対応の質とスピードを向上させるChrome拡張機能です。
-            </p>
-            <span class="inline-flex items-center text-sm font-bold text-bond-navy dark:text-sky-400 group-hover:text-bond-yellow-deep transition-colors">
-              詳しく見る
-              <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-            </span>
+        </a>
+
+        <a href="/services/app/md-clipper" class="block bg-white dark:bg-gray-800 border border-bond-border hover:border-bond-navy dark:hover:border-sky-400 transition-all duration-300 group">
+          <div class="md:flex items-center">
+            <div class="md:w-1/4 p-8 flex items-center justify-center bg-bond-background dark:bg-gray-700 border-r border-bond-border">
+              <div class="text-center">
+                <Image src={mdClipperIcon} alt="MD Clipper" class="w-16 h-16 rounded-xl mx-auto mb-2" width={64} height={64} />
+                <span class="text-xs font-mono text-bond-text-sub/60">Chrome Extension</span>
+              </div>
+            </div>
+            <div class="md:w-3/4 p-8">
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="text-2xl font-bold text-bond-navy dark:text-sky-400 font-serif group-hover:text-bond-yellow-deep transition-colors">
+                  MD Clipper
+                </h3>
+                <span class="text-[10px] font-mono font-bold tracking-widest uppercase px-2 py-0.5 border border-bond-navy/30 text-bond-navy/70">Free / OSS</span>
+              </div>
+              <p class="text-bond-text-sub dark:text-gray-400 mb-4 leading-relaxed">
+                WebページをワンクリックでクリーンなMarkdownに変換するChrome拡張機能。広告やナビゲーションを自動除去し、本文だけを抽出します。完全無料・オープンソース。
+              </p>
+              <span class="inline-flex items-center text-sm font-bold text-bond-navy dark:text-sky-400 group-hover:text-bond-yellow-deep transition-colors">
+                詳しく見る
+                <Icon name="tabler:arrow-right" class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </section>
 

@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Button from '~/components/ui/Button.astro';
 import tsunagiIcon from '~/assets/images/tsunagi-icon.png';
+import mdClipperIcon from '~/assets/images/md-clipper-icon.png';
 import logoChatwork from '~/assets/images/logo-chatwork.png';
 import logoSlack from '~/assets/images/logo-slack.png';
 import logoBacklog from '~/assets/images/logo-backlog.png';
@@ -40,6 +41,13 @@ const features = [
   { icon: 'tabler:message-chatbot', label: 'AI返信アシスト' },
   { icon: 'tabler:arrows-exchange', label: 'クロスチャット連携' },
   { icon: 'tabler:brand-chrome', label: 'Chrome拡張機能' },
+];
+
+const mdClipperFeatures = [
+  { icon: 'tabler:markdown', label: 'ワンクリック変換' },
+  { icon: 'tabler:ad-off', label: '広告・ノイズ除去' },
+  { icon: 'tabler:file-text', label: 'frontmatter自動付与' },
+  { icon: 'tabler:lock', label: 'ブラウザ内完結' },
 ];
 ---
 
@@ -142,6 +150,108 @@ const features = [
             <!-- Empty 8th cell as accent -->
             <div class="bg-bond-navy flex items-center justify-center aspect-square">
               <span class="text-[10px] font-mono text-bond-yellow-main/60 tracking-widest">+more</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MD Clipper Card (Light Treatment) -->
+  <div class="relative bg-bond-surface text-bond-text-main overflow-hidden border border-bond-border mt-6">
+    <!-- Background Grid -->
+    <div class="absolute inset-0 bg-blueprint-grid opacity-5 pointer-events-none"></div>
+
+    <div class="relative z-10 px-6 sm:px-10 lg:px-14 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <!-- 左側：プロダクト情報 -->
+        <div class="lg:col-span-7">
+          <!-- Label -->
+          <div class="mb-6 flex items-center gap-4">
+            <div class="w-12 h-1 bg-bond-navy"></div>
+            <span class="font-mono text-xs tracking-widest uppercase text-bond-navy">Chrome Extension / OSS</span>
+          </div>
+
+          <!-- Logo + Title -->
+          <div class="flex items-center gap-5 mb-6">
+            <Image
+              src={mdClipperIcon}
+              alt="MD Clipper アイコン"
+              width={72}
+              height={72}
+              class="w-16 h-16 lg:w-[72px] lg:h-[72px] rounded-2xl border border-bond-border"
+            />
+            <div>
+              <h3 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy">
+                MD Clipper
+              </h3>
+              <p class="text-sm text-bond-text-sub font-sans mt-1">Webページを一瞬でMarkdownに変換するChrome拡張機能</p>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <p class="text-base text-bond-text-sub leading-relaxed mb-8 border-l-2 border-bond-navy pl-5">
+            閲覧中のWebページをワンクリックでMarkdownに変換。広告やナビゲーションを自動除去し、<br class="hidden md:inline" />
+            本文だけをクリーンに抽出します。完全無料・オープンソース。
+          </p>
+
+          <!-- Features -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+            {mdClipperFeatures.map((feature) => (
+              <div class="flex items-center gap-2 px-3 py-2 border border-bond-border bg-white">
+                <Icon name={feature.icon} class="w-4 h-4 text-bond-navy flex-shrink-0" />
+                <span class="text-xs font-bold tracking-wide text-bond-navy">{feature.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <!-- CTA -->
+          <div class="flex flex-col sm:flex-row gap-4">
+            <Button
+              href="/services/app/md-clipper"
+              class="btn-primary bg-bond-navy text-white border-bond-navy hover:bg-bond-navy/90 w-full sm:w-auto"
+            >
+              MD Clipperの詳細を見る
+              <Icon name="tabler:arrow-right" class="w-4 h-4 ml-2" />
+            </Button>
+            <a
+              href="https://chromewebstore.google.com/detail/md-clipper/aeeihfjackmhpbifgdanioeamhkpfklm"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-secondary border-bond-navy text-bond-navy hover:bg-bond-navy/5 w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest"
+            >
+              <Icon name="tabler:brand-chrome" class="w-4 h-4" />
+              Chrome Web Store
+            </a>
+          </div>
+        </div>
+
+        <!-- 右側：変換イメージ -->
+        <div class="lg:col-span-5">
+          <p class="font-mono text-xs tracking-widest uppercase text-bond-text-sub/40 mb-4 text-center lg:text-left">
+            // How It Works
+          </p>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4 p-4 border border-bond-border bg-white">
+              <div class="w-10 h-10 bg-bond-navy text-white flex items-center justify-center flex-shrink-0 font-mono font-bold text-sm">01</div>
+              <div>
+                <p class="text-sm font-bold text-bond-navy">ページを開く</p>
+                <p class="text-xs text-bond-text-sub">変換したいWebページにアクセス</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-4 border border-bond-border bg-white">
+              <div class="w-10 h-10 bg-bond-navy text-white flex items-center justify-center flex-shrink-0 font-mono font-bold text-sm">02</div>
+              <div>
+                <p class="text-sm font-bold text-bond-navy">アイコンをクリック</p>
+                <p class="text-xs text-bond-text-sub">ツールバーのMD Clipperアイコンを押す</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 p-4 border border-bond-border bg-white">
+              <div class="w-10 h-10 bg-bond-yellow-main text-bond-navy flex items-center justify-center flex-shrink-0 font-mono font-bold text-sm">03</div>
+              <div>
+                <p class="text-sm font-bold text-bond-navy">Markdownをコピー</p>
+                <p class="text-xs text-bond-text-sub">変換結果をコピーまたはファイル保存</p>
+              </div>
             </div>
           </div>
         </div>

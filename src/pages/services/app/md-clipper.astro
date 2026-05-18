@@ -1,0 +1,307 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import mdClipperIcon from '~/assets/images/md-clipper-icon.png';
+
+const metadata = {
+  title: 'MD Clipper - Webページ→Markdown変換 | 合同会社ぼんど',
+  description: 'MD Clipperは、WebページをワンクリックでクリーンなMarkdownに変換する無料Chrome拡張機能です。広告除去・frontmatter自動付与・ブラウザ内完結で、ナレッジ管理やAI活用を効率化します。',
+};
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'サービス一覧', url: '/services' },
+  { name: 'アプリ制作', url: '/services/app' },
+  { name: 'MD Clipper', url: '/services/app/md-clipper' },
+];
+
+const painPoints = [
+  'Webページの情報を手作業でコピペして、書式が崩れてやり直す',
+  '広告やナビゲーションが混ざり、本文だけの抽出に時間がかかる',
+  'AIに読ませたいのに、HTMLのままでは精度が出ない',
+  'ナレッジをMarkdownで管理したいが、変換作業が面倒すぎる',
+];
+
+const features = [
+  {
+    icon: 'tabler:markdown',
+    title: 'ワンクリックMarkdown変換',
+    description: '閲覧中のWebページをボタン一つでMarkdownに変換。HTMLの構造を解析し、見出し・リスト・リンク・画像を正確に変換します。',
+  },
+  {
+    icon: 'tabler:ad-off',
+    title: '本文抽出・ノイズ除去',
+    description: '広告、ナビゲーション、フッターなどのノイズを自動的に除去。記事やドキュメントの本文だけをクリーンに抽出します。',
+  },
+  {
+    icon: 'tabler:file-text',
+    title: 'frontmatter自動付与',
+    description: 'タイトル・URL・取得日時などのメタ情報をYAML frontmatterとして自動付与。ナレッジ管理やObsidian連携に最適です。',
+  },
+  {
+    icon: 'tabler:eye',
+    title: 'プレビュー・編集',
+    description: '変換結果をリアルタイムでプレビュー。その場で編集してからコピー・保存できるので、後処理の手間を削減します。',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'インストール',
+    description: 'Chrome Web Storeから無料でインストール。アカウント登録は不要です。',
+    icon: 'tabler:download',
+  },
+  {
+    number: '02',
+    title: 'ページを開く',
+    description: 'Markdownに変換したいWebページにアクセスします。',
+    icon: 'tabler:browser',
+  },
+  {
+    number: '03',
+    title: 'クリックで変換・保存',
+    description: 'ツールバーのアイコンをクリック。変換結果をコピーまたはファイルとして保存します。',
+    icon: 'tabler:clipboard-check',
+  },
+];
+
+const faqs = [
+  {
+    question: 'MD Clipperは無料ですか？',
+    answer: 'はい、MD Clipperは完全無料でご利用いただけます。オープンソースソフトウェア（MIT License）として公開しており、すべての機能を無料でお使いいただけます。',
+  },
+  {
+    question: 'どのようなページに対応していますか？',
+    answer: 'ブログ記事、ニュースサイト、ドキュメント、技術記事など、テキストコンテンツを持つWebページ全般に対応しています。動的に生成されるコンテンツやSPAにも対応しています。',
+  },
+  {
+    question: 'データはどこに保存されますか？',
+    answer: '変換処理はすべてブラウザ内で完結します。外部サーバーへのデータ送信は一切ありません。プライバシーを重視した設計です。',
+  },
+  {
+    question: 'Obsidianなどのナレッジ管理ツールと連携できますか？',
+    answer: 'はい、frontmatter付きのMarkdownを出力するため、Obsidian、Notion、LogSeqなどのMarkdown対応ツールにそのまま取り込めます。',
+  },
+  {
+    question: 'AI（ChatGPTやClaude）と組み合わせて使えますか？',
+    answer: 'はい、WebページをMarkdownに変換することで、AIへのコンテキスト入力として最適な形式になります。HTMLよりもトークン効率が良く、AIの回答精度向上にも寄与します。',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <StructuredData
+    type="software"
+    breadcrumbs={breadcrumbs}
+    software={{
+      name: 'MD Clipper',
+      description: 'WebページをワンクリックでクリーンなMarkdownに変換する無料Chrome拡張機能。広告除去・frontmatter自動付与・ブラウザ内完結で、ナレッジ管理やAI活用を効率化します。',
+      applicationCategory: 'BrowserApplication',
+      operatingSystem: 'Chrome',
+      url: 'https://bond-llc.jp/services/app/md-clipper',
+    }}
+    faq={faqs.map(f => ({ question: f.question, answer: f.answer }))}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
+  <!-- ヒーロー -->
+  <section aria-labelledby="hero-heading" class="py-20 lg:py-28 bg-bond-navy text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <Image src={mdClipperIcon} alt="MD Clipper アイコン" width={96} height={96} class="mx-auto mb-6 rounded-2xl" />
+      <p class="text-sm font-mono text-bond-yellow-main tracking-widest uppercase mb-4">Chrome Extension / Free &amp; Open Source</p>
+      <h1 id="hero-heading" class="text-4xl md:text-6xl font-bold font-serif mb-6">
+        MD Clipper
+      </h1>
+      <p class="text-xl md:text-2xl text-white/80 mb-4 font-serif">
+        Webページを一瞬で<br class="md:hidden" />Markdownに変換
+      </p>
+      <p class="text-lg text-white/60 max-w-2xl mx-auto mb-10">
+        MD Clipperは、閲覧中のWebページをワンクリックでクリーンなMarkdownに変換するChrome拡張機能です。
+        広告やナビゲーションを自動除去し、本文だけを抽出。ナレッジ管理やAI活用を効率化します。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://chromewebstore.google.com/detail/md-clipper/aeeihfjackmhpbifgdanioeamhkpfklm"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary bg-bond-yellow-main text-bond-navy border-bond-yellow-main hover:bg-bond-yellow-deep inline-flex items-center justify-center gap-2"
+        >
+          <Icon name="tabler:brand-chrome" class="w-5 h-5" />
+          Chrome Web Storeで入手
+        </a>
+        <a
+          href="https://github.com/gussan-gussan/md-clipper"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary border-white/30 text-white hover:bg-white/10 inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest"
+        >
+          <Icon name="tabler:brand-github" class="w-5 h-5" />
+          GitHub
+        </a>
+      </div>
+      <p class="text-sm text-white/40 mt-4">完全無料・登録不要・データ送信なし</p>
+    </div>
+  </section>
+
+  <!-- こんな悩みありませんか？ -->
+  <section aria-labelledby="pain-points-heading" class="py-16 lg:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 id="pain-points-heading" class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          こんな悩みありませんか？
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {painPoints.map((point) => (
+          <div class="flex items-start gap-4 p-6 border border-bond-border bg-white dark:bg-gray-800">
+            <Icon name="tabler:alert-circle" class="w-6 h-6 text-bond-yellow-deep flex-shrink-0 mt-0.5" />
+            <p class="text-bond-text-main dark:text-gray-300">{point}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 主な機能 -->
+  <section aria-labelledby="features-heading" class="py-16 lg:py-24 bg-bond-surface border-y border-bond-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 id="features-heading" class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          主な機能
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">FEATURES</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {features.map((feature) => (
+          <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border">
+            <div class="w-14 h-14 bg-bond-navy text-white flex items-center justify-center mb-6">
+              <Icon name={feature.icon} class="w-7 h-7" />
+            </div>
+            <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">{feature.title}</h3>
+            <p class="text-bond-text-sub dark:text-gray-300 leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 使い方 -->
+  <section aria-labelledby="howto-heading" class="py-16 lg:py-24">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 id="howto-heading" class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          使い方
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">HOW TO USE</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub max-w-2xl mx-auto">
+          3ステップでWebページをMarkdownに変換できます
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {steps.map((step, index) => (
+          <div class="relative group">
+            <div class="border border-bond-border bg-white dark:bg-gray-800 p-8 h-full hover:border-bond-navy transition-colors duration-300 text-center">
+              <div class="text-4xl font-mono font-bold text-bond-navy/20 group-hover:text-bond-yellow-main transition-colors duration-300 mb-4">
+                {step.number}
+              </div>
+              <div class="w-14 h-14 bg-bond-navy text-white flex items-center justify-center mx-auto mb-6">
+                <Icon name={step.icon} class="w-7 h-7" />
+              </div>
+              <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">{step.title}</h3>
+              <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{step.description}</p>
+            </div>
+            {index < steps.length - 1 && (
+              <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-px bg-bond-border z-10"></div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section aria-labelledby="faq-heading" class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 id="faq-heading" class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">
+          よくある質問
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">FAQ</span>
+        </h2>
+      </div>
+
+      <dl class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+              <dt class="font-medium text-bond-navy dark:text-sky-400">
+                {faq.question}
+              </dt>
+              <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300 flex-shrink-0 ml-4" />
+            </summary>
+            <div class="px-6 pb-6">
+              <dd class="text-bond-text-main dark:text-gray-300">
+                {faq.answer}
+              </dd>
+            </div>
+          </details>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section aria-labelledby="cta-heading" class="py-16 lg:py-24 bg-bond-navy text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-10 pointer-events-none"></div>
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 relative z-10 text-center">
+      <h2 id="cta-heading" class="text-3xl md:text-4xl font-bold font-serif mb-6">
+        MD Clipperを<br>使ってみませんか？
+      </h2>
+      <p class="text-lg text-white/70 mb-10">
+        完全無料・登録不要。今すぐChrome Web Storeからインストールして、<br class="hidden md:inline" />
+        Webページの情報収集を効率化しましょう。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="https://chromewebstore.google.com/detail/md-clipper/aeeihfjackmhpbifgdanioeamhkpfklm"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary bg-bond-yellow-main text-bond-navy border-bond-yellow-main hover:bg-bond-yellow-deep inline-flex items-center justify-center gap-2"
+        >
+          <Icon name="tabler:brand-chrome" class="w-5 h-5" />
+          Chrome Web Storeで入手
+        </a>
+        <a
+          href="https://github.com/gussan-gussan/md-clipper"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-secondary border-white/30 text-white hover:bg-white/10 inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest"
+        >
+          <Icon name="tabler:brand-github" class="w-5 h-5" />
+          GitHub
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- フッターリンク -->
+  <div class="py-8 bg-bond-background border-t border-bond-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex justify-center gap-6">
+      <a href="/services/app" class="text-sm text-bond-text-sub hover:text-bond-navy dark:hover:text-sky-400 underline transition-colors">
+        アプリ制作サービス
+      </a>
+      <a href="/services/app/tsunagi" class="text-sm text-bond-text-sub hover:text-bond-navy dark:hover:text-sky-400 underline transition-colors">
+        Tsunagi（ツナギ）
+      </a>
+    </div>
+  </div>
+</Layout>

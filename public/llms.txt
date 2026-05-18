@@ -24,6 +24,7 @@
 - [DX・業務効率化](https://bond-llc.jp/services/dx): 業務自動化・データ分析・クラウド導入支援
 - [アプリ制作](https://bond-llc.jp/services/app): 業務効率化アプリ・店舗向けアプリ・Chrome拡張機能の開発
 - [Tsunagi（ツナギ）](https://bond-llc.jp/services/app/tsunagi): Web制作者向けAIチャットアシスタント（Chrome拡張機能）
+- [MD Clipper](https://bond-llc.jp/services/app/md-clipper): WebページをワンクリックでMarkdownに変換する無料Chrome拡張機能（OSS・MIT License）
 - [実績・事例](https://bond-llc.jp/works): 地域事業者さまとの成功事例
 - [会社概要](https://bond-llc.jp/company): 会社基本情報・事業内容・アクセス
 - [よくある質問](https://bond-llc.jp/faq): サービスに関するFAQ
@@ -35,7 +36,7 @@
 2. EC構築・オンライン販売支援: Shopify、楽天市場、LP+決済の構築と運用代行
 3. MEO・LINE・集客導線設計: Googleマップ上位表示、LINE公式アカウント構築、SNS運用
 4. ローカルDX・業務効率化: 業務自動化、データ分析、クラウド化、セキュリティ強化
-5. アプリ制作: モバイルアプリ、Webアプリ、Chrome拡張機能の企画・開発・運用
+5. アプリ制作: モバイルアプリ、Webアプリ、Chrome拡張機能の企画・開発・運用。自社プロダクトとしてTsunagiとMD Clipperを提供
 
 ## 対応エリア
 
