@@ -98,6 +98,7 @@ export const footerData = {
   secondaryLinks: [
     { text: 'プライバシーポリシー', href: getPermalink('/privacy') },
     { text: '利用規約', href: getPermalink('/terms') },
+    { text: '情報セキュリティ基本方針', href: getPermalink('/security-policy') },
   ],
   socialLinks: [
     { ariaLabel: 'LINE', icon: 'tabler:brand-line', href: 'https://lin.ee/LYodITQO' },
