@@ -40,6 +40,7 @@ if (!props.decoding) {
 const _image = await findImage(props.src);
 
 let image: ImageType | undefined = undefined;
+let isLocalAsset = false;
 
 if (
   typeof _image === 'string' &&
@@ -48,13 +49,32 @@ if (
 ) {
   image = await getImagesOptimized(_image, props, unpicOptimizer);
 } else if (_image) {
+  isLocalAsset = true;
   image = await getImagesOptimized(_image, props, astroAssetsOptimizer);
+}
+
+// SEO/LLMO spec IMG-01: ローカルアセットはAVIF→WebPの順で配信し、元形式をフォールバックにする
+let avifSrcset: string | undefined;
+let webpSrcset: string | undefined;
+if (image && isLocalAsset && _image) {
+  avifSrcset = (await getImagesOptimized(_image, { ...props, format: 'avif' }, astroAssetsOptimizer)).attributes.srcset as
+    | string
+    | undefined;
+  webpSrcset = (await getImagesOptimized(_image, { ...props, format: 'webp' }, astroAssetsOptimizer)).attributes.srcset as
+    | string
+    | undefined;
 }
 ---
 
 {
   !image ? (
     <Fragment />
+  ) : avifSrcset || webpSrcset ? (
+    <picture class="contents">
+      {avifSrcset && <source type="image/avif" srcset={avifSrcset} sizes={image.attributes.sizes} />}
+      {webpSrcset && <source type="image/webp" srcset={webpSrcset} sizes={image.attributes.sizes} />}
+      <img src={image.src} crossorigin="anonymous" referrerpolicy="no-referrer" {...image.attributes} />
+    </picture>
   ) : (
     <img src={image.src} crossorigin="anonymous" referrerpolicy="no-referrer" {...image.attributes} />
   )

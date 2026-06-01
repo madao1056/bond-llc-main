@@ -87,7 +87,7 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                   href={href}
                 >
                   {icon === 'tabler:brand-line' ? (
-                    <img src={lineIcon.src} alt="LINE" class="w-5 h-5" />
+                    <img src={lineIcon.src} alt="LINE" width="20" height="20" loading="lazy" decoding="async" class="w-5 h-5" />
                   ) : icon ? (
                     <Icon name={icon} class="w-5 h-5" />
                   ) : null}

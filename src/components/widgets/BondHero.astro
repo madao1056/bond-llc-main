@@ -17,6 +17,8 @@ export interface Props {
   image?: {
     src: string;
     alt?: string;
+    width?: number;
+    height?: number;
   };
 }
 
@@ -101,8 +103,12 @@ const {
             <img
               src={image.src}
               alt={image.alt || ''}
+              width={image.width}
+              height={image.height}
               class="w-full h-auto object-cover grayscale contrast-125"
               loading="eager"
+              fetchpriority="high"
+              decoding="async"
             />
           </div>
 
