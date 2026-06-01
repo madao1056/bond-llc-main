@@ -29,7 +29,12 @@ _制定日_: 2026年5月30日
 
 ---
 
-本方針に基づき、当社は独立行政法人情報処理推進機構（IPA）が推進する「SECURITY ACTION」の二つ星（★★）を自己宣言します。
+本方針に基づき、当社は独立行政法人情報処理推進機構（IPA）が推進する「SECURITY ACTION」の二つ星（★★）を自己宣言しています。
+
+<img src="/images/security-action-futatsuboshi.png" alt="SECURITY ACTION 二つ星ロゴマーク" width="120" height="120" style="margin-top:1rem;" />
+
+自己宣言ID：50000109087  
+自己宣言日：2026年6月1日
 
 制定日：2026年5月30日  
 合同会社ぼんど  
