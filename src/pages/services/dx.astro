@@ -9,7 +9,7 @@ import heroImage from '~/assets/images/hero-dx.png';
 
 const metadata = {
   title: 'ローカルDX・業務効率化サービス | 合同会社ぼんど',
-  description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で生産性を平均40%向上させます。',
+  description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で生産性向上を支援します。',
 };
 
 const breadcrumbs = [
@@ -69,33 +69,6 @@ const solutions = [
   },
 ];
 
-const benefits = [
-  {
-    title: '生産性向上',
-    value: '平均40%',
-    description: '業務時間削減',
-    icon: 'tabler:trending-up',
-  },
-  {
-    title: 'コスト削減',
-    value: '年間30%',
-    description: '人件費・運用費削減',
-    icon: 'tabler:coin',
-  },
-  {
-    title: 'ミス削減',
-    value: '90%減少',
-    description: '人的ミスの削減',
-    icon: 'tabler:check',
-  },
-  {
-    title: '働き方改革',
-    value: '満足度85%',
-    description: '従業員満足度向上',
-    icon: 'tabler:users',
-  },
-];
-
 const process = [
   {
     title: '現状分析',
@@ -126,33 +99,6 @@ const process = [
     title: '運用サポート',
     description: '導入後も継続的に改善',
     detail: '運用状況をモニタリングし、さらなる改善提案を行います。',
-  },
-];
-
-const cases = [
-  {
-    industry: '製造業',
-    company: 'A社（従業員50名）',
-    challenge: '受注から納品までの管理が紙ベースで、進捗把握が困難',
-    solution: 'クラウド型生産管理システムの導入とExcel業務の自動化',
-    result: '納期遅延が80%減少、残業時間30%削減',
-    icon: 'tabler:building-factory',
-  },
-  {
-    industry: '小売業',
-    company: 'B店（スタッフ15名）',
-    challenge: '在庫管理と売上分析に多大な時間がかかっていた',
-    solution: 'POSシステム連携とBIツールによる自動レポート作成',
-    result: '在庫管理時間90%削減、売上10%向上',
-    icon: 'tabler:shopping-cart',
-  },
-  {
-    industry: '医療・福祉',
-    company: 'C施設（職員30名）',
-    challenge: 'シフト管理と勤怠管理が複雑で、ミスが頻発',
-    solution: 'クラウド勤怠システムと自動シフト作成ツール導入',
-    result: '管理業務50%削減、シフトミスゼロ達成',
-    icon: 'tabler:heart',
   },
 ];
 
@@ -237,20 +183,6 @@ const faqs = [
           これらの「当たり前」を見直し、デジタル化することで、
           本来注力すべき業務に時間を使えるようになります。
         </p>
-      </div>
-
-      <!-- 効果・メリット -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-bond-border border border-bond-border mb-16">
-        {benefits.map((benefit) => (
-          <div class="bg-bond-surface dark:bg-gray-800 p-8 text-center group hover:bg-white transition-colors duration-300">
-            <div class="w-12 h-12 border border-bond-navy flex items-center justify-center mx-auto mb-4 group-hover:bg-bond-navy group-hover:text-white transition-colors duration-300">
-              <Icon name={benefit.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-white" />
-            </div>
-            <p class="text-3xl font-bold text-bond-navy dark:text-sky-400 mb-1 font-mono">{benefit.value}</p>
-            <p class="text-sm font-semibold text-bond-text-main dark:text-gray-300 mb-2 font-serif">{benefit.title}</p>
-            <p class="text-xs text-bond-text-sub dark:text-gray-400 leading-tight">{benefit.description}</p>
-          </div>
-        ))}
       </div>
     </div>
   </section>
