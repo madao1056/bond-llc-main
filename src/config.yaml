@@ -23,8 +23,6 @@ metadata:
         height: 628
     type: website
   twitter:
-    handle: '@bond_llc'
-    site: '@bond_llc'
     cardType: summary_large_image
 
 i18n:
