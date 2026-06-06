@@ -14,6 +14,26 @@
   ],
   "redirects": [
     {
+      "source": "/md-clipper-launch",
+      "destination": "/news/md-clipper-launch",
+      "permanent": true
+    },
+    {
+      "source": "/company-launch",
+      "destination": "/news/company-launch",
+      "permanent": true
+    },
+    {
+      "source": "/tsunagi-launch",
+      "destination": "/news/tsunagi-launch",
+      "permanent": true
+    },
+    {
+      "source": "/ai-work-with-claude-2026-06",
+      "destination": "/news/ai-work-with-claude-2026-06",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
