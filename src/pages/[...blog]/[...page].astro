@@ -24,7 +24,8 @@ const currentPage = page.currentPage ?? 1;
 // const allTags = await findTags();
 
 const metadata = {
-  title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  title: `コラム${currentPage > 1 ? ` — ${currentPage}ページ目` : ''} | 合同会社ぼんど`,
+  description: 'Web制作・AI活用・DXに関するコラムやお知らせを発信しています。',
   robots: {
     index: blogListRobots?.index && currentPage === 1,
     follow: blogListRobots?.follow,

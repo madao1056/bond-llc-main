@@ -40,6 +40,10 @@ export const headerData = {
       href: getPermalink('/works'),
     },
     {
+      text: 'コラム',
+      href: getBlogPermalink(),
+    },
+    {
       text: 'みやびと',
       href: 'https://miyabito.bond-llc.jp/',
     },
@@ -83,7 +87,7 @@ export const footerData = {
       links: [
         { text: '実績・事例', href: getPermalink('/works') },
         { text: 'みやびと', href: 'https://miyabito.bond-llc.jp/' },
-        { text: 'お知らせ', href: getBlogPermalink() },
+        { text: 'コラム・お知らせ', href: getBlogPermalink() },
       ],
     },
     {
