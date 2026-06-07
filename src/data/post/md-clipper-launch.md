@@ -2,6 +2,7 @@
 publishDate: 2026-05-18T00:00:00.000Z
 title: "WebページをワンクリックでMarkdown保存するChrome拡張「MD Clipper」を公開しました"
 excerpt: "気になったWebページをそのままMarkdownファイルとして保存できるChrome拡張「MD Clipper」をChrome Web Storeで公開しました。すべての処理はローカルで完結し、サーバーへのデータ送信は一切ありません。"
+image: "~/assets/images/md-clipper-icon.png"
 category: "お知らせ"
 tags:
   - お知らせ

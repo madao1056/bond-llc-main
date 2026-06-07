@@ -2,6 +2,7 @@
 publishDate: 2026-05-31T00:00:00.000Z
 title: "AIがあなたの文体で返信を書いてくれるChrome拡張「Tsunagi」をリリースしました"
 excerpt: "Chatwork・Slack・Gmail・Larkなど複数のビジネスチャット・メールに対応したAI返信アシスト Chrome拡張「Tsunagi」を正式リリースしました。あなたの文体を学習し、自分が書いたような返信を瞬時に提案します。"
+image: "~/assets/images/tsunagi-icon.png"
 category: "お知らせ"
 tags:
   - お知らせ
