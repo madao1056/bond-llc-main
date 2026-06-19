@@ -30,7 +30,10 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    sitemap(),
+    // 限定公開（noindex）記事はサイトマップからも除外する
+    sitemap({
+      filter: (page) => !page.includes('/news/farm-dx-aomori-2026-06'),
+    }),
     mdx(),
     icon({
       include: {

@@ -137,6 +137,12 @@ export const fetchPosts = async (): Promise<Array<Post>> => {
   return _posts;
 };
 
+/** 一覧・検索に載せる記事だけを返す。`metadata.robots.index: false` の記事は
+ * 限定公開（記事ページURLは生成されるが一覧/カテゴリ/タグ/関連/RSSからは除外）扱い。 */
+export const fetchListablePosts = async (): Promise<Array<Post>> => {
+  return (await fetchPosts()).filter((post) => post?.metadata?.robots?.index !== false);
+};
+
 /** */
 export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post>> => {
   if (!Array.isArray(slugs)) return [];
@@ -168,7 +174,7 @@ export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> =
 /** */
 export const findLatestPosts = async ({ count }: { count?: number }): Promise<Array<Post>> => {
   const _count = count || 4;
-  const posts = await fetchPosts();
+  const posts = await fetchListablePosts();
 
   return posts ? posts.slice(0, _count) : [];
 };
@@ -176,7 +182,7 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
+  return paginate(await fetchListablePosts(), {
     params: { blog: BLOG_BASE || undefined },
     pageSize: blogPostsPerPage,
   });
@@ -197,7 +203,7 @@ export const getStaticPathsBlogPost = async () => {
 export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogCategoryRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchListablePosts();
   const categories = {};
   posts.map((post) => {
     if (post.category?.slug) {
@@ -221,7 +227,7 @@ export const getStaticPathsBlogCategory = async ({ paginate }: { paginate: Pagin
 export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogTagRouteEnabled) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchListablePosts();
   const tags = {};
   posts.map((post) => {
     if (Array.isArray(post.tags)) {
@@ -245,7 +251,7 @@ export const getStaticPathsBlogTag = async ({ paginate }: { paginate: PaginateFu
 
 /** */
 export async function getRelatedPosts(originalPost: Post, maxResults: number = 4): Promise<Post[]> {
-  const allPosts = await fetchPosts();
+  const allPosts = await fetchListablePosts();
   const originalTagsSet = new Set(originalPost.tags ? originalPost.tags.map((tag) => tag.slug) : []);
 
   const postsWithScores = allPosts.reduce((acc: { post: Post; score: number }[], iteratedPost: Post) => {
