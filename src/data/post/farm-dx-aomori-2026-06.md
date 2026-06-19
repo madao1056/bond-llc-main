@@ -15,8 +15,8 @@ metadata:
   title: "リンゴ農家のDXに青森まで行ってきた話 | 合同会社ぼんど"
   description: "青森のリンゴ農家へDX支援の出張レポート。選果・在庫・仕入れ・販売のデータをどうつなぎ、属人的な判断を数字に変えるか。農業×DXで困っている人へ、現場のリアルと仕組み化の考え方を解説します。"
   robots:
-    index: false
-    follow: false
+    index: true
+    follow: true
 ---
 
 先日、青森のリンゴ農家さんのDX支援で、現地まで行ってきました。
