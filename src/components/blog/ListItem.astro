@@ -21,12 +21,9 @@ const image = (await findImage(post.image)) as ImageMetadata | undefined;
 const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : '';
 ---
 
-<article class="max-w-md mx-auto md:max-w-none intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+<article class="relative max-w-md mx-auto md:max-w-none group intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
   {link ? (
-    <a
-      href={link}
-      class={`grid gap-6 md:gap-8 group cursor-pointer ${image ? 'md:grid-cols-[30%_1fr]' : ''}`}
-    >
+    <div class={`grid gap-6 md:gap-8 ${image ? 'md:grid-cols-[30%_1fr]' : ''}`}>
       {image && (
         <div class="relative h-0 pb-[56.25%] md:pb-0 md:h-full md:min-h-[180px] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded shadow-lg">
           <Image
@@ -64,17 +61,17 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
             </span>
           </div>
           <h2 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading dark:text-slate-300 group-hover:text-primary dark:group-hover:text-blue-700 transition ease-in duration-200">
-            {post.title}
+            <a href={link} class="cursor-pointer after:absolute after:inset-0">{post.title}</a>
           </h2>
         </header>
-        {post.excerpt && <p class="flex-grow text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
+        {post.excerpt && <p class="text-muted dark:text-slate-400 text-lg">{post.excerpt}</p>}
         {post.tags && Array.isArray(post.tags) && (
-          <footer class="mt-5">
+          <footer class="relative z-10 mt-5">
             <PostTags tags={post.tags} />
           </footer>
         )}
       </div>
-    </a>
+    </div>
   ) : (
     <div class={`grid gap-6 md:gap-8 ${image ? 'md:grid-cols-[30%_1fr]' : ''}`}>
       {image && (
