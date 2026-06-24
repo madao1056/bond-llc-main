@@ -96,6 +96,7 @@ export const footerData = {
         { text: 'お問い合わせ', href: getPermalink('/contact') },
         { text: 'LINE公式アカウント', href: 'https://lin.ee/LYodITQO' },
         { text: 'よくある質問', href: getPermalink('/faq') },
+        { text: '制作パートナーをお探しの方｜enen', href: 'https://enen.website/contact/' },
       ],
     },
   ],
