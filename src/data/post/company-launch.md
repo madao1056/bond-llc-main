@@ -2,7 +2,7 @@
 publishDate: 2025-11-21T00:00:00.000Z
 title: "合同会社ぼんどを設立しました"
 excerpt: "2025年11月21日、宮崎を拠点とする合同会社ぼんどを設立いたしました。地域の事業者さまとお客さまをつなぐ、新しい価値創造に挑戦してまいります。"
-image: "~/assets/images/bond-launch.avif"
+image: "~/assets/images/bond-logo-thumb.png"
 category: "お知らせ"
 tags:
   - お知らせ
