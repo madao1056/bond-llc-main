@@ -1,0 +1,1791 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>診断リード獲得パッケージ 開発デモ｜合同会社ぼんど</title>
+<meta name="description" content="合同会社ぼんどが自社開発した診断型リード獲得ツールの開発デモ。採用力・AI活用度・バックオフィス効率化の3ジャンルを実際に体験できます。">
+<meta name="robots" content="noindex, nofollow">
+<style>
+  :root {
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --ink: #1C2433;
+    --sub: #46505E;
+    --muted: #7C8695;
+    --line: #E2E6EB;
+    --soft: #EEF0F3;
+    --header-bg: #FFFFFF;
+    --shadow: 0 2px 12px rgba(28, 36, 51, 0.06);
+    --accent: #2E5FD8;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12161D;
+      --surface: #1B212B;
+      --ink: #E9EDF3;
+      --sub: #B4BCC8;
+      --muted: #7E8794;
+      --line: #2A3240;
+      --soft: #232A36;
+      --header-bg: #1B212B;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F4F5F7;
+    --surface: #FFFFFF;
+    --ink: #1C2433;
+    --sub: #46505E;
+    --muted: #7C8695;
+    --line: #E2E6EB;
+    --soft: #EEF0F3;
+    --header-bg: #FFFFFF;
+    --shadow: 0 2px 12px rgba(28, 36, 51, 0.06);
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12161D;
+    --surface: #1B212B;
+    --ink: #E9EDF3;
+    --sub: #B4BCC8;
+    --muted: #7E8794;
+    --line: #2A3240;
+    --soft: #232A36;
+    --header-bg: #1B212B;
+    --shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Noto Sans JP", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ジャンル別アクセント（#app の data-genre で切替） */
+  #app[data-genre="recruit"]  { --accent: #2E5FD8; }
+  #app[data-genre="ai"]       { --accent: #7A44D6; }
+  #app[data-genre="backoffice"] { --accent: #0E8C7F; }
+
+  .demo-bar {
+    background: var(--ink);
+    color: var(--bg);
+    text-align: center;
+    font-size: 0.75rem;
+    padding: 7px 14px;
+    letter-spacing: 0.04em;
+  }
+
+  header.site-header {
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 20px;
+  }
+
+  .header-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .header-sub {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+
+  main.wide { max-width: 920px; }
+
+  .screen { display: none; animation: fadeIn 0.35s ease; }
+  .screen.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screen { animation: none; }
+    .bar-fill, .progress-fill { transition: none !important; }
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 32px 28px;
+  }
+
+  @media (max-width: 768px) {
+    .card { padding: 24px 18px; border-radius: 10px; }
+    main { padding: 20px 14px 48px; }
+  }
+
+  /* ---------- ランディング ---------- */
+  .landing-head { text-align: center; margin-bottom: 30px; }
+
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .landing-head h1 {
+    font-size: 1.7rem;
+    line-height: 1.45;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+
+  .landing-head .lead {
+    color: var(--sub);
+    font-size: 0.95rem;
+    max-width: 34em;
+    margin: 0 auto;
+  }
+
+  .flow-strip {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 26px 0 36px;
+  }
+
+  .flow-step {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    color: var(--sub);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .flow-step .step-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+
+  .flow-arrow { color: var(--muted); font-size: 0.85rem; align-self: center; }
+
+  .genre-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .genre-grid { grid-template-columns: 1fr; }
+  }
+
+  .genre-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--ink);
+    transition: border-color 0.15s ease, transform 0.12s ease;
+  }
+
+  .genre-card:hover { border-color: var(--g-accent); transform: translateY(-2px); }
+
+  .genre-mark {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--g-accent) 14%, transparent);
+    color: var(--g-accent);
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .genre-card h2 { font-size: 1.08rem; margin: 0; line-height: 1.5; }
+
+  .genre-card .genre-desc {
+    font-size: 0.85rem;
+    color: var(--sub);
+    margin: 0;
+    flex: 1;
+  }
+
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .chip {
+    font-size: 0.72rem;
+    color: var(--sub);
+    background: var(--soft);
+    border-radius: 999px;
+    padding: 3px 10px;
+  }
+
+  .genre-cta {
+    margin-top: 4px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--g-accent);
+  }
+
+  .landing-note {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 30px;
+  }
+
+  /* ---------- 診断イントロ ---------- */
+  .intro-genre-tag {
+    display: inline-block;
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  #screen-intro h1 {
+    font-size: 1.55rem;
+    margin: 0 0 12px;
+    line-height: 1.5;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  #screen-intro .intro-head { text-align: center; }
+
+  #screen-intro .lead {
+    color: var(--sub);
+    font-size: 0.93rem;
+    text-align: center;
+    margin: 0 0 26px;
+  }
+
+  .start-meta {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .meta-item {
+    background: var(--soft);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+    flex: 1 1 130px;
+    min-width: 110px;
+  }
+
+  .meta-item .meta-label { font-size: 0.78rem; color: var(--muted); }
+  .meta-item .meta-value { font-size: 0.95rem; font-weight: 700; margin-top: 2px; }
+
+  .btn-primary {
+    display: block;
+    width: 100%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 15px 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+  }
+
+  .btn-primary:hover { opacity: 0.9; }
+  .btn-primary:active { transform: scale(0.99); }
+
+  .btn-ghost {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: var(--sub);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 13px 24px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 12px;
+    transition: background 0.15s ease;
+  }
+
+  .btn-ghost:hover { background: var(--soft); }
+
+  /* ---------- 質問 ---------- */
+  .progress-wrap { margin-bottom: 24px; }
+
+  .progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .progress-track {
+    background: var(--soft);
+    border-radius: 999px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    background: var(--accent);
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+
+  .category-tag {
+    display: inline-block;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  .question-text {
+    font-size: 1.12rem;
+    font-weight: 700;
+    margin: 0 0 22px;
+    line-height: 1.6;
+  }
+
+  .options { display: flex; flex-direction: column; gap: 10px; }
+
+  .option-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--soft);
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 15px 17px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .option-btn:hover,
+  .option-btn.selected {
+    border-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  }
+
+  .option-letter {
+    flex: 0 0 auto;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.78rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 22px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    padding: 0;
+  }
+
+  .back-link:hover { color: var(--accent); }
+
+  /* ---------- リードフォーム ---------- */
+  #screen-form h2 { font-size: 1.3rem; margin: 0 0 6px; text-align: center; }
+
+  #screen-form .form-lead {
+    color: var(--sub);
+    font-size: 0.92rem;
+    text-align: center;
+    margin: 0 0 22px;
+  }
+
+  .teaser-box {
+    background: var(--soft);
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .teaser-box .teaser-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 8px; }
+
+  .teaser-box .teaser-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    filter: blur(5px);
+    user-select: none;
+  }
+
+  .form-group { margin-bottom: 16px; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--sub);
+    margin-bottom: 6px;
+  }
+
+  .required {
+    color: #C43D3D;
+    margin-left: 4px;
+    font-size: 0.75rem;
+  }
+
+  .form-group input {
+    width: 100%;
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 12px 14px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .form-group input:focus { outline: none; border-color: var(--accent); }
+  .form-group input.error { border-color: #C43D3D; }
+
+  .field-error {
+    color: #C43D3D;
+    font-size: 0.78rem;
+    margin-top: 5px;
+    display: none;
+  }
+
+  .field-error.show { display: block; }
+
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 20px 0 4px;
+  }
+
+  .checkbox-group input {
+    margin-top: 4px;
+    width: 18px; height: 18px;
+    flex: 0 0 auto;
+    accent-color: var(--accent);
+  }
+
+  .checkbox-group label { font-size: 0.85rem; color: var(--sub); }
+
+  .form-actions { margin-top: 18px; }
+
+  .sample-fill {
+    display: block;
+    margin: 14px auto 0;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 0.82rem;
+    color: var(--accent);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .demo-note {
+    margin-top: 18px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: var(--soft);
+    border-radius: 8px;
+    padding: 12px 14px;
+    line-height: 1.6;
+  }
+
+  .loading-overlay {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 40px 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .loading-overlay.active { display: flex; }
+
+  .spinner {
+    width: 18px; height: 18px;
+    border: 3px solid var(--soft);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- 結果 ---------- */
+  .result-header { text-align: center; margin-bottom: 28px; }
+  .result-label { font-size: 0.85rem; color: var(--muted); }
+
+  .result-score {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 8px 0 2px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .result-score .score-unit { font-size: 1.05rem; color: var(--muted); font-weight: 500; }
+
+  .result-type {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 8px 22px;
+    border-radius: 999px;
+    margin-top: 10px;
+  }
+
+  .section-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin: 30px 0 16px;
+  }
+
+  .bar-row { margin-bottom: 16px; }
+
+  .bar-row-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--sub);
+    margin-bottom: 6px;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar-track {
+    background: var(--soft);
+    border-radius: 999px;
+    height: 14px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent);
+    width: 0%;
+    transition: width 1s ease 0.15s;
+  }
+
+  .commentary {
+    background: var(--soft);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-size: 0.92rem;
+    color: var(--sub);
+  }
+
+  .action-list { margin: 0; padding: 0; list-style: none; }
+
+  .action-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.92rem;
+    color: var(--sub);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .action-list li:last-child { border-bottom: none; }
+
+  .action-list .num {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+  }
+
+  .cta-box {
+    margin-top: 34px;
+    background: var(--ink);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+
+  .cta-box p {
+    color: var(--bg);
+    font-size: 0.98rem;
+    font-weight: 500;
+    margin: 0 0 20px;
+    line-height: 1.7;
+  }
+
+  .cta-box .btn-outline {
+    display: block;
+    width: 100%;
+    background: transparent;
+    color: var(--bg);
+    border: 1.5px solid color-mix(in srgb, var(--bg) 50%, transparent);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 13px 24px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.15s ease;
+  }
+
+  .cta-box .btn-outline:hover { background: color-mix(in srgb, var(--bg) 10%, transparent); }
+
+  footer.site-footer {
+    text-align: center;
+    padding: 24px 20px 40px;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  /* ---------- トースト ---------- */
+  #toast {
+    position: fixed;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%) translateY(12px);
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.85rem;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    max-width: min(90vw, 420px);
+    text-align: center;
+  }
+
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+
+<div id="app">
+  <div class="demo-bar">合同会社ぼんど 開発デモ — 設問・デザイン・保存先はお客さま仕様にカスタマイズできます</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <span class="logo">診断リード獲得パッケージ</span>
+      <span class="header-sub">デモショーケース（3ジャンル）</span>
+    </div>
+  </header>
+
+  <!-- 0. ランディング（ジャンル選択） -->
+  <main class="wide screen active" id="screen-landing">
+    <div class="landing-head">
+      <span class="eyebrow">Demo Showcase</span>
+      <h1>サイト訪問者を、<br>見込み客リストに変える。</h1>
+      <p class="lead">3分の無料診断をサイトに設置。結果を見る手前で連絡先を入力してもらい、ホットリードとして自動蓄積します。同じ仕組みで、テーマは自由に差し替え可能です。</p>
+    </div>
+
+    <div class="flow-strip" role="list">
+      <div class="flow-step" role="listitem"><span class="step-num">1</span>訪問者が3分診断に回答</div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="flow-step" role="listitem"><span class="step-num">2</span>結果の手前で連絡先を入力</div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="flow-step" role="listitem"><span class="step-num">3</span>リードがLark Base等へ自動保存</div>
+    </div>
+
+    <div class="genre-grid" id="genre-grid"></div>
+
+    <p class="landing-note">3つとも同じ診断エンジンで動いています。設問とデザインの差し替えだけで、貴社のテーマに合わせた診断を短期間で公開できます。</p>
+  </main>
+
+  <main id="main-diagnosis" hidden>
+
+    <!-- 1. イントロ -->
+    <section id="screen-intro" class="screen">
+      <div class="card">
+        <div class="intro-head">
+          <span class="intro-genre-tag" id="intro-tag"></span>
+          <h1 id="intro-title"></h1>
+          <p class="lead" id="intro-lead"></p>
+        </div>
+
+        <div class="start-meta">
+          <div class="meta-item">
+            <div class="meta-label">所要時間</div>
+            <div class="meta-value">約3分</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">質問数</div>
+            <div class="meta-value">全10問</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">料金</div>
+            <div class="meta-value">無料</div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-primary" id="btn-start">診断をはじめる</button>
+        <button type="button" class="btn-ghost js-back-landing">← 他の診断を見る</button>
+      </div>
+    </section>
+
+    <!-- 2. 質問 -->
+    <section id="screen-question" class="screen">
+      <div class="card">
+        <div class="progress-wrap">
+          <div class="progress-labels">
+            <span id="progress-count">1 / 10</span>
+            <span id="progress-percent">10%</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <span class="category-tag" id="question-category"></span>
+        <p class="question-text" id="question-text"></p>
+
+        <div class="options" id="question-options"></div>
+
+        <button type="button" class="back-link" id="btn-back" style="display:none;">← 前の質問に戻る</button>
+      </div>
+    </section>
+
+    <!-- 3. リード獲得フォーム -->
+    <section id="screen-form" class="screen">
+      <div class="card">
+        <h2>診断が完了しました！</h2>
+        <p class="form-lead">結果レポートを表示するには、以下をご入力ください。</p>
+
+        <div class="teaser-box">
+          <div class="teaser-label" id="teaser-label"></div>
+          <div class="teaser-value">【入力後に表示されます】</div>
+        </div>
+
+        <form id="lead-form" novalidate>
+          <div class="form-group">
+            <label for="f-company">会社名<span class="required">必須</span></label>
+            <input type="text" id="f-company" name="company" autocomplete="organization">
+            <div class="field-error" id="err-company">会社名を入力してください。</div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-name">お名前<span class="required">必須</span></label>
+            <input type="text" id="f-name" name="name" autocomplete="name">
+            <div class="field-error" id="err-name">お名前を入力してください。</div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-email">メールアドレス<span class="required">必須</span></label>
+            <input type="email" id="f-email" name="email" autocomplete="email">
+            <div class="field-error" id="err-email">正しいメールアドレスを入力してください。</div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-tel">電話番号（任意）</label>
+            <input type="tel" id="f-tel" name="tel" autocomplete="tel">
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="f-agree" name="agree">
+            <label for="f-agree">個人情報の取り扱いに同意する<span class="required">必須</span></label>
+          </div>
+          <div class="field-error" id="err-agree">個人情報の取り扱いへの同意が必要です。</div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary" id="btn-submit">診断結果を見る</button>
+            <button type="button" class="sample-fill" id="btn-sample">デモ用サンプルデータで自動入力</button>
+          </div>
+
+          <div class="demo-note">
+            デモ環境のため、送信されたデータはどこにも保存されません。<br>
+            実運用では、回答スコア・タイプ・連絡先が Lark Base などの管理表へ自動でリスト化されます。
+          </div>
+
+          <div class="loading-overlay" id="loading-overlay">
+            <span class="spinner"></span>
+            <span>結果を集計しています…</span>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- 4. 結果 -->
+    <section id="screen-result" class="screen">
+      <div class="card">
+        <div class="result-header">
+          <div class="result-label" id="result-label"></div>
+          <div class="result-score"><span id="result-score-num">0</span><span class="score-unit"> / 100点</span></div>
+          <div class="result-type" id="result-type"></div>
+        </div>
+
+        <div class="section-title">カテゴリ別スコア</div>
+        <div id="bar-chart"></div>
+
+        <div class="section-title">総評</div>
+        <div class="commentary" id="result-commentary"></div>
+
+        <div class="section-title">次の一手</div>
+        <ul class="action-list" id="action-list"></ul>
+
+        <div class="cta-box">
+          <p id="cta-text"></p>
+          <button type="button" class="btn-primary" id="btn-cta">無料相談を予約する</button>
+          <button type="button" class="btn-outline js-back-landing">他のジャンルの診断を試す</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    このページは合同会社ぼんどの開発デモです。診断結果は簡易的な目安であり、導入時にはお客さまの業種・課題に合わせて設問を設計します。<br><a href="/works" style="color: inherit;">← 実績・事例ページへ戻る</a>
+  </footer>
+</div>
+
+<div id="toast" role="status"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  // =================================================================
+  // ジャンル定義: エンジンは共通。ここを差し替えるだけで別テーマになる。
+  // =================================================================
+  var GENRES = {
+    recruit: {
+      key: 'recruit',
+      icon: '🤝',
+      tag: '採用・人材',
+      title: '採用力診断',
+      introTitle: '3分でわかる採用力診断',
+      lead: '10個の質問に答えるだけで、貴社の採用の現在地と次の一手がわかります。',
+      cardDesc: '「求人を出しても集まらない」の原因を、戦略・母集団・選考・定着・発信の5つに分解して可視化。',
+      teaserLabel: '貴社の採用力タイプは…',
+      resultLabel: '貴社の採用力スコア',
+      ctaText: 'この結果をもとに、貴社の採用課題に合わせた改善プランを無料相談でご提案します。',
+      categories: ['採用戦略', '母集団形成', '選考プロセス', '定着・受け入れ', '採用ブランディング'],
+      questions: [
+        {
+          category: '採用戦略',
+          text: '採用計画は事業計画と連動していますか？',
+          options: [
+            { text: '年間の採用計画があり、事業計画と連動している', score: 3 },
+            { text: '大まかな採用人数は決めている', score: 2 },
+            { text: '欠員が出てから動くことが多い', score: 1 },
+            { text: '特に計画はない', score: 0 }
+          ]
+        },
+        {
+          category: '採用戦略',
+          text: '「どんな人に来てほしいか」（求める人物像）は明確ですか？',
+          options: [
+            { text: '職種ごとに言語化され、社内で共有されている', score: 3 },
+            { text: '経営者・採用担当の頭の中では明確', score: 2 },
+            { text: '面接のたびに基準が変わりがち', score: 1 },
+            { text: '特に決めていない', score: 0 }
+          ]
+        },
+        {
+          category: '母集団形成',
+          text: '求人への応募数は足りていますか？',
+          options: [
+            { text: '安定して十分な応募がある', score: 3 },
+            { text: '職種によっては集まる', score: 2 },
+            { text: 'ほとんど集まらない', score: 1 },
+            { text: '応募ゼロが続いている', score: 0 }
+          ]
+        },
+        {
+          category: '母集団形成',
+          text: '求人媒体・チャネルごとの効果を測っていますか？',
+          options: [
+            { text: '媒体ごとの応募数・採用単価を把握している', score: 3 },
+            { text: 'ざっくりとは把握している', score: 2 },
+            { text: '感覚で媒体を選んでいる', score: 1 },
+            { text: '測っていない', score: 0 }
+          ]
+        },
+        {
+          category: '選考プロセス',
+          text: '応募から面接日程の連絡までのスピードは？',
+          options: [
+            { text: '即日〜翌日には連絡している', score: 3 },
+            { text: '2〜3日以内', score: 2 },
+            { text: '1週間くらいかかることがある', score: 1 },
+            { text: '決まっていない・遅れがち', score: 0 }
+          ]
+        },
+        {
+          category: '選考プロセス',
+          text: '選考基準は面接官の間で揃っていますか？',
+          options: [
+            { text: '評価シートがあり、基準が統一されている', score: 3 },
+            { text: 'ある程度は共有されている', score: 2 },
+            { text: '面接官それぞれの主観に任せている', score: 1 },
+            { text: '特に決まっていない', score: 0 }
+          ]
+        },
+        {
+          category: '定着・受け入れ',
+          text: '入社後の受け入れ体制（オンボーディング）は？',
+          options: [
+            { text: '育成計画とフォロー面談を仕組み化している', score: 3 },
+            { text: '現場でOJTを実施している', score: 2 },
+            { text: '配属先に任せている', score: 1 },
+            { text: '特に何もしていない', score: 0 }
+          ]
+        },
+        {
+          category: '定着・受け入れ',
+          text: '入社1年以内の離職はどの程度ありますか？',
+          options: [
+            { text: 'ほとんどない', score: 3 },
+            { text: 'たまにある', score: 2 },
+            { text: '3人に1人は辞めてしまう', score: 1 },
+            { text: '半数以上が辞めてしまう', score: 0 }
+          ]
+        },
+        {
+          category: '採用ブランディング',
+          text: '会社の魅力を伝える情報発信（SNS・採用サイト等）は？',
+          options: [
+            { text: '定期的に発信し、応募につながっている', score: 3 },
+            { text: '採用ページはあるが更新は不定期', score: 2 },
+            { text: '求人票以外の発信はしていない', score: 1 },
+            { text: '何もしていない', score: 0 }
+          ]
+        },
+        {
+          category: '採用ブランディング',
+          text: '働く社員の声（インタビュー・口コミ）を採用に活かしていますか？',
+          options: [
+            { text: '社員インタビュー等を公開している', score: 3 },
+            { text: '面接の場で口頭で伝えている', score: 2 },
+            { text: '特に集めていない', score: 1 },
+            { text: '口コミサイトの評価が気になるが手つかず', score: 0 }
+          ]
+        }
+      ],
+      types: [
+        {
+          min: 0, max: 30, name: '採用基盤づくり期',
+          desc: 'まずは採用の土台を整える段階です。求人を出す前に「誰に・何を・どう伝えるか」を固めることで、同じ求人費でも成果が大きく変わります。焦って媒体を増やすより、基盤づくりが先決です。',
+          actions: [
+            '求める人物像を1職種ぶんだけでも言語化し、求人票に反映する',
+            '{lowCategory}の現状を数字で把握することから始める',
+            '応募者への連絡スピードを「即日〜翌日」に決めて運用する'
+          ]
+        },
+        {
+          min: 31, max: 55, name: '採用改善期',
+          desc: '採用活動は回っているものの、勘と経験に頼っている部分が多い段階です。応募数・面接率・定着率などの数字を可視化し、ボトルネックを特定することで改善が加速します。',
+          actions: [
+            '{lowCategory}を最優先の改善テーマに設定する',
+            '媒体ごとの応募数と採用単価を月次で記録し、費用対効果を比較する',
+            '面接の評価項目を統一し、選考基準のブレをなくす'
+          ]
+        },
+        {
+          min: 56, max: 80, name: '採用強化期',
+          desc: '採用の仕組みが一定レベルで機能している段階です。ここからは「選ばれる会社」になるための発信強化と、入社後の定着・活躍までを含めた採用体験の質を高めることが次のテーマです。',
+          actions: [
+            '{lowCategory}を底上げし、5カテゴリのバランスを整える',
+            '社員インタビューなど「働く姿が見える」コンテンツを増やす',
+            'オンボーディングの振り返り面談を定例化し、早期離職の芽を摘む'
+          ]
+        },
+        {
+          min: 81, max: 100, name: '採用先進期',
+          desc: '採用力が競争優位になっている段階です。多くの企業が目標とする水準に到達しています。この強みを維持しつつ、採用ノウハウの発信やリファラル採用の強化で、さらに採用コストを下げる余地があります。',
+          actions: [
+            '{lowCategory}も含め全カテゴリで高水準を維持する体制を築く',
+            '社員からの紹介（リファラル採用）の仕組みを整え、採用単価を下げる',
+            '採用の知見を発信し、業界内での認知とブランド力を高める'
+          ]
+        }
+      ]
+    },
+
+    ai: {
+      key: 'ai',
+      icon: '🤖',
+      tag: 'AI活用',
+      title: 'AI活用度診断',
+      introTitle: '3分でわかるAI活用度診断',
+      lead: '10個の質問に答えるだけで、貴社のAI活用の現在地と次の一手がわかります。',
+      cardDesc: '「AIを使いたいが何から始めれば…」を、方針・活用・データ・人材・ルールの5つに分解して可視化。',
+      teaserLabel: '貴社のAI活用タイプは…',
+      resultLabel: '貴社のAI活用度スコア',
+      ctaText: 'この結果をもとに、明日から使えるAI活用の始め方を無料相談でご提案します。',
+      categories: ['経営・方針', '日常業務での活用', 'データ・ナレッジ整備', '人材・リテラシー', 'セキュリティ・ルール'],
+      questions: [
+        {
+          category: '経営・方針',
+          text: 'AI活用について、会社としての方針はありますか？',
+          options: [
+            { text: '方針を明文化し、推進役も決まっている', score: 3 },
+            { text: '経営層が活用を推奨している', score: 2 },
+            { text: '個人の判断に任せている', score: 1 },
+            { text: '特に考えていない', score: 0 }
+          ]
+        },
+        {
+          category: '経営・方針',
+          text: 'AIで効率化したい業務は特定できていますか？',
+          options: [
+            { text: '業務を棚卸しし、優先順位まで決めている', score: 3 },
+            { text: 'いくつか候補はある', score: 2 },
+            { text: '漠然と「何かに使えそう」と思っている', score: 1 },
+            { text: '正直わからない', score: 0 }
+          ]
+        },
+        {
+          category: '日常業務での活用',
+          text: 'ChatGPT等の生成AIを業務で使っていますか？',
+          options: [
+            { text: '業務フローに組み込んで毎日使っている', score: 3 },
+            { text: '一部の社員が日常的に使っている', score: 2 },
+            { text: '試したことがある程度', score: 1 },
+            { text: '使っていない', score: 0 }
+          ]
+        },
+        {
+          category: '日常業務での活用',
+          text: '文章作成・要約・アイデア出しをAIに任せる割合は？',
+          options: [
+            { text: '半分以上はAIが下書きしている', score: 3 },
+            { text: 'たまに任せている', score: 2 },
+            { text: 'ほぼ自分で書いている', score: 1 },
+            { text: 'すべて手作業', score: 0 }
+          ]
+        },
+        {
+          category: 'データ・ナレッジ整備',
+          text: '社内の情報（マニュアル・議事録・ノウハウ）は整理されていますか？',
+          options: [
+            { text: '検索すればすぐ見つかる状態', score: 3 },
+            { text: '保存場所は決まっているが散らばり気味', score: 2 },
+            { text: '個人のPCや頭の中にある', score: 1 },
+            { text: 'ほぼ文書化されていない', score: 0 }
+          ]
+        },
+        {
+          category: 'データ・ナレッジ整備',
+          text: '業務情報はAIに読み込ませられる形（デジタルデータ）で残っていますか？',
+          options: [
+            { text: 'ほぼデジタルで一元管理されている', score: 3 },
+            { text: '半分くらいはデジタル化されている', score: 2 },
+            { text: '紙とデジタルが混在している', score: 1 },
+            { text: '紙が中心', score: 0 }
+          ]
+        },
+        {
+          category: '人材・リテラシー',
+          text: '社内にAIツールを使いこなせる人はいますか？',
+          options: [
+            { text: '推進役がいて、社内に使い方を広めている', score: 3 },
+            { text: '数名は使いこなしている', score: 2 },
+            { text: '1人いるかいないか', score: 1 },
+            { text: 'いない', score: 0 }
+          ]
+        },
+        {
+          category: '人材・リテラシー',
+          text: 'AIを学ぶ機会（研修・勉強会）はありますか？',
+          options: [
+            { text: '定期的に実施している', score: 3 },
+            { text: '不定期に実施している', score: 2 },
+            { text: '個人の自主性に任せている', score: 1 },
+            { text: '特にない', score: 0 }
+          ]
+        },
+        {
+          category: 'セキュリティ・ルール',
+          text: 'AI利用のルール（入力してよい情報の線引き等）はありますか？',
+          options: [
+            { text: 'ガイドラインを整備し、社内に周知している', score: 3 },
+            { text: '口頭で注意喚起している', score: 2 },
+            { text: 'ないが、気にはなっている', score: 1 },
+            { text: '考えたことがない', score: 0 }
+          ]
+        },
+        {
+          category: 'セキュリティ・ルール',
+          text: '顧客情報・機密情報の管理ルールは明確ですか？',
+          options: [
+            { text: '規程があり、運用も徹底されている', score: 3 },
+            { text: '規程はあるが運用が曖昧', score: 2 },
+            { text: '暗黙の了解で回っている', score: 1 },
+            { text: '明確ではない', score: 0 }
+          ]
+        }
+      ],
+      types: [
+        {
+          min: 0, max: 30, name: 'AI未着手期',
+          desc: 'これからAI活用を始める段階です。実は一番伸びしろが大きいのがこの段階。難しく考えず、身近な業務ひとつをAIに任せてみることが最初の一歩です。小さな成功体験が社内の空気を変えます。',
+          actions: [
+            '毎日発生する文章業務（メール・報告書等）をひとつ選び、AIに下書きさせてみる',
+            '{lowCategory}について、現状を紙に書き出して整理する',
+            '「入力してはいけない情報」だけ先に決めて、安心して試せる環境をつくる'
+          ]
+        },
+        {
+          min: 31, max: 55, name: 'AI試行期',
+          desc: '一部でAIを試し始めている段階です。個人の工夫にとどまっており、会社の仕組みにはなっていません。うまく使えている人のやり方を社内に広げ、「全員が使える状態」を目指すのが次の課題です。',
+          actions: [
+            '{lowCategory}の底上げを最優先テーマに設定する',
+            '社内でうまく使えている人のプロンプトや使い方を共有会で横展開する',
+            'AI利用ガイドラインを1枚にまとめ、全員が安心して使える線引きをつくる'
+          ]
+        },
+        {
+          min: 56, max: 80, name: 'AI活用期',
+          desc: '組織的なAI活用が進んでいる段階です。ここからは「個人の効率化」から「業務フローへの組み込み」へステップアップし、AIが前提の仕事の流れを設計することで効果が一段と大きくなります。',
+          actions: [
+            '{lowCategory}を強化し、活用の土台を厚くする',
+            '定型業務のフローにAIを組み込み、「人がやる部分」を明確にする',
+            '社内ナレッジをAIが参照できる形に整備し、問い合わせ対応を効率化する'
+          ]
+        },
+        {
+          min: 81, max: 100, name: 'AI浸透期',
+          desc: 'AIが日常業務に溶け込んでいる段階です。多くの企業にとって目標となる水準に到達しています。この強みを競争力に変え、業務効率化の先にある新しいサービスや価値づくりへ進む余地があります。',
+          actions: [
+            '{lowCategory}も含め、全カテゴリで高水準を維持する仕組みを整える',
+            'AI活用の知見を発信し、採用力・ブランド力の向上につなげる',
+            'AIを前提にした新サービス・新しい顧客体験の企画を検討する'
+          ]
+        }
+      ]
+    },
+
+    backoffice: {
+      key: 'backoffice',
+      icon: '📊',
+      tag: '業務効率化',
+      title: 'バックオフィス効率化診断',
+      introTitle: '3分でわかるバックオフィス効率化診断',
+      lead: '10個の質問に答えるだけで、貴社の事務業務のムダと改善ポイントがわかります。',
+      cardDesc: '経理・労務・書類・情報共有・ツール連携の5つの視点で、事務作業に埋もれた時間を可視化。',
+      teaserLabel: '貴社の業務効率タイプは…',
+      resultLabel: '貴社の業務効率スコア',
+      ctaText: 'この結果をもとに、貴社の事務業務を何時間削減できるか、無料相談で試算します。',
+      categories: ['経理・請求', '勤怠・労務', '契約・書類管理', '情報共有', 'ツール連携・自動化'],
+      questions: [
+        {
+          category: '経理・請求',
+          text: '請求書の発行・受け取りはどのように処理していますか？',
+          options: [
+            { text: 'クラウドで発行・受領まで自動処理', score: 3 },
+            { text: '一部はクラウド化している', score: 2 },
+            { text: 'Excelで作成してメール送付', score: 1 },
+            { text: '紙・手書きが中心', score: 0 }
+          ]
+        },
+        {
+          category: '経理・請求',
+          text: '毎月の経理処理（記帳・仕訳）にかかる負担は？',
+          options: [
+            { text: '自動連携でほぼ手間なし', score: 3 },
+            { text: '月に数時間程度', score: 2 },
+            { text: '毎月数日かかっている', score: 1 },
+            { text: 'いつも締め切りに追われている', score: 0 }
+          ]
+        },
+        {
+          category: '勤怠・労務',
+          text: '勤怠管理の方法は？',
+          options: [
+            { text: 'クラウド勤怠で自動集計', score: 3 },
+            { text: 'タイムカード＋Excel集計', score: 2 },
+            { text: '紙の出勤簿', score: 1 },
+            { text: '正確に把握できていない', score: 0 }
+          ]
+        },
+        {
+          category: '勤怠・労務',
+          text: '給与計算・年末調整などの労務処理は？',
+          options: [
+            { text: 'システムでほぼ自動化している', score: 3 },
+            { text: '外部に委託している', score: 2 },
+            { text: '担当者が手作業で対応', score: 1 },
+            { text: '経営者が自ら手作業で対応', score: 0 }
+          ]
+        },
+        {
+          category: '契約・書類管理',
+          text: '契約書の締結・保管方法は？',
+          options: [
+            { text: '電子契約で締結し、クラウドで保管', score: 3 },
+            { text: '紙とデータが混在している', score: 2 },
+            { text: '紙で締結し、ファイルで保管', score: 1 },
+            { text: 'どこにあるか分からない書類がある', score: 0 }
+          ]
+        },
+        {
+          category: '契約・書類管理',
+          text: '社内の申請・承認（稟議・経費精算等）は？',
+          options: [
+            { text: 'ワークフローシステムで完結', score: 3 },
+            { text: 'チャットやメールで承認している', score: 2 },
+            { text: '紙の申請書に押印', score: 1 },
+            { text: '明確なルールがない', score: 0 }
+          ]
+        },
+        {
+          category: '情報共有',
+          text: '社内連絡の主な手段は？',
+          options: [
+            { text: 'ビジネスチャットで全社が日常的にやり取り', score: 3 },
+            { text: '一部の部門でチャットを活用', score: 2 },
+            { text: 'メール・電話が中心', score: 1 },
+            { text: '口頭・紙の回覧が中心', score: 0 }
+          ]
+        },
+        {
+          category: '情報共有',
+          text: '業務の進捗やタスクは見える化されていますか？',
+          options: [
+            { text: 'ツールで全員の状況が見える', score: 3 },
+            { text: '定例会議で共有している', score: 2 },
+            { text: '担当者に聞かないと分からない', score: 1 },
+            { text: '把握できていない', score: 0 }
+          ]
+        },
+        {
+          category: 'ツール連携・自動化',
+          text: '使っているツール同士のデータ連携は？',
+          options: [
+            { text: 'API等で自動連携している', score: 3 },
+            { text: 'CSVの書き出し・取り込みで連携', score: 2 },
+            { text: 'それぞれ独立していて手入力', score: 1 },
+            { text: '連携という発想がなかった', score: 0 }
+          ]
+        },
+        {
+          category: 'ツール連携・自動化',
+          text: '同じ情報を複数の場所に入力し直す作業（二重入力）は？',
+          options: [
+            { text: 'ほぼない', score: 3 },
+            { text: 'たまにある', score: 2 },
+            { text: '日常的にある', score: 1 },
+            { text: 'ほとんどの業務で発生している', score: 0 }
+          ]
+        }
+      ],
+      types: [
+        {
+          min: 0, max: 30, name: '手作業中心期',
+          desc: '事務業務の多くが手作業に頼っている段階です。裏を返せば、改善の効果が最も出やすい状態です。全部を一度に変える必要はありません。負担の大きい業務ひとつのデジタル化から始めましょう。',
+          actions: [
+            '毎月最も時間を取られている事務作業を1つ特定する',
+            '{lowCategory}から着手し、小さな成功体験をつくる',
+            '無料〜低コストのクラウドツールをまず1つ試験導入する'
+          ]
+        },
+        {
+          min: 31, max: 55, name: '部分効率化期',
+          desc: 'ツール導入が部分的に進んでいる段階です。ただしツール同士がつながっておらず、二重入力や転記作業が残りがちです。個別最適から全体最適へ視点を切り替えることが次の課題です。',
+          actions: [
+            '{lowCategory}のムダを洗い出し、優先的に改善する',
+            '二重入力が発生している業務をリストアップし、連携で解消する',
+            '紙が残っている業務のデジタル化を計画に落とし込む'
+          ]
+        },
+        {
+          min: 56, max: 80, name: '仕組み化期',
+          desc: '業務の仕組み化が進んでいる段階です。ここからはツール間の自動連携やAI活用で「人がやらなくていい仕事」をさらに減らし、空いた時間を売上に直結する業務へ振り向けるフェーズです。',
+          actions: [
+            '{lowCategory}を底上げし、業務全体のボトルネックを解消する',
+            'ツール間のデータ連携を自動化し、転記・チェック作業をなくす',
+            '削減できた時間を営業・企画など付加価値業務へ再配分する'
+          ]
+        },
+        {
+          min: 81, max: 100, name: '自動化成熟期',
+          desc: 'バックオフィスが高度に自動化されている段階です。多くの企業が目標とする水準に到達しています。この効率性を武器に、データを経営判断へ活かす攻めのバックオフィスへ進化する余地があります。',
+          actions: [
+            '{lowCategory}も含め、全カテゴリで高水準を維持する体制を整える',
+            '蓄積されたデータをダッシュボード化し、経営判断のスピードを上げる',
+            '自社の効率化ノウハウを型化し、社内の他部門・グループへ展開する'
+          ]
+        }
+      ]
+    }
+  };
+
+  var GENRE_ORDER = ['recruit', 'ai', 'backoffice'];
+  var GENRE_ACCENTS = { recruit: '#2E5FD8', ai: '#7A44D6', backoffice: '#0E8C7F' };
+
+  // =================================================================
+  // 状態
+  // =================================================================
+  var state = {
+    genre: null,   // GENRES のいずれか
+    current: 0,
+    answers: []
+  };
+
+  var app = document.getElementById('app');
+  var landing = document.getElementById('screen-landing');
+  var mainDiag = document.getElementById('main-diagnosis');
+
+  var screens = {
+    intro: document.getElementById('screen-intro'),
+    question: document.getElementById('screen-question'),
+    form: document.getElementById('screen-form'),
+    result: document.getElementById('screen-result')
+  };
+
+  function showLanding() {
+    app.removeAttribute('data-genre');
+    landing.classList.add('active');
+    mainDiag.hidden = true;
+    Object.keys(screens).forEach(function (key) {
+      screens[key].classList.remove('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showScreen(name) {
+    landing.classList.remove('active');
+    mainDiag.hidden = false;
+    Object.keys(screens).forEach(function (key) {
+      screens[key].classList.toggle('active', key === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // =================================================================
+  // ランディング: ジャンルカード生成
+  // =================================================================
+  var grid = document.getElementById('genre-grid');
+
+  GENRE_ORDER.forEach(function (key) {
+    var g = GENRES[key];
+    var card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'genre-card';
+    card.style.setProperty('--g-accent', GENRE_ACCENTS[key]);
+
+    var mark = document.createElement('div');
+    mark.className = 'genre-mark';
+    mark.textContent = g.icon;
+
+    var h2 = document.createElement('h2');
+    h2.textContent = g.title;
+
+    var desc = document.createElement('p');
+    desc.className = 'genre-desc';
+    desc.textContent = g.cardDesc;
+
+    var chips = document.createElement('div');
+    chips.className = 'chip-row';
+    g.categories.forEach(function (cat) {
+      var chip = document.createElement('span');
+      chip.className = 'chip';
+      chip.textContent = cat;
+      chips.appendChild(chip);
+    });
+
+    var cta = document.createElement('div');
+    cta.className = 'genre-cta';
+    cta.textContent = 'この診断を試す →';
+
+    card.appendChild(mark);
+    card.appendChild(h2);
+    card.appendChild(desc);
+    card.appendChild(chips);
+    card.appendChild(cta);
+
+    card.addEventListener('click', function () {
+      startGenre(key);
+    });
+
+    grid.appendChild(card);
+  });
+
+  // =================================================================
+  // ジャンル開始 → イントロ
+  // =================================================================
+  function startGenre(key) {
+    var g = GENRES[key];
+    state.genre = g;
+    state.current = 0;
+    state.answers = new Array(g.questions.length).fill(null);
+
+    app.setAttribute('data-genre', key);
+
+    document.getElementById('intro-tag').textContent = g.tag;
+    document.getElementById('intro-title').textContent = g.introTitle;
+    document.getElementById('intro-lead').textContent = g.lead;
+
+    showScreen('intro');
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function () {
+    state.current = 0;
+    state.answers = new Array(state.genre.questions.length).fill(null);
+    renderQuestion();
+    showScreen('question');
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.js-back-landing'), function (btn) {
+    btn.addEventListener('click', showLanding);
+  });
+
+  // =================================================================
+  // 質問画面
+  // =================================================================
+  var elCategory = document.getElementById('question-category');
+  var elQuestionText = document.getElementById('question-text');
+  var elOptions = document.getElementById('question-options');
+  var elProgressCount = document.getElementById('progress-count');
+  var elProgressPercent = document.getElementById('progress-percent');
+  var elProgressFill = document.getElementById('progress-fill');
+  var elBack = document.getElementById('btn-back');
+
+  function renderQuestion() {
+    var questions = state.genre.questions;
+    var idx = state.current;
+    var q = questions[idx];
+
+    elCategory.textContent = q.category;
+    elQuestionText.textContent = q.text;
+
+    var percent = Math.round(((idx + 1) / questions.length) * 100);
+    elProgressCount.textContent = (idx + 1) + ' / ' + questions.length;
+    elProgressPercent.textContent = percent + '%';
+    elProgressFill.style.width = percent + '%';
+
+    elBack.style.display = idx > 0 ? 'inline-block' : 'none';
+
+    var letters = ['A', 'B', 'C', 'D'];
+    elOptions.innerHTML = '';
+    q.options.forEach(function (opt, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn';
+
+      var saved = state.answers[idx];
+      if (saved && saved.optionIndex === i) {
+        btn.classList.add('selected');
+      }
+
+      var letterSpan = document.createElement('span');
+      letterSpan.className = 'option-letter';
+      letterSpan.textContent = letters[i];
+
+      var textSpan = document.createElement('span');
+      textSpan.textContent = opt.text;
+
+      btn.appendChild(letterSpan);
+      btn.appendChild(textSpan);
+      btn.addEventListener('click', function () { selectOption(idx, i); });
+      elOptions.appendChild(btn);
+    });
+  }
+
+  function selectOption(qIndex, optIndex) {
+    var q = state.genre.questions[qIndex];
+    var opt = q.options[optIndex];
+
+    state.answers[qIndex] = {
+      category: q.category,
+      score: opt.score,
+      optionIndex: optIndex
+    };
+
+    screens.question.style.opacity = '0';
+    setTimeout(function () {
+      if (qIndex < state.genre.questions.length - 1) {
+        state.current = qIndex + 1;
+        renderQuestion();
+      } else {
+        prepareForm();
+        showScreen('form');
+      }
+      screens.question.style.opacity = '';
+    }, 180);
+  }
+
+  elBack.addEventListener('click', function () {
+    if (state.current > 0) {
+      state.current -= 1;
+      renderQuestion();
+    }
+  });
+
+  // =================================================================
+  // スコア計算
+  // =================================================================
+  function computeScores() {
+    var cats = state.genre.categories;
+    var byCategory = {};
+    cats.forEach(function (cat) { byCategory[cat] = 0; });
+
+    var total = 0;
+    state.answers.forEach(function (a) {
+      if (!a) return;
+      byCategory[a.category] += a.score;
+      total += a.score;
+    });
+
+    var maxTotal = state.genre.questions.length * 3;
+    var percentTotal = Math.round((total / maxTotal) * 100);
+
+    var lowestCategory = cats[0];
+    var lowestValue = byCategory[lowestCategory];
+    cats.forEach(function (cat) {
+      if (byCategory[cat] < lowestValue) {
+        lowestValue = byCategory[cat];
+        lowestCategory = cat;
+      }
+    });
+
+    return { byCategory: byCategory, percentTotal: percentTotal, lowestCategory: lowestCategory };
+  }
+
+  function getTypeDef(percentTotal) {
+    var types = state.genre.types;
+    for (var i = 0; i < types.length; i++) {
+      if (percentTotal >= types[i].min && percentTotal <= types[i].max) return types[i];
+    }
+    return types[types.length - 1];
+  }
+
+  // =================================================================
+  // リードフォーム
+  // =================================================================
+  var form = document.getElementById('lead-form');
+  var loadingOverlay = document.getElementById('loading-overlay');
+  var btnSubmit = document.getElementById('btn-submit');
+
+  function prepareForm() {
+    document.getElementById('teaser-label').textContent = state.genre.teaserLabel;
+    form.style.display = '';
+    loadingOverlay.classList.remove('active');
+    btnSubmit.disabled = false;
+  }
+
+  document.getElementById('btn-sample').addEventListener('click', function () {
+    document.getElementById('f-company').value = '株式会社サンプル';
+    document.getElementById('f-name').value = '診断 太郎';
+    document.getElementById('f-email').value = 'sample@example.com';
+    document.getElementById('f-tel').value = '090-0000-0000';
+    document.getElementById('f-agree').checked = true;
+  });
+
+  function validateEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function setFieldError(inputEl, errorEl, hasError) {
+    inputEl.classList.toggle('error', hasError);
+    errorEl.classList.toggle('show', hasError);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var company = document.getElementById('f-company');
+    var name = document.getElementById('f-name');
+    var email = document.getElementById('f-email');
+    var agree = document.getElementById('f-agree');
+
+    var valid = true;
+
+    setFieldError(company, document.getElementById('err-company'), !company.value.trim());
+    if (!company.value.trim()) valid = false;
+
+    setFieldError(name, document.getElementById('err-name'), !name.value.trim());
+    if (!name.value.trim()) valid = false;
+
+    var emailBad = !email.value.trim() || !validateEmail(email.value.trim());
+    setFieldError(email, document.getElementById('err-email'), emailBad);
+    if (emailBad) valid = false;
+
+    document.getElementById('err-agree').classList.toggle('show', !agree.checked);
+    if (!agree.checked) valid = false;
+
+    if (!valid) return;
+
+    // デモのため送信は行わない。実運用ではここで /api/lead へPOST → Lark Base保存。
+    form.style.display = 'none';
+    loadingOverlay.classList.add('active');
+
+    var scores = computeScores();
+    setTimeout(function () {
+      renderResult(scores);
+      showScreen('result');
+    }, 800);
+  });
+
+  // =================================================================
+  // 結果画面
+  // =================================================================
+  function renderResult(scores) {
+    var g = state.genre;
+    var typeDef = getTypeDef(scores.percentTotal);
+
+    document.getElementById('result-label').textContent = g.resultLabel;
+    document.getElementById('result-score-num').textContent = scores.percentTotal;
+    document.getElementById('result-type').textContent = typeDef.name;
+    document.getElementById('result-commentary').textContent = typeDef.desc;
+    document.getElementById('cta-text').textContent = g.ctaText;
+
+    var elBarChart = document.getElementById('bar-chart');
+    elBarChart.innerHTML = '';
+    g.categories.forEach(function (cat) {
+      var value = scores.byCategory[cat];
+      var pct = Math.round((value / 6) * 100);
+
+      var row = document.createElement('div');
+      row.className = 'bar-row';
+
+      var label = document.createElement('div');
+      label.className = 'bar-row-label';
+      var labelCat = document.createElement('span');
+      labelCat.textContent = cat;
+      var labelVal = document.createElement('span');
+      labelVal.textContent = value + ' / 6';
+      label.appendChild(labelCat);
+      label.appendChild(labelVal);
+
+      var track = document.createElement('div');
+      track.className = 'bar-track';
+      var fill = document.createElement('div');
+      fill.className = 'bar-fill';
+      fill.style.width = '0%';
+      track.appendChild(fill);
+
+      row.appendChild(label);
+      row.appendChild(track);
+      elBarChart.appendChild(row);
+
+      setTimeout(function () { fill.style.width = pct + '%'; }, 50);
+    });
+
+    var elActionList = document.getElementById('action-list');
+    elActionList.innerHTML = '';
+    typeDef.actions.forEach(function (tpl, i) {
+      var li = document.createElement('li');
+      var num = document.createElement('span');
+      num.className = 'num';
+      num.textContent = String(i + 1);
+      var span = document.createElement('span');
+      span.textContent = tpl.replace('{lowCategory}', scores.lowestCategory);
+      li.appendChild(num);
+      li.appendChild(span);
+      elActionList.appendChild(li);
+    });
+  }
+
+  // =================================================================
+  // デモ用トースト
+  // =================================================================
+  var toast = document.getElementById('toast');
+  var toastTimer = null;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2600);
+  }
+
+  document.getElementById('btn-cta').addEventListener('click', function () {
+    showToast('デモ環境のためリンク先は未設定です。実運用では予約ページ等につながります。');
+  });
+})();
+</script>
+
+</body>
+</html>
