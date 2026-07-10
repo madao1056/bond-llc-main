@@ -8,7 +8,7 @@ import heroWorks from '~/assets/images/hero-works.png';
 
 const metadata = {
   title: '実績一覧',
-  description: '合同会社ぼんどの実績・事例ページ。地域事業者さまとのプロジェクト事例は順次公開してまいります。',
+  description: '合同会社ぼんどの実績・事例ページ。飲食店さまのお弁当Web予約システム構築など、地域事業者さまとのプロジェクト事例をご紹介します。',
 };
 
 const breadcrumbs = [
@@ -37,29 +37,85 @@ const breadcrumbs = [
     </Fragment>
 
     <Fragment slot="subtitle">
-      地域事業者さまとのプロジェクト事例は<br />
-      順次公開してまいります
+      地域事業者さまとのプロジェクト事例を<br />
+      ご紹介します
     </Fragment>
   </Hero2>
 
-  <!-- 準備中 -->
+  <!-- 導入事例 -->
   <section class="py-20 lg:py-28">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-      <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-bond-yellow-main/10 mb-8">
-        <Icon name="tabler:pencil" class="w-10 h-10 text-bond-yellow-deep" />
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-4">
+          導入事例
+        </h2>
+        <p class="text-lg text-bond-text-sub leading-relaxed">
+          お客さまの許可をいただいたうえで掲載しています。
+        </p>
       </div>
 
-      <h2 class="text-3xl md:text-4xl font-bold text-bond-navy mb-6">
-        実績は準備中です
-      </h2>
+      <div class="bg-bond-surface border border-bond-navy/10 rounded-2xl p-8 md:p-10 shadow-sm">
+        <div class="flex items-start gap-4 mb-6">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-bond-yellow-main/15 shrink-0">
+            <Icon name="tabler:tools-kitchen-2" class="w-6 h-6 text-bond-yellow-deep" />
+          </div>
+          <div>
+            <h3 class="text-xl md:text-2xl font-bold text-bond-navy mb-1">
+              お弁当のWeb予約システム構築
+            </h3>
+            <p class="text-sm text-bond-text-sub">惣菜屋レザン さま｜飲食店</p>
+          </div>
+        </div>
 
-      <p class="text-lg text-bond-text-sub leading-relaxed mb-4">
-        合同会社ぼんどは2025年11月に設立したばかりの会社です。
-      </p>
-      <p class="text-lg text-bond-text-sub leading-relaxed">
-        現在進行中のプロジェクトの成果がまとまり次第、<br class="hidden sm:inline" />
-        お客さまの許可をいただいたうえで、こちらに掲載してまいります。
-      </p>
+        <p class="text-bond-navy font-bold text-lg leading-relaxed mb-8">
+          インスタ・電話・LINEに分散していた予約窓口を一本化し、「漏れ」を防ぐ
+        </p>
+
+        <div class="mb-8">
+          <h4 class="flex items-center gap-2 text-lg font-bold text-bond-navy mb-3">
+            <Icon name="tabler:alert-circle" class="w-5 h-5 text-bond-yellow-deep" />
+            課題
+          </h4>
+          <p class="text-bond-text-sub leading-relaxed">
+            お弁当の予約が、インスタグラムのメッセージ・電話・LINEと複数の窓口に分かれて届いていました。それぞれ確認する場所が違うため、営業と並行して全部を追いかける必要があり、今後注文が増えていったときに「見落とし・返信漏れ」が起きるリスクを抱えていました。また、口頭やメッセージでのやり取りは、注文内容や合計金額の控えも手作業になりがちでした。
+          </p>
+        </div>
+
+        <div class="mb-8">
+          <h4 class="flex items-center gap-2 text-lg font-bold text-bond-navy mb-3">
+            <Icon name="tabler:bulb" class="w-5 h-5 text-bond-yellow-deep" />
+            解決
+          </h4>
+          <p class="text-bond-text-sub leading-relaxed">
+            予約の入口を1つにまとめる、スマホから24時間注文できるWeb予約フォームを構築しました。設計で大切にしたのは「お店側の運用を変えないこと」。メニューの追加・価格変更・販売停止は、お店が使い慣れた表を1行直すだけでフォームに自動反映されます。予約が入ると注文内容と合計金額が自動で記録され、お客さまには確認メールが自動送信。当日予約の締切時間や定休日の受付停止も、すべて自動で制御されます。
+          </p>
+        </div>
+
+        <div>
+          <h4 class="flex items-center gap-2 text-lg font-bold text-bond-navy mb-3">
+            <Icon name="tabler:trophy" class="w-5 h-5 text-bond-yellow-deep" />
+            結果
+          </h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-3 text-bond-text-sub leading-relaxed">
+              <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep shrink-0 mt-1" />
+              予約が1か所に集まる体制になり、複数アプリを見回る負担と見落としリスクを解消
+            </li>
+            <li class="flex items-start gap-3 text-bond-text-sub leading-relaxed">
+              <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep shrink-0 mt-1" />
+              注文が増えても運用が変わらない、「これから」に耐える受付の仕組みに
+            </li>
+            <li class="flex items-start gap-3 text-bond-text-sub leading-relaxed">
+              <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep shrink-0 mt-1" />
+              注文内容と金額が自動で記録されるため、聞き間違い・計算ミスの心配がない
+            </li>
+            <li class="flex items-start gap-3 text-bond-text-sub leading-relaxed">
+              <Icon name="tabler:check" class="w-5 h-5 text-bond-yellow-deep shrink-0 mt-1" />
+              メニュー改定は表を直すだけ。ITの専門知識ゼロで日々の運用が完結
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
