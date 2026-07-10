@@ -4,7 +4,9 @@ import Hero2 from '~/components/widgets/Hero2.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import heroWorks from '~/assets/images/hero-works.png';
+import raisinLogo from '~/assets/images/works-raisin-logo.jpg';
 
 const metadata = {
   title: '実績一覧',
@@ -56,8 +58,8 @@ const breadcrumbs = [
 
       <div class="bg-bond-surface border border-bond-navy/10 rounded-2xl p-8 md:p-10 shadow-sm">
         <div class="flex items-start gap-4 mb-6">
-          <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-bond-yellow-main/15 shrink-0">
-            <Icon name="tabler:tools-kitchen-2" class="w-6 h-6 text-bond-yellow-deep" />
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white border border-bond-navy/10 shrink-0 overflow-hidden">
+            <Image src={raisinLogo} alt="惣菜屋レザン ロゴ" width={128} height={128} class="w-full h-full object-contain p-1" loading="lazy" decoding="async" />
           </div>
           <div>
             <h3 class="text-xl md:text-2xl font-bold text-bond-navy mb-1">
