@@ -10,7 +10,7 @@ tags:
   - AI活用
 author: "橋口真幸"
 metadata:
-  title: "AI返信アシスト「Tsunagi」リリースのお知らせ | 合同会社ぼんど"
+  title: "AI返信アシスト「Tsunagi」リリースのお知らせ"
   description: "Chatwork・Slack・Gmail・Lark等に対応したAI返信Chrome拡張「Tsunagi」を正式リリース。あなたの文体を学習し、返信業務の時間を大幅に削減します。"
 ---
 

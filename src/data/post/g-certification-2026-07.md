@@ -12,7 +12,7 @@ tags:
   - 資格
 author: "橋口真幸"
 metadata:
-  title: "AIを仕事で使う人間として、G検定を受けてきた | 合同会社ぼんど"
+  title: "AIを仕事で使う人間として、G検定を受けてきた"
   description: "JDLA Deep Learning for GENERAL 2026 #4（G検定）に合格しました。8分野の得点率を公開しつつ、実務でAIを使うことと体系的に理解することの違い、そしてAI支援事業者としての責任について書いています。"
   robots:
     index: true

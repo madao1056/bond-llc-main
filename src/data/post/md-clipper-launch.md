@@ -10,7 +10,7 @@ tags:
   - ツール
 author: "橋口真幸"
 metadata:
-  title: "Chrome拡張「MD Clipper」公開のお知らせ | 合同会社ぼんど"
+  title: "Chrome拡張「MD Clipper」公開のお知らせ"
   description: "WebページをワンクリックでMarkdown保存するChrome拡張「MD Clipper」をリリース。Readability.js+Turndown.jsでローカル変換。プライバシー重視設計。"
 ---
 
