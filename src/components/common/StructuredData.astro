@@ -33,6 +33,27 @@ const { type = 'website', page = {}, breadcrumbs = [], faq = [], service, softwa
 
 const siteUrl = 'https://bond-llc.jp';
 
+// 代表社員（保有資格を機械可読に）
+const founderSchema = {
+  '@type': 'Person',
+  '@id': `${siteUrl}/#founder`,
+  name: '橋口真幸',
+  jobTitle: '代表社員',
+  worksFor: { '@id': `${siteUrl}/#organization` },
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    name: 'JDLA Deep Learning for GENERAL 2026 #4（G検定）',
+    credentialCategory: 'certificate',
+    dateCreated: '2026-07-21',
+    recognizedBy: {
+      '@type': 'Organization',
+      name: '一般社団法人日本ディープラーニング協会',
+      alternateName: 'Japan Deep Learning Association',
+      url: 'https://www.jdla.org/',
+    },
+  },
+};
+
 // Organization（全ページ共通）
 const organizationSchema = {
   '@type': 'Organization',
@@ -63,6 +84,7 @@ const organizationSchema = {
   sameAs: [
     'https://lin.ee/LYodITQO',
   ],
+  founder: { '@id': `${siteUrl}/#founder` },
 };
 
 // LocalBusiness（トップページ用）
@@ -169,7 +191,7 @@ const contactSchema = type === 'contact' ? {
 } : null;
 
 // @graph の構築
-const graph: Record<string, unknown>[] = [organizationSchema];
+const graph: Record<string, unknown>[] = [organizationSchema, founderSchema];
 
 if (type === 'website') {
   graph.push(webSiteSchema, localBusinessSchema);

@@ -75,6 +75,37 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         ))
       }
     </div>
+
+    <!-- 認定・資格ロゴ帯 -->
+    <div class="py-8 border-t border-gray-200 dark:border-slate-800">
+      <div class="text-xs text-muted dark:text-gray-400 mb-5 tracking-wider">認定・資格</div>
+      <ul class="flex flex-wrap items-center gap-x-12 gap-y-8">
+        <li>
+          <!-- JDLA G検定ロゴ: 使用規定によりアイソレーション（保護エリア）を確保し、変形・色変更を行わないこと -->
+          <img
+            src="/images/jdla-g-2026-4.svg"
+            alt="JDLA Deep Learning for GENERAL 2026 #4 合格"
+            width="160"
+            height="97"
+            loading="lazy"
+            decoding="async"
+            class="w-[160px] h-auto"
+          />
+        </li>
+        <li>
+          <img
+            src="/images/security-action-futatsuboshi.png"
+            alt="SECURITY ACTION 二つ星宣言"
+            width="110"
+            height="110"
+            loading="lazy"
+            decoding="async"
+            class="w-[92px] h-auto"
+          />
+        </li>
+      </ul>
+    </div>
+
     <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
       {
         socialLinks?.length ? (

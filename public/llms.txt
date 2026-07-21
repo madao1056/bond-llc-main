@@ -10,6 +10,11 @@
 - 所在地: 〒880-1101 宮崎県東諸県郡国富町大字本庄9896番地3
 - メール: bond.llc.2025@gmail.com
 
+## 資格・認定
+
+- JDLA Deep Learning for GENERAL 2026 #4（G検定）合格 — 一般社団法人日本ディープラーニング協会／2026年7月／代表社員 橋口真幸
+- SECURITY ACTION 二つ星宣言 — 独立行政法人情報処理推進機構（IPA）
+
 ## ミッション
 
 地域の事業者とお客さまをつなぎ、価値が正しく届く環境をつくる
@@ -29,6 +34,11 @@
 - [会社概要](https://bond-llc.jp/company): 会社基本情報・事業内容・アクセス
 - [よくある質問](https://bond-llc.jp/faq): サービスに関するFAQ
 - [お問い合わせ](https://bond-llc.jp/contact): 無料相談・お問い合わせフォーム
+- [コラム一覧](https://bond-llc.jp/news): AI活用・DX・Web制作に関する実務記事
+
+## 主要コラム
+
+- [AIを仕事で使う人間として、G検定を受けてきた](https://bond-llc.jp/news/g-certification-2026-07): JDLA G検定（2026 #4）合格報告と8分野の得点率、AI支援事業者としての責任範囲
 
 ## 提供サービス
 
