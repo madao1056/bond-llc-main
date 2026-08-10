@@ -44,7 +44,11 @@ const founderSchema = {
     '@type': 'EducationalOccupationalCredential',
     name: 'JDLA Deep Learning for GENERAL 2026 #4（G検定）',
     credentialCategory: 'certificate',
-    dateCreated: '2026-07-21',
+    // オープンバッジ（Open Badges v2）の発行日
+    dateCreated: '2026-08-07',
+    // 第三者検証が可能な公開アサーションページ
+    url: 'https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/QjlZVzM1QUpJMitMSG5QdGhWTXQyUT09',
+    identifier: 'https://nlp.netlearning.co.jp/api/v1.0/openbadge/v2/Assertion/QjlZVzM1QUpJMitMSG5QdGhWTXQyUT09',
     recognizedBy: {
       '@type': 'Organization',
       name: '一般社団法人日本ディープラーニング協会',
@@ -75,9 +79,11 @@ const organizationSchema = {
     postalCode: '880-1101',
     addressCountry: 'JP',
   },
+  telephone: '+81-80-3964-3044',
   contactPoint: {
     '@type': 'ContactPoint',
     email: 'info@bond-llc.jp',
+    telephone: '+81-80-3964-3044',
     contactType: 'customer service',
     availableLanguage: 'Japanese',
   },
@@ -95,6 +101,7 @@ const localBusinessSchema = {
   url: siteUrl,
   description: '宮崎を拠点に、Web制作・EC構築・MEO・LINE・DX支援・アプリ制作を通じて、地域の事業者とお客さまをつなぐデジタルパートナーです。',
   address: organizationSchema.address,
+  telephone: '+81-80-3964-3044',
   openingHoursSpecification: [
     {
       '@type': 'OpeningHoursSpecification',
