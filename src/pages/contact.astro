@@ -119,6 +119,8 @@ const breadcrumbs = [
   </section>
 
   <script>
+    import { track } from '@vercel/analytics';
+
     // ClientRouter（View Transitions）有効のため DOMContentLoaded は初回遷移でしか発火しない
     document.addEventListener('astro:page-load', () => {
       const form = document.getElementById('contact-form') as HTMLFormElement | null;
@@ -179,11 +181,15 @@ const breadcrumbs = [
           if (res.ok) {
             showStatus('success');
             form.reset();
+            // 「/contact は見られているのに送信0件」を検知できるようにする
+            track('contact_submit_success');
           } else {
             showStatus('error', result.error ?? '送信に失敗しました。');
+            track('contact_submit_error', { reason: 'api', status: res.status });
           }
         } catch {
           showStatus('error', '通信エラーが発生しました。時間をおいて再度お試しください。');
+          track('contact_submit_error', { reason: 'network' });
         } finally {
           if (submitBtn) submitBtn.disabled = false;
         }
