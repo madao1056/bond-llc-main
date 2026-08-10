@@ -1,5 +1,8 @@
 import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 
+// 著作権表記の年。ビルド時の年を出力するので、年明けの手動更新が不要になる
+const currentYear = new Date().getFullYear();
+
 export const headerData = {
   links: [
     {
@@ -109,6 +112,6 @@ export const footerData = {
     { ariaLabel: 'LINE', icon: 'tabler:brand-line', href: 'https://lin.ee/LYodITQO' },
   ],
   footNote: `
-    <span class="text-sm">© 2025 合同会社ぼんど All rights reserved.</span>
+    <span class="text-sm">© ${currentYear} 合同会社ぼんど All rights reserved.</span>
   `,
 };

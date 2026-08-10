@@ -119,7 +119,8 @@ const breadcrumbs = [
   </section>
 
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    // ClientRouter（View Transitions）有効のため DOMContentLoaded は初回遷移でしか発火しない
+    document.addEventListener('astro:page-load', () => {
       const form = document.getElementById('contact-form') as HTMLFormElement | null;
       if (!form) return;
 

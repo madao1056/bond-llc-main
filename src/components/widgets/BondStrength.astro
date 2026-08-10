@@ -31,6 +31,7 @@ const strengths = [
     description: '「こうしたい」という想いを汲み取り、言葉にならない要望まで形にします。細かな相談も遠慮なくどうぞ。',
     icon: 'tabler:sparkles',
     image: imgYoshinani,
+    imageAlt: '手のひらの上に黄色く光る立方体が浮かんでいるイメージ。言葉にならない要望を形にすることを表す',
     points: [
       {
         title: '曖昧な要望も形に',
@@ -52,6 +53,7 @@ const strengths = [
     description: 'お客さまと並走し、事業の成長を自分ごととして捉えます。単なる外注先ではなく、パートナーとして。',
     icon: 'tabler:users-group',
     image: imgCocreation,
+    imageAlt: '製図台に広げた図面を2人で覗き込みながら検討しているイメージ。共創して進めることを表す',
     points: [
       {
         title: '事業理解から始める',
@@ -73,6 +75,7 @@ const strengths = [
     description: '一過性の施策ではなく、継続的に成果が出る仕組みを構築。誰でも運用できる形で引き継ぎます。',
     icon: 'tabler:settings',
     image: imgSystem,
+    imageAlt: '噛み合った歯車のなかで中央の1枚が黄色く光っているイメージ。仕組み化と継続的な運用を表す',
     points: [
       {
         title: '運用マニュアル作成',
@@ -151,7 +154,7 @@ const strengths = [
             <div class="relative z-20 w-full h-full overflow-hidden grayscale contrast-125 border-2 border-bond-background shadow-xl">
                <Image
                   src={strength.image}
-                  alt={strength.title}
+                  alt={strength.imageAlt}
                   width={500}
                   height={500}
                   class="w-full h-full object-cover"
@@ -166,14 +169,21 @@ const strengths = [
 </WidgetWrapper>
 
 <!-- Modal Container - Outside WidgetWrapper for full screen coverage -->
-<div id="strength-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] opacity-0 pointer-events-none transition-opacity duration-300" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;">
+<div
+  id="strength-modal"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] opacity-0 pointer-events-none transition-opacity duration-300"
+  style="position: fixed; top: 0; left: 0; right: 0; bottom: 0;"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-hidden="true"
+>
   <div class="flex items-center justify-center min-h-screen p-4">
     <div class="bg-white max-w-2xl w-full rounded-lg shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content">
       <!-- Modal Header -->
       <div class="flex items-center justify-between p-6 border-b border-bond-navy/10">
-        <h3 class="text-xl font-bold text-bond-navy font-serif" id="modal-title">
-          強みの詳細
-        </h3>
+        <!-- 中身はクリックされた項目に応じてJSが差し込む（初期値は空） -->
+        <h3 class="text-xl font-bold text-bond-navy font-serif" id="modal-title"></h3>
         <button 
           id="close-modal" 
           class="text-bond-navy/50 hover:text-bond-navy transition-colors p-2"
@@ -185,9 +195,7 @@ const strengths = [
       
       <!-- Modal Body -->
       <div class="p-6">
-        <p class="text-bond-text-main leading-relaxed" id="modal-description">
-          詳細情報がここに表示されます。
-        </p>
+        <p class="text-bond-text-main leading-relaxed" id="modal-description"></p>
       </div>
       
       <!-- Modal Footer -->
@@ -244,67 +252,78 @@ const strengths = [
     }
   };
 
-  // DOM elements
-  const modal = document.getElementById('strength-modal');
-  const modalContent = document.getElementById('modal-content');
-  const modalTitle = document.getElementById('modal-title');
-  const modalDescription = document.getElementById('modal-description');
-  const closeModalBtn = document.getElementById('close-modal');
-  const modalCloseBtn = document.getElementById('modal-close-btn');
+  // ClientRouter（View Transitions）有効下ではモジュールスクリプトは再実行されず、
+  // DOMContentLoaded もクライアント遷移では発火しない。
+  // そのため要素の取得と購読は astro:page-load ごとにやり直す。
+  let closeCurrentModal = null;
 
-  // Open modal function
-  function openModal(triggerId) {
-    const data = modalData[triggerId];
-    if (!data) return;
+  function initStrengthModal() {
+    const modal = document.getElementById('strength-modal');
+    const modalContent = document.getElementById('modal-content');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
 
-    modalTitle.textContent = data.title;
-    modalDescription.textContent = data.description;
-    
-    modal.classList.remove('opacity-0', 'pointer-events-none');
-    modalContent.classList.remove('scale-95');
-    modalContent.classList.add('scale-100');
-    
-    // Prevent body scroll
-    document.body.style.overflow = 'hidden';
-  }
+    // このページに強みセクションが無ければ何もしない
+    if (!modal || !modalContent || !modalTitle || !modalDescription) {
+      closeCurrentModal = null;
+      return;
+    }
 
-  // Close modal function
-  function closeModal() {
-    modal.classList.add('opacity-0', 'pointer-events-none');
-    modalContent.classList.remove('scale-100');
-    modalContent.classList.add('scale-95');
-    
-    // Restore body scroll
-    document.body.style.overflow = '';
-  }
+    function openModal(triggerId) {
+      const data = modalData[triggerId];
+      if (!data) return;
 
-  // Event listeners
-  document.addEventListener('DOMContentLoaded', function() {
-    // Add click listeners to strength point triggers
-    const triggers = document.querySelectorAll('[data-modal-trigger]');
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', function() {
-        const triggerId = this.getAttribute('data-modal-trigger');
-        openModal(triggerId);
+      modalTitle.textContent = data.title;
+      modalDescription.textContent = data.description;
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.setAttribute('aria-hidden', 'false');
+      modalContent.classList.remove('scale-95');
+      modalContent.classList.add('scale-100');
+
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.setAttribute('aria-hidden', 'true');
+      modalContent.classList.remove('scale-100');
+      modalContent.classList.add('scale-95');
+
+      // Restore body scroll
+      document.body.style.overflow = '';
+    }
+
+    closeCurrentModal = closeModal;
+
+    document.querySelectorAll('[data-modal-trigger]').forEach((trigger) => {
+      trigger.addEventListener('click', function () {
+        openModal(this.getAttribute('data-modal-trigger'));
       });
     });
 
-    // Close modal listeners
-    closeModalBtn?.addEventListener('click', closeModal);
-    modalCloseBtn?.addEventListener('click', closeModal);
+    document.getElementById('close-modal')?.addEventListener('click', closeModal);
+    document.getElementById('modal-close-btn')?.addEventListener('click', closeModal);
 
     // Close on backdrop click
-    modal?.addEventListener('click', function(e) {
-      if (e.target === modal) {
-        closeModal();
-      }
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
     });
+  }
 
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && !modal.classList.contains('opacity-0')) {
-        closeModal();
-      }
-    });
+  // Escapeキーの購読はdocumentに対して一度だけ張る（遷移ごとに重複させない）
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' || !closeCurrentModal) return;
+    const modal = document.getElementById('strength-modal');
+    if (modal && !modal.classList.contains('opacity-0')) closeCurrentModal();
   });
+
+  // 遷移でモーダルを開いたまま離脱した場合にスクロール固定が残るのを防ぐ
+  document.addEventListener('astro:before-swap', function () {
+    document.body.style.overflow = '';
+    closeCurrentModal = null;
+  });
+
+  document.addEventListener('astro:page-load', initStrengthModal);
 </script>

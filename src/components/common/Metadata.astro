@@ -14,6 +14,14 @@ export interface Props extends MetaData {
   dontUseTitleTemplate?: boolean;
 }
 
+// Open Graph の locale は language_TERRITORY 形式が仕様。
+// I18N.language は html の lang 属性にも使われるため、ここでだけ地域付きに変換する。
+const OG_LOCALE_BY_LANGUAGE: Record<string, string> = {
+  ja: 'ja_JP',
+  en: 'en_US',
+};
+const ogLocale = OG_LOCALE_BY_LANGUAGE[I18N?.language ?? ''] ?? I18N?.language ?? 'en_US';
+
 const {
   title,
   ignoreTitleTemplate = false,
@@ -36,7 +44,7 @@ const seoProps: AstroSeoProps = merge(
       url: canonical,
       site_name: SITE?.name,
       images: [],
-      locale: I18N?.language || 'en',
+      locale: ogLocale,
       type: 'website',
     },
     twitter: {
