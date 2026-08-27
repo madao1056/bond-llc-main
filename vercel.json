@@ -3,6 +3,27 @@
   "trailingSlash": false,
   "headers": [
     {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+        }
+      ]
+    },
+    {
       "source": "/_astro/(.*)",
       "headers": [
         {
@@ -31,6 +52,26 @@
     {
       "source": "/ai-work-with-claude-2026-06",
       "destination": "/news/ai-work-with-claude-2026-06",
+      "permanent": true
+    },
+    {
+      "source": "/category/ai-huo2-yong4",
+      "destination": "/category/ai",
+      "permanent": true
+    },
+    {
+      "source": "/category/orase",
+      "destination": "/category/news",
+      "permanent": true
+    },
+    {
+      "source": "/category/hmupji",
+      "destination": "/category/web-production",
+      "permanent": true
+    },
+    {
+      "source": "/category/bu3-zhu4-jin1",
+      "destination": "/category/subsidy",
       "permanent": true
     },
     {

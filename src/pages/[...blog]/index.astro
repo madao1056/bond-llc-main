@@ -12,6 +12,9 @@ import { getStaticPathsBlogPost, blogPostRobots } from '~/utils/blog';
 import { findImage } from '~/utils/images';
 import type { MetaData } from '~/types';
 import RelatedPosts from '~/components/blog/RelatedPosts.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import { getBlogPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
@@ -43,9 +46,33 @@ const metadata = merge(
   },
   { ...(post?.metadata ? { ...post.metadata, canonical: post.metadata?.canonical || url } : {}) }
 ) as MetaData;
+
+// パンくず（LINK-02）と記事の構造化データ（LLMO-16）
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'コラム', url: getBlogPermalink() },
+  { name: post.title, url: url },
+];
+
+const ogImage = typeof image === 'string' ? image : (image as ImageMetadata)?.src;
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    article={{
+      headline: post.title,
+      description: post.excerpt,
+      url: url,
+      datePublished: post.publishDate.toISOString(),
+      dateModified: (post.updateDate ?? post.publishDate).toISOString(),
+      image: ogImage ? new URL(ogImage, 'https://bond-llc.jp').href : undefined,
+      authorName: post.author,
+      section: post.category?.title,
+      keywords: post.tags?.map((t) => t.title),
+    }}
+  />
+  <Breadcrumb items={breadcrumbs} />
   <SinglePost post={{ ...post, image: image }} url={url}>
     {post.Content ? <post.Content /> : <Fragment set:html={post.content || ''} />}
   </SinglePost>

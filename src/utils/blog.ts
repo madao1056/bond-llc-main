@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content';
 import type { Post } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
 import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import { findTaxonomySlug } from './taxonomy-slugs';
 
 const generatePermalink = async ({
   id,
@@ -63,13 +64,14 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
   const category = rawCategory
     ? {
-        slug: cleanSlug(rawCategory),
+        // 日本語名は辞書の英語スラッグを優先する（URL-01）
+        slug: findTaxonomySlug(rawCategory) ?? cleanSlug(rawCategory),
         title: rawCategory,
       }
     : undefined;
 
   const tags = rawTags.map((tag: string) => ({
-    slug: cleanSlug(tag),
+    slug: findTaxonomySlug(tag) ?? cleanSlug(tag),
     title: tag,
   }));
 

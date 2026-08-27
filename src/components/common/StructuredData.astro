@@ -12,6 +12,17 @@ export interface Props {
     datePublished?: string;
     dateModified?: string;
   };
+  article?: {
+    headline: string;
+    description?: string;
+    url: string;
+    datePublished: string;
+    dateModified?: string;
+    image?: string;
+    authorName?: string;
+    section?: string;
+    keywords?: string[];
+  };
   breadcrumbs?: Array<{ name: string; url: string }>;
   faq?: Array<{ question: string; answer: string }>;
   service?: {
@@ -29,7 +40,7 @@ export interface Props {
   };
 }
 
-const { type = 'website', page = {}, breadcrumbs = [], faq = [], service, software } = Astro.props;
+const { type = 'website', page = {}, breadcrumbs = [], faq = [], service, software, article } = Astro.props;
 
 const siteUrl = 'https://bond-llc.jp';
 
@@ -197,6 +208,27 @@ const contactSchema = type === 'contact' ? {
   },
 } : null;
 
+// BlogPosting（記事ページ）
+// LLMO-16: author / publisher / datePublished / dateModified を必須とする
+const articleSchema = article ? {
+  '@type': 'BlogPosting',
+  '@id': `${article.url}#article`,
+  headline: article.headline,
+  ...(article.description ? { description: article.description } : {}),
+  url: article.url,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': article.url },
+  datePublished: article.datePublished,
+  dateModified: article.dateModified || article.datePublished,
+  author: article.authorName === '橋口真幸'
+    ? { '@id': `${siteUrl}/#founder` }
+    : { '@type': 'Person', name: article.authorName || '合同会社ぼんど' },
+  publisher: { '@id': `${siteUrl}/#organization` },
+  ...(article.image ? { image: { '@type': 'ImageObject', url: article.image } } : {}),
+  ...(article.section ? { articleSection: article.section } : {}),
+  ...(article.keywords && article.keywords.length ? { keywords: article.keywords.join(', ') } : {}),
+  inLanguage: 'ja',
+} : null;
+
 // @graph の構築
 const graph: Record<string, unknown>[] = [organizationSchema, founderSchema];
 
@@ -209,6 +241,7 @@ if (faqSchema) graph.push(faqSchema);
 if (serviceSchema) graph.push(serviceSchema);
 if (softwareSchema) graph.push(softwareSchema);
 if (contactSchema) graph.push(contactSchema);
+if (articleSchema) graph.push(articleSchema);
 
 const jsonLd = {
   '@context': 'https://schema.org',

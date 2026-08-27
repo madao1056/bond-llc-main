@@ -1,5 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
 
 import type { MetaData } from '~/types';
 
@@ -14,9 +16,17 @@ const { frontmatter } = Astro.props;
 const metadata: MetaData = {
   title: frontmatter?.title,
 };
+
+// パンくず（LINK-02）: Markdown ページにも必ず出す
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: frontmatter?.title ?? 'ページ', url: Astro.url.pathname },
+];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData breadcrumbs={breadcrumbs} />
+  <Breadcrumb items={breadcrumbs} />
   <section class="px-4 py-16 sm:px-6 mx-auto lg:px-8 lg:py-20 max-w-4xl">
     <h1 class="font-bold font-heading text-4xl md:text-5xl leading-[1.2] tracking-tighter">{frontmatter.title}</h1>
     <div

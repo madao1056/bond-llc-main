@@ -6,6 +6,9 @@ import Layout from '~/layouts/PageLayout.astro';
 import BlogList from '~/components/blog/List.astro';
 import Headline from '~/components/blog/Headline.astro';
 import Pagination from '~/components/blog/Pagination.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import { getBlogPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
@@ -20,15 +23,24 @@ const { page, category } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
 const metadata = {
-  title: `Category '${category.title}' ${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  title: `${category.title}の記事一覧${currentPage > 1 ? `（${currentPage}ページ目）` : ''}`,
+  description: `合同会社ぼんどの「${category.title}」に関する記事一覧です。宮崎の中小企業向けにWeb制作・DX支援の実務で得た知見を発信しています。`,
   robots: {
     index: blogCategoryRobots?.index,
     follow: blogCategoryRobots?.follow,
   },
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: 'コラム', url: getBlogPermalink() },
+  { name: category.title, url: Astro.url.pathname },
+];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData breadcrumbs={breadcrumbs} />
+  <Breadcrumb items={breadcrumbs} />
   <section class="px-4 md:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline>{category.title}</Headline>
     <BlogList posts={page.data} />

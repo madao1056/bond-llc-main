@@ -30,9 +30,11 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    // 限定公開（noindex）記事はサイトマップからも除外する
+    // noindex のページはサイトマップからも除外する（SMAP-04）
+    // - 限定公開記事
+    // - タグ一覧（config.yaml で tag.robots.index: false のため）
     sitemap({
-      filter: (page) => !page.includes('/news/farm-dx-aomori-2026-06'),
+      filter: (page) => !page.includes('/news/farm-dx-aomori-2026-06') && !/\/tag\//.test(page),
     }),
     mdx(),
     icon({

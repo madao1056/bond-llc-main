@@ -8,6 +8,9 @@ import Pagination from '~/components/blog/Pagination.astro';
 // import PostTags from "~/components/blog/Tags.astro";
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import { getBlogPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
@@ -24,7 +27,7 @@ const currentPage = page.currentPage ?? 1;
 // const allTags = await findTags();
 
 const metadata = {
-  title: `コラム${currentPage > 1 ? ` — ${currentPage}ページ目` : ''} | 合同会社ぼんど`,
+  title: `コラム${currentPage > 1 ? ` — ${currentPage}ページ目` : ''}`,
   description: 'Web制作・AI活用・DXに関するコラムやお知らせを発信しています。',
   robots: {
     index: blogListRobots?.index && currentPage === 1,
@@ -34,9 +37,21 @@ const metadata = {
     type: 'blog',
   },
 };
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  ...(currentPage > 1
+    ? [
+        { name: 'コラム', url: getBlogPermalink() },
+        { name: `${currentPage}ページ目`, url: Astro.url.pathname },
+      ]
+    : [{ name: 'コラム', url: getBlogPermalink() }]),
+];
 ---
 
 <Layout metadata={metadata}>
+  <StructuredData breadcrumbs={breadcrumbs} />
+  <Breadcrumb items={breadcrumbs} />
   <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
     <Headline
       subtitle="合同会社ぼんどの最新情報や、Web制作・DXに関する役立つ情報を発信しています。"
