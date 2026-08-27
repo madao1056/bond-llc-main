@@ -34,7 +34,11 @@ export default defineConfig({
     // - 限定公開記事
     // - タグ一覧（config.yaml で tag.robots.index: false のため）
     sitemap({
-      filter: (page) => !page.includes('/news/farm-dx-aomori-2026-06') && !/\/tag\//.test(page),
+      filter: (page) =>
+        !page.includes('/news/farm-dx-aomori-2026-06') &&
+        !/\/tag\//.test(page) &&
+        // ページネーション2以降は noindex のため除外する（SMAP-04）
+        !/\/\d+\/?$/.test(page),
     }),
     mdx(),
     icon({
