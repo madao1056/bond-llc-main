@@ -51,22 +51,40 @@ const founderSchema = {
   name: '橋口真幸',
   jobTitle: '代表社員',
   worksFor: { '@id': `${siteUrl}/#organization` },
-  hasCredential: {
-    '@type': 'EducationalOccupationalCredential',
-    name: 'JDLA Deep Learning for GENERAL 2026 #4（G検定）',
-    credentialCategory: 'certificate',
-    // オープンバッジ（Open Badges v2）の発行日
-    dateCreated: '2026-08-07',
-    // 第三者検証が可能な公開アサーションページ
-    url: 'https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/QjlZVzM1QUpJMitMSG5QdGhWTXQyUT09',
-    identifier: 'https://nlp.netlearning.co.jp/api/v1.0/openbadge/v2/Assertion/QjlZVzM1QUpJMitMSG5QdGhWTXQyUT09',
-    recognizedBy: {
-      '@type': 'Organization',
-      name: '一般社団法人日本ディープラーニング協会',
-      alternateName: 'Japan Deep Learning Association',
-      url: 'https://www.jdla.org/',
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: 'JDLA Deep Learning for GENERAL 2026 #4（G検定）',
+      credentialCategory: 'certificate',
+      // オープンバッジ（Open Badges v2）の発行日
+      dateCreated: '2026-08-07',
+      // 第三者検証が可能な公開アサーションページ
+      url: 'https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/QjlZVzM1QUpJMitMSG5QdGhWTXQyUT09',
+      identifier: 'https://nlp.netlearning.co.jp/api/v1.0/openbadge/v2/Assertion/QjlZVzM1QUpJMitMSG5QdGhWTXQyUT09',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: '一般社団法人日本ディープラーニング協会',
+        alternateName: 'Japan Deep Learning Association',
+        url: 'https://www.jdla.org/',
+      },
     },
-  },
+    {
+      '@type': 'EducationalOccupationalCredential',
+      name: '生成AIパスポート',
+      credentialCategory: 'certificate',
+      // オープンバッジ（Open Badges v3）の発行日
+      dateCreated: '2026-09-18',
+      // 第三者検証が可能な公開クレデンシャルページ
+      url: 'https://wallet.openbadge.net/public/credential/6f3790a1-8609-8b81-8a51-01a0b23e1a68',
+      identifier: 'https://walletapi.openbadge.net/api/public-credentials/share/6f3790a1-8609-8b81-8a51-01a0b23e1a68',
+      recognizedBy: {
+        '@type': 'Organization',
+        name: '一般社団法人生成AI活用普及協会',
+        alternateName: 'Generative AI Utilization Association',
+        url: 'https://guga.or.jp/',
+      },
+    },
+  ],
 };
 
 // Organization（全ページ共通）
