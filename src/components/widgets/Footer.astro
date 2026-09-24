@@ -37,20 +37,6 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         <div class="mb-2">
           <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
         </div>
-        <div class="text-sm text-muted flex gap-1">
-          {
-            secondaryLinks.map(({ text, href }, index) => (
-              <>
-                {index !== 0 ? ' · ' : ''}
-                <a
-                  class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
-                  href={href}
-                  set:html={text}
-                />
-              </>
-            ))
-          }
-        </div>
       </div>
       {
         links.map(({ title, links }) => (
@@ -144,8 +130,28 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         )
       }
 
-      <div class="text-sm mr-4 dark:text-muted">
-        <Fragment set:html={footNote} />
+      <div class="md:mr-4">
+        {
+          secondaryLinks?.length ? (
+            <div class="text-sm text-muted flex flex-wrap items-center gap-x-1 gap-y-1 mb-3 md:mb-1.5">
+              {secondaryLinks.map(({ text, href }, index) => (
+                <>
+                  {index !== 0 ? <span aria-hidden="true">·</span> : ''}
+                  <a
+                    class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
+                    href={href}
+                    set:html={text}
+                  />
+                </>
+              ))}
+            </div>
+          ) : (
+            ''
+          )
+        }
+        <div class="text-sm dark:text-muted">
+          <Fragment set:html={footNote} />
+        </div>
       </div>
     </div>
   </div>
