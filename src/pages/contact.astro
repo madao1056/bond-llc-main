@@ -163,6 +163,13 @@ const breadcrumbs = [
         if (submitBtn) submitBtn.disabled = true;
         showStatus('loading');
 
+        let entry: { from?: string; path?: string } = {};
+        try {
+          entry = JSON.parse(sessionStorage.getItem('bond_entry') ?? '{}');
+        } catch {
+          // 記録が読めなくても送信はできる
+        }
+
         try {
           const res = await fetch('/api/contact', {
             method: 'POST',
@@ -174,6 +181,9 @@ const breadcrumbs = [
               phone: formData.get('phone') ?? '',
               service: formData.get('service') ?? '',
               message,
+              entryFrom: entry.from ?? '',
+              entryPath: entry.path ?? '',
+              page: location.pathname,
             }),
           });
 

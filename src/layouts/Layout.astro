@@ -40,6 +40,16 @@ const { language, textDirection } = I18N;
     <Analytics />
     <VercelAnalytics />
 
+    <!-- 最初に開いたページと from パラメータを記録（お問い合わせの流入元判定に使う） -->
+    <script is:inline>
+      try {
+        if (!sessionStorage.getItem('bond_entry')) {
+          var from = new URLSearchParams(location.search).get('from') || '';
+          sessionStorage.setItem('bond_entry', JSON.stringify({ from: from, path: location.pathname }));
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Comment the line below to disable View Transitions -->
     <ClientRouter fallback="swap" />
   </head>
