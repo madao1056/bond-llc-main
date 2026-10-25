@@ -119,11 +119,13 @@ const credentials = [
   '生成AIパスポート',
 ];
 
+// 公開済みの回だけ載せる（投稿したら url を足して追加）
 const reelEpisodes = [
-  'Claude in Chrome（いつものブラウザをAIが操作する機能）',
-  'GoogleのサービスとAIをつなぐコネクタ',
-  'Computer use（何でもできるけど、あまり使わない方がいい機能）',
-  '入れたけど使わなかったもの',
+  {
+    title: '入れたけど使わなかったもの',
+    summary: 'Claudeと連携できるツールを5つ入れて、ほとんど使わなかった話。入れる前に「使う作業を1つ決める」が学びでした。',
+    url: 'https://www.instagram.com/bond_hashiguchi/reel/De6FTsyuZgN/',
+  },
 ];
 
 const columns = [
@@ -347,11 +349,16 @@ const faqs = [
           実際に使っているAIの良いところと注意点を短く紹介しています。
         </p>
       </div>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-        {reelEpisodes.map((episode, index) => (
-          <li class="flex items-start bg-white dark:bg-gray-800 p-5 border border-bond-border dark:border-gray-700">
-            <span class="font-mono text-sm font-bold text-bond-yellow-deep mr-3 mt-0.5">第{index + 1}話</span>
-            <span class="text-bond-text-main dark:text-gray-300">{episode}</span>
+      <ul class="grid grid-cols-1 gap-4 mb-10 max-w-2xl mx-auto">
+        {reelEpisodes.map((episode) => (
+          <li>
+            <a href={episode.url} target="_blank" rel="noopener" class="flex items-start bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300">
+              <Icon name="tabler:player-play" class="w-6 h-6 text-bond-yellow-deep mt-0.5 mr-4 flex-shrink-0" />
+              <span>
+                <span class="block font-bold text-bond-navy dark:text-sky-400 mb-1">{episode.title}</span>
+                <span class="block text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{episode.summary}</span>
+              </span>
+            </a>
           </li>
         ))}
       </ul>
