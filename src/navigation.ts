@@ -102,7 +102,6 @@ export const footerData = {
       title: 'お問い合わせ',
       links: [
         { text: 'お問い合わせ', href: getPermalink('/contact') },
-        { text: 'LINE公式アカウント', href: 'https://lin.ee/LYodITQO' },
         { text: 'よくある質問', href: getPermalink('/faq') },
         { text: '制作パートナーをお探しの方｜enen', href: 'https://enen.website/contact/' },
       ],
@@ -113,9 +112,7 @@ export const footerData = {
     { text: '利用規約', href: getPermalink('/terms') },
     { text: '情報セキュリティ基本方針', href: getPermalink('/security-policy') },
   ],
-  socialLinks: [
-    { ariaLabel: 'LINE', icon: 'tabler:brand-line', href: 'https://lin.ee/LYodITQO' },
-  ],
+  socialLinks: [],
   footNote: `
     <span class="text-sm">© ${currentYear} 合同会社ぼんど All rights reserved.</span>
   `,
