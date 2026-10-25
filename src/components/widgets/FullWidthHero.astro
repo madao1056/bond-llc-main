@@ -20,6 +20,8 @@ interface Props {
   photoBackground?: boolean;
   /** 背景画像の表示位置（CSS background-position） */
   backgroundPosition?: string;
+  /** 背景画像の右下に小さく出す注記（例: イメージ） */
+  backgroundNote?: string;
   backgroundColor?: string;
   gradientOverlay?: boolean;
   textAlign?: 'left' | 'center' | 'right';
@@ -37,6 +39,7 @@ const {
   backgroundImage,
   photoBackground = false,
   backgroundPosition = 'center',
+  backgroundNote,
   backgroundColor ='bg-gradient-to-br from-bond-navy via-bond-navy/95 to-bond-navy/90',
   gradientOverlay = true,
   textAlign = 'center',
@@ -161,6 +164,10 @@ const alignmentClasses = {
       <Icon name="tabler:chevron-down" class="w-6 h-6" />
     </div>
   </div>
+
+  {backgroundNote && (
+    <p class="absolute bottom-2 right-3 text-[10px] leading-none text-white/60">{backgroundNote}</p>
+  )}
 </section>
 
 <style>
