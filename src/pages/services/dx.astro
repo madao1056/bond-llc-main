@@ -9,7 +9,7 @@ import heroImage from '~/assets/images/hero-dx.png';
 
 const metadata = {
   title: 'ローカルDX・業務効率化サービス',
-  description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で生産性向上を支援します。',
+  description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で、手間の多い作業を減らす仕組みづくりを支援します。',
 };
 
 const breadcrumbs = [
@@ -109,11 +109,11 @@ const faqs = [
   },
   {
     title: '業種別にどんなDXが可能ですか？',
-    description: '【飲食店】予約管理システム、キャッシュレス決済、在庫管理の自動化により、ホールスタッフが接客に集中できます。【農業】IoTセンサーで土壌・気象データを収集し、最適な守稫時期を判断。作業記録のデジタル化で品質管理も向上します。【不動産】VR内覧、電子契約、顧客管理システムで業務効率が大幅に改善します。【美容・サロン】予約管理、顧客カルテ、LINE連携でリピート率が向上します。【士業】書類作成の自動化、クラウド保管、オンライン相談で業務時間を大幅に削減できます。',
+    description: '【飲食店】予約管理、キャッシュレス決済、在庫管理の自動化などで、接客に使える時間を増やすことを目指します。【農業】気象データや作業記録をデジタルで残し、収穫時期の判断や品質管理に役立てます。【不動産】電子契約や顧客管理システムで、書類や連絡の手間を減らします。【美容・サロン】予約管理、顧客カルテ、LINE連携で、お客さまとの接点を整えます。【士業】書類作成の自動化、クラウド保管、オンライン相談で、定型作業の負担を減らします。',
   },
   {
     title: 'DXを導入するとどんなメリットがありますか？',
-    description: 'ルーティン作業から解放され、スタッフが本来の価値ある業務に集中できます。例えば、データ入力や書類作成の時間が80%削減され、その時間を顧客サービスや新規事業開発に充てられます。また、データの可視化により経営判断が迅速になり、ミスも減少します。結果として、売上向上とコスト削減が同時に実現し、従業員の満足度も向上します。',
+    description: 'データ入力や書類作成などの繰り返し作業を減らし、その時間をお客さま対応など本来の業務に回せるようになります。また、数字を見える形にすることで、経営判断の材料が揃いやすくなり、転記ミスなども起きにくくなります。どれだけ効果が出るかは業務内容によって異なるため、導入前に一緒に見通しを立てます。',
   },
   {
     title: 'ITに詳しくない社員でも使えるようになりますか？',
@@ -141,7 +141,7 @@ const faqs = [
 <Layout metadata={metadata}>
   <StructuredData
     breadcrumbs={breadcrumbs}
-    service={{ name: 'ローカルDX・業務効率化サービス', description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で生産性を大幅に向上させます。' }}
+    service={{ name: 'ローカルDX・業務効率化サービス', description: '宮崎の地域企業のDX推進をサポート。業務自動化・データ分析・システム導入で、手間の多い作業を減らす仕組みづくりを支援します。' }}
     faq={faqs.map(f => ({ question: f.title, answer: f.description }))}
   />
   <Breadcrumb items={breadcrumbs} />
@@ -151,7 +151,7 @@ const faqs = [
     tagline="Digital Transformation"
     title="ローカルDX・業務効率化"
     subtitle="デジタルの力で、本業に集中できる環境を<br />宮崎の企業のDX推進をサポート"
-    description="手作業からの解放で、価値ある仕事に集中。業務自動化、データ分析、システム導入により生産性を大幅に向上させます。"
+    description="手作業を減らして、価値ある仕事に集中。業務自動化、データ分析、システム導入で、日々の手間を減らす仕組みをつくります。"
     backgroundImage={heroImage.src}
     actions={[
       {
@@ -237,7 +237,7 @@ const faqs = [
           <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">IMPLEMENTATION</span>
         </h2>
         <p class="text-lg text-gray-300">
-          段階的に、確実に、成果を出しながら進めます
+          小さく試しながら、段階的に進めます
         </p>
       </div>
 
@@ -281,7 +281,7 @@ const faqs = [
           <p class="text-lg text-bond-text-sub mb-8 max-w-2xl mx-auto leading-relaxed">
             貴社の現状を分析し、最適なDX推進計画をご提案します。
             まずは何から始めるべきか、投資対効果はどれくらいか、
-            具体的にお示しします。
+            一緒に整理します。
           </p>
           
           <div class="bg-white dark:bg-gray-800 p-8 mb-10 text-left max-w-2xl mx-auto border border-bond-border shadow-[4px_4px_0_0_#dadada]">
