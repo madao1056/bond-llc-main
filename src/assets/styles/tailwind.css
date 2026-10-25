@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 見出しの段落ち対策: 文節で折り返し（Chrome系）、行の長さを揃える（Safari 17.5+ も対応） */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    word-break: auto-phrase;
+    text-wrap: balance;
+  }
+}
+
 @layer utilities {
   .bg-page {
     background-color: var(--aw-color-bg-page);
