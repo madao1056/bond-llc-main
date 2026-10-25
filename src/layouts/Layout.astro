@@ -11,6 +11,7 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import BasicScripts from '~/components/common/BasicScripts.astro';
+import MobileConsultBar from '~/components/widgets/MobileConsultBar.astro';
 // Vercel Web Analytics（Cookie不使用）。ページビューに加え、
 // contact.astro から track() でフォーム送信の成否を送っている
 import VercelAnalytics from '@vercel/analytics/astro';
@@ -56,6 +57,7 @@ const { language, textDirection } = I18N;
 
   <body class="antialiased text-default bg-page tracking-tight">
     <slot />
+    <MobileConsultBar />
 
     <BasicScripts />
   </body>

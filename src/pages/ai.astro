@@ -20,11 +20,18 @@ const breadcrumbs = [
 
 const instagramUrl = 'https://www.instagram.com/bond_hashiguchi/';
 
+/** 「|」で区切った文節を途中で折り返さないよう、文節ごとに span で包む（スマホの段落ち対策） */
+const phrases = (text: string): string =>
+  text
+    .split('|')
+    .map((part) => `<span class="inline-block">${part}</span>`)
+    .join('');
+
 const worries = [
-  'AIが気になるけど、何から始めればいいか分からない',
-  '入れてはみたけど、結局使わなくなった',
-  'パソコンが苦手。スマホだけでもできるの？',
-  'お客様の情報を入れても大丈夫なのか不安',
+  'AIが気になるけど、|何から始めればいいか|分からない',
+  '入れてはみたけど、|結局使わなくなった',
+  'パソコンが苦手。|スマホだけでもできるの？',
+  'お客様の情報を|入れても大丈夫なのか不安',
 ];
 
 const features = [
@@ -207,7 +214,7 @@ const faqs = [
     <div class="max-w-4xl mx-auto px-4 sm:px-6 relative">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
-          こんなこと、ありませんか
+          <Fragment set:html={phrases('こんなこと、|ありませんか')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">YOUR WORRIES</span>
         </h2>
       </div>
@@ -215,7 +222,7 @@ const faqs = [
         {worries.map((worry) => (
           <li class="flex items-start bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700">
             <Icon name="tabler:help-circle" class="w-6 h-6 text-bond-yellow-deep mt-0.5 mr-3 flex-shrink-0" />
-            <span class="text-bond-text-main dark:text-gray-300">{worry}</span>
+            <span class="text-bond-text-main dark:text-gray-300" set:html={phrases(worry)} />
           </li>
         ))}
       </ul>
@@ -231,7 +238,7 @@ const faqs = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
-          ぼんどの訪問AI導入 3つの特徴
+          <Fragment set:html={phrases('ぼんどの|訪問AI導入|3つの特徴')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">FEATURES</span>
         </h2>
       </div>
@@ -254,7 +261,7 @@ const faqs = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-16">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
-          AIに任せられる仕事の例
+          <Fragment set:html={phrases('AIに任せられる|仕事の例')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">USE CASES</span>
         </h2>
         <p class="text-lg text-bond-text-sub dark:text-gray-300">
@@ -304,7 +311,7 @@ const faqs = [
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
-          安心して使うために
+          <Fragment set:html={phrases('安心して|使うために')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">SAFETY</span>
         </h2>
       </div>
@@ -336,7 +343,7 @@ const faqs = [
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
-          自腹で試したAIの正直レビュー
+          <Fragment set:html={phrases('自腹で試したAIの|正直レビュー')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">HONEST REVIEW</span>
         </h2>
         <p class="text-lg text-bond-text-sub dark:text-gray-300 leading-relaxed">
@@ -370,7 +377,7 @@ const faqs = [
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
-          伺うのは、この人です
+          <Fragment set:html={phrases('伺うのは、|この人です')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">ABOUT US</span>
         </h2>
       </div>
@@ -406,7 +413,7 @@ const faqs = [
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       <div class="text-center mb-12">
         <h2 class="text-3xl md:text-4xl font-bold text-bond-navy dark:text-sky-400 mb-4">
-          訪問AI導入に関するよくある質問
+          <Fragment set:html={phrases('訪問AI導入に関する|よくある質問')} />
         </h2>
       </div>
 
@@ -432,7 +439,7 @@ const faqs = [
 
   <!-- CTA -->
   <BondCTA
-    title="AI導入・業務効率化・HP制作のご相談"
+    title={phrases('AI導入・|業務効率化・|HP制作のご相談')}
     subtitle="初回相談はオンラインで、無料です"
     description="「何ができるか知りたい」だけでも大丈夫です。お仕事の内容をお聞きして、AIで楽にできそうなところを一緒に探します。"
   />
