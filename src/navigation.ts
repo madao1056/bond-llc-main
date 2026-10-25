@@ -53,6 +53,7 @@ export const headerData = {
     {
       text: 'みやびと',
       href: 'https://miyabito.bond-llc.jp/',
+      target: '_blank',
     },
     {
       text: '会社概要',
@@ -94,7 +95,7 @@ export const footerData = {
       title: 'コンテンツ',
       links: [
         { text: '実績・事例', href: getPermalink('/works') },
-        { text: 'みやびと', href: 'https://miyabito.bond-llc.jp/' },
+        { text: 'みやびと', href: 'https://miyabito.bond-llc.jp/', target: '_blank' },
         { text: 'コラム・お知らせ', href: getBlogPermalink() },
       ],
     },
