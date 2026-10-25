@@ -16,6 +16,10 @@ interface Props {
     target?: string;
   }>;
   backgroundImage?: string;
+  /** 写真を色味そのままで表示する（既定はネイビーに溶け込ませる装飾表示） */
+  photoBackground?: boolean;
+  /** 背景画像の表示位置（CSS background-position） */
+  backgroundPosition?: string;
   backgroundColor?: string;
   gradientOverlay?: boolean;
   textAlign?: 'left' | 'center' | 'right';
@@ -31,7 +35,9 @@ const {
   description,
   actions = [],
   backgroundImage,
-  backgroundColor = 'bg-gradient-to-br from-bond-navy via-bond-navy/95 to-bond-navy/90',
+  photoBackground = false,
+  backgroundPosition = 'center',
+  backgroundColor ='bg-gradient-to-br from-bond-navy via-bond-navy/95 to-bond-navy/90',
   gradientOverlay = true,
   textAlign = 'center',
   minHeight = 'min-h-[60vh]',
@@ -52,14 +58,19 @@ const alignmentClasses = {
 >
   <!-- 背景画像 -->
   {backgroundImage && (
-    <div 
-      class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-60 mix-blend-overlay"
-      style={`background-image: url(${backgroundImage});`}
+    <div
+      class={`absolute inset-0 bg-cover bg-no-repeat ${photoBackground ? '' : 'opacity-60 mix-blend-overlay'}`}
+      style={`background-image: url(${backgroundImage}); background-position: ${backgroundPosition};`}
     />
   )}
-  
+
+  <!-- 写真背景の上で文字を読みやすくする暗幕 -->
+  {photoBackground && (
+    <div class="absolute inset-0 bg-black/55"></div>
+  )}
+
   <!-- グラデーションオーバーレイ -->
-  {gradientOverlay && (
+  {gradientOverlay && !photoBackground && (
     <div class="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-black/40"></div>
   )}
   
