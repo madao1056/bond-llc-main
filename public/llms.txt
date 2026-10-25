@@ -8,7 +8,7 @@
 - 設立: 2025年11月21日
 - 代表者: 橋口 真幸
 - 所在地: 〒880-1101 宮崎県東諸県郡国富町大字本庄9896番地3
-- メール: bond.llc.2025@gmail.com
+- メール: info@bond-llc.jp
 
 ## 資格・認定
 
@@ -27,6 +27,7 @@
 - [EC構築・オンライン販売支援](https://bond-llc.jp/services/ec): Shopify・楽天対応のECサイト構築サービス
 - [MEO・LINE・集客支援](https://bond-llc.jp/services/marketing): Googleマップ上位表示・LINE公式・SNS運用による集客支援
 - [DX・業務効率化](https://bond-llc.jp/services/dx): 業務自動化・データ分析・クラウド導入支援
+- [訪問AI導入サポート](https://bond-llc.jp/ai): 宮崎県内の会社・お店に訪問し、生成AIの設定から使い方まで一緒に進める導入支援（初回相談はオンライン・無料）
 - [アプリ制作](https://bond-llc.jp/services/app): 業務効率化アプリ・店舗向けアプリ・Chrome拡張機能の開発
 - [Tsunagi（ツナギ）](https://bond-llc.jp/services/app/tsunagi): Web制作者向けAIチャットアシスタント（Chrome拡張機能）
 - [MD Clipper](https://bond-llc.jp/services/app/md-clipper): WebページをワンクリックでMarkdownに変換する無料Chrome拡張機能（OSS・MIT License）
@@ -46,7 +47,8 @@
 2. EC構築・オンライン販売支援: Shopify、楽天市場、LP+決済の構築と運用代行
 3. MEO・LINE・集客導線設計: Googleマップ上位表示、LINE公式アカウント構築、SNS運用
 4. ローカルDX・業務効率化: 業務自動化、データ分析、クラウド化、セキュリティ強化
-5. アプリ制作: モバイルアプリ、Webアプリ、Chrome拡張機能の企画・開発・運用。自社プロダクトとしてTsunagiとMD Clipperを提供
+5. 訪問AI導入サポート: 宮崎県全域に訪問し、AIの設定・使い方の定着・情報の扱いのルールづくりを支援。自社で実際に使って試したAIのみ提案
+6. アプリ制作: モバイルアプリ、Webアプリ、Chrome拡張機能の企画・開発・運用。自社プロダクトとしてTsunagiとMD Clipperを提供
 
 ## 対応エリア
 
@@ -55,6 +57,6 @@
 
 ## 連絡先
 
-- メール: bond.llc.2025@gmail.com
+- メール: info@bond-llc.jp
 - LINE公式: https://line.me/R/ti/p/@245fzhog
 - お問い合わせフォーム: https://bond-llc.jp/contact

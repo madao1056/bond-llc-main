@@ -1,0 +1,437 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
+import BondCTA from '~/components/widgets/BondCTA.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+import Breadcrumb from '~/components/common/Breadcrumb.astro';
+import { Icon } from 'astro-icon/components';
+import heroImage from '~/assets/images/hero-dx.png';
+import profileImage from '~/icons/profile.webp';
+
+const metadata = {
+  title: '宮崎で訪問AI導入サポート',
+  description: '宮崎の会社・お店に伺って、AIの設定から使い方まで一緒に進めます。実務で毎日AIを使う合同会社ぼんどが、自腹で試した経験をもとに正直にご提案します。初回相談はオンラインで無料。',
+};
+
+const breadcrumbs = [
+  { name: 'ホーム', url: '/' },
+  { name: '訪問AI導入', url: '/ai' },
+];
+
+const lineUrl = 'https://lin.ee/LYodITQO';
+const instagramUrl = 'https://www.instagram.com/enen_hashiguchi/';
+
+const worries = [
+  'AIが気になるけど、何から始めればいいか分からない',
+  '入れてはみたけど、結局使わなくなった',
+  'パソコンが苦手。スマホだけでもできるの？',
+  'お客様の情報を入れても大丈夫なのか不安',
+];
+
+const features = [
+  {
+    title: '訪問して、設定から使い方まで一緒に',
+    icon: 'tabler:home-hand',
+    description: '会社やお店に伺い、アカウントの作成・設定から、普段の仕事で実際に1回使ってみるところまで隣で一緒に進めます。説明だけして帰ることはしません。',
+  },
+  {
+    title: '自腹で試したAIを正直にレビュー',
+    icon: 'tabler:message-check',
+    description: 'ぼんどは自社の仕事で毎日AIを使っています。お勧めするのは、自分たちでお金を払って使い続けているものだけ。「入れたけど使わなかったもの」や、向いていない使い方もお伝えします。',
+  },
+  {
+    title: '宮崎の会社・お店のための窓口',
+    icon: 'tabler:map-pin',
+    description: '国富町を拠点に、宮崎県全域に伺います。顔を合わせて相談できる、地元のAI導入の窓口です。',
+  },
+];
+
+const useCases = [
+  {
+    title: 'メール・返信文の下書き',
+    icon: 'tabler:mail',
+    description: '問い合わせや予約への返信文をAIが下書きし、人が確認して送ります。',
+  },
+  {
+    title: 'チラシ・SNS投稿の文案づくり',
+    icon: 'tabler:writing',
+    description: '伝えたいことを箇条書きで渡すと、文章の形に整えてくれます。',
+  },
+  {
+    title: '表の集計・整理',
+    icon: 'tabler:table',
+    description: 'Excelやスプレッドシート（Googleの表計算）の集計や並べ替えを手伝わせます。',
+  },
+  {
+    title: '打ち合わせの記録',
+    icon: 'tabler:microphone',
+    description: '録音から文字起こし（声を文字にすること）をして、要点をまとめます。',
+  },
+  {
+    title: 'Gmail・カレンダーとつなぐ',
+    icon: 'tabler:plug-connected',
+    description: 'コネクタ（AIと普段使うサービスをつなぐ機能）で、メール探しや予定の確認を任せます。',
+  },
+  {
+    title: 'ホームページの更新・相談',
+    icon: 'tabler:world-www',
+    description: 'お知らせの文章づくりから、ホームページ制作そのものまでご相談いただけます。',
+  },
+];
+
+const steps = [
+  {
+    title: 'LINE・フォームでご相談',
+    description: '「何ができるか知りたい」だけでも大丈夫です',
+  },
+  {
+    title: '初回相談（オンライン・無料）',
+    description: 'お仕事の流れと、AIで楽にしたいことをお聞きします',
+  },
+  {
+    title: '訪問して一緒に設定',
+    description: '設定から、実際の仕事で1回使うところまで同席します',
+  },
+  {
+    title: '使ってみた後のフォロー',
+    description: 'つまずいたところや、次に任せたいことをご相談ください',
+  },
+];
+
+const safetyPoints = [
+  {
+    title: '入れていい情報を一緒に決める',
+    description: 'お客様の個人情報など、AIに入れない情報のルールを最初に決めます。',
+  },
+  {
+    title: 'つなぐのは「読むだけ」から',
+    description: 'メールやカレンダーとつなぐときは、まず読むだけの権限から始めます。',
+  },
+  {
+    title: '最後の確認は人がする',
+    description: 'AIの答えには間違いもあります。送る前・使う前に人が確認する流れにします。',
+  },
+];
+
+const credentials = [
+  'SECURITY ACTION 二つ星宣言（IPA）',
+  'JDLA G検定（2026 #4）合格',
+  '生成AIパスポート',
+];
+
+const reelEpisodes = [
+  'Claude in Chrome（いつものブラウザをAIが操作する機能）',
+  'GoogleのサービスとAIをつなぐコネクタ',
+  'Computer use（何でもできるけど、あまり使わない方がいい機能）',
+  '入れたけど使わなかったもの',
+];
+
+const columns = [
+  {
+    title: 'AIと一緒に働いた1ヶ月のリアル',
+    href: '/news/ai-work-with-claude-2026-06',
+  },
+  {
+    title: 'PCの前で「待つ」仕事が減っていく',
+    href: '/news/remote-ai-workstyle-2026-10',
+  },
+];
+
+const faqs = [
+  {
+    title: '費用はどれくらいかかりますか？',
+    description: '初回相談はオンラインで、無料です。訪問してのサポートは、お仕事の内容や設定したいことをお聞きしたうえで、事前にお見積りをお出しします。お見積りに納得いただけてから進めます。',
+  },
+  {
+    title: 'AIのサービス自体にも料金がかかりますか？',
+    description: 'ChatGPTやClaudeなどのAIサービスには、無料で使える範囲と月額の有料プランがあります。サービスの料金は各社にお支払いいただく形です。まずは無料の範囲で試し、必要になったら有料プランを検討する進め方もできます。',
+  },
+  {
+    title: 'パソコンが苦手でも大丈夫ですか？',
+    description: '大丈夫です。設定はその場で一緒に行い、普段の仕事で実際に使うところまで隣でサポートします。',
+  },
+  {
+    title: 'スマホだけでも使えますか？',
+    description: '多くのAIサービスはスマホのアプリで使えます。スマホ中心で使いたい場合は、その前提で設定します。',
+  },
+  {
+    title: 'どのAIを使いますか？',
+    description: 'ChatGPT・Claude・Geminiなど、特定の製品に決め打ちはしません。お仕事の内容に合わせて、自社で実際に使って良かったものをご提案します。',
+  },
+  {
+    title: '訪問できるエリアはどこですか？',
+    description: '宮崎県全域に伺います。初回相談はオンラインで行います。',
+  },
+  {
+    title: 'お客様の情報を入れて大丈夫ですか？',
+    description: 'AIに入れてよい情報・入れない情報のルールを最初に一緒に決めます。AIとほかのサービスをつなぐ場合も、まず読むだけの権限から始めます。',
+  },
+  {
+    title: 'ホームページ制作や業務効率化の相談もできますか？',
+    description: 'できます。ぼんどはホームページ制作や業務の仕組みづくりも行っています。AIに限らずご相談ください。',
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <StructuredData
+    breadcrumbs={breadcrumbs}
+    service={{ name: '訪問AI導入サポート', description: '宮崎の会社・お店に訪問し、生成AIの設定から使い方まで一緒に進める導入サポート。', areaServed: '宮崎県' }}
+    faq={faqs.map(f => ({ question: f.title, answer: f.description }))}
+  />
+  <Breadcrumb items={breadcrumbs} />
+
+  <!-- ヒーローセクション -->
+  <FullWidthHero
+    tagline="AI Support in Miyazaki"
+    title="<span class='inline-block'>宮崎の会社・お店に</span><span class='inline-block'>伺って、</span><br /><span class='inline-block'>AIの導入を</span><span class='inline-block'>手伝います</span>"
+    subtitle="設定から使い方まで、隣で一緒に"
+    description="実務で毎日AIを使う会社が、自腹で試して良かったものだけをご提案します。初回相談はオンラインで無料です。"
+    backgroundImage={heroImage.src}
+    actions={[
+      {
+        text: 'LINEで相談する',
+        href: lineUrl,
+        variant: 'primary',
+        icon: 'tabler:brand-line',
+      },
+      {
+        text: 'フォームで相談する',
+        href: '/contact',
+        variant: 'secondary',
+        icon: 'tabler:mail',
+      },
+    ]}
+  />
+
+  <!-- お悩み -->
+  <section class="py-16 lg:py-24 relative overflow-hidden">
+    <div class="absolute inset-0 bg-blueprint-grid opacity-30 pointer-events-none"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          こんなこと、ありませんか
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">YOUR WORRIES</span>
+        </h2>
+      </div>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {worries.map((worry) => (
+          <li class="flex items-start bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700">
+            <Icon name="tabler:help-circle" class="w-6 h-6 text-bond-yellow-deep mt-0.5 mr-3 flex-shrink-0" />
+            <span class="text-bond-text-main dark:text-gray-300">{worry}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="text-lg text-bond-text-sub dark:text-gray-300 text-center mt-10 leading-relaxed">
+        AIは、使い始めの設定と「最初の1回」でつまずきやすい道具です。<br class="hidden md:block" />
+        そこを、伺って一緒に越えるのがぼんどの訪問AI導入です。
+      </p>
+    </div>
+  </section>
+
+  <!-- 特徴 -->
+  <section id="features" class="py-16 lg:py-24 bg-bond-background relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          ぼんどの訪問AI導入 3つの特徴
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">FEATURES</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {features.map((feature) => (
+          <div class="bg-white dark:bg-gray-800 p-8 border border-bond-border dark:border-gray-700 hover:shadow-[4px_4px_0_0_#1f2e6c] transition-all duration-300 group">
+            <div class="w-12 h-12 border border-bond-yellow-main flex items-center justify-center mb-6 group-hover:bg-bond-yellow-main transition-colors duration-300">
+              <Icon name={feature.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 group-hover:text-bond-navy" />
+            </div>
+            <h3 class="text-xl font-bold text-bond-navy dark:text-sky-400 mb-3 font-serif">{feature.title}</h3>
+            <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{feature.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- できること -->
+  <section class="py-16 lg:py-24 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          AIに任せられる仕事の例
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">USE CASES</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub dark:text-gray-300">
+          お仕事の内容をお聞きして、効きそうなところから始めます
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {useCases.map((useCase) => (
+          <div class="flex items-start bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700">
+            <Icon name={useCase.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 mt-0.5 mr-4 flex-shrink-0" />
+            <div>
+              <h3 class="font-bold text-bond-navy dark:text-sky-400 mb-2">{useCase.title}</h3>
+              <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{useCase.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 進め方 -->
+  <section class="py-16 lg:py-24 bg-bond-navy text-white relative">
+    <div class="absolute inset-0 bg-grid-white/[0.05] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 relative">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-yellow-main mb-4 tracking-tight">
+          ご相談からの流れ
+          <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">FLOW</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {steps.map((step, index) => (
+          <div class="h-full p-8 border border-white/20 hover:border-bond-yellow-main transition-colors duration-300 bg-bond-navy group">
+            <div class="w-12 h-12 border-2 border-white/30 flex items-center justify-center mb-6 font-mono text-xl font-bold text-white group-hover:border-bond-yellow-main group-hover:text-bond-yellow-main transition-colors duration-300">
+              0{index + 1}
+            </div>
+            <h3 class="text-lg font-bold text-white mb-3 font-serif">{step.title}</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 安心して使うために -->
+  <section class="py-16 lg:py-24 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          安心して使うために
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">SAFETY</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {safetyPoints.map((point) => (
+          <div class="bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700">
+            <Icon name="tabler:shield-check" class="w-6 h-6 text-bond-yellow-deep mb-3" />
+            <h3 class="font-bold text-bond-navy dark:text-sky-400 mb-2">{point.title}</h3>
+            <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{point.description}</p>
+          </div>
+        ))}
+      </div>
+      <div class="bg-bond-surface border border-bond-border p-6">
+        <h3 class="font-bold text-bond-navy dark:text-sky-400 mb-4 font-serif">ぼんどの取り組み・資格</h3>
+        <ul class="flex flex-wrap gap-3">
+          {credentials.map((credential) => (
+            <li class="flex items-center text-sm text-bond-text-main dark:text-gray-300 bg-white dark:bg-gray-800 border border-bond-border px-3 py-2">
+              <Icon name="tabler:certificate" class="w-4 h-4 text-bond-yellow-deep mr-2 flex-shrink-0" />
+              {credential}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 自腹レビュー（Instagram） -->
+  <section class="py-16 lg:py-24 bg-bond-background relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          自腹で試したAIの正直レビュー
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">HONEST REVIEW</span>
+        </h2>
+        <p class="text-lg text-bond-text-sub dark:text-gray-300 leading-relaxed">
+          Instagramのリール「ここだけの話」シリーズで、<br class="hidden md:block" />
+          実際に使っているAIの良いところと注意点を短く紹介しています。
+        </p>
+      </div>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+        {reelEpisodes.map((episode, index) => (
+          <li class="flex items-start bg-white dark:bg-gray-800 p-5 border border-bond-border dark:border-gray-700">
+            <span class="font-mono text-sm font-bold text-bond-yellow-deep mr-3 mt-0.5">第{index + 1}話</span>
+            <span class="text-bond-text-main dark:text-gray-300">{episode}</span>
+          </li>
+        ))}
+      </ul>
+      <div class="text-center">
+        <a href={instagramUrl} target="_blank" rel="noopener" class="btn-secondary inline-flex items-center px-8 py-4">
+          <Icon name="tabler:brand-instagram" class="mr-2 w-5 h-5" /> Instagramでリールを見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 運営者 -->
+  <section class="py-16 lg:py-24 relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4 tracking-tight">
+          伺うのは、この人です
+          <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">ABOUT US</span>
+        </h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div class="max-w-[220px] mx-auto w-full aspect-[3/4] bg-bond-surface border border-bond-border overflow-hidden">
+          <img src={profileImage.src} alt="合同会社ぼんど 代表社員 橋口真幸" width={profileImage.width} height={profileImage.height} loading="lazy" decoding="async" class="w-full h-full object-contain" />
+        </div>
+        <div class="md:col-span-2">
+          <p class="text-sm text-bond-text-sub mb-1">合同会社ぼんど 代表社員</p>
+          <p class="text-2xl font-bold font-serif text-bond-navy dark:text-sky-400 mb-4">橋口 真幸</p>
+          <p class="text-bond-text-main dark:text-gray-300 leading-relaxed mb-4">
+            ホームページ制作や業務の仕組みづくりの仕事で、毎日AIを使っています。
+            メールの整理や請求書の作成など、自社の仕事をAIに手伝わせてきた経験をもとに、
+            「どこまで任せられて、どこからは人がやるべきか」を正直にお伝えします。
+            宮崎のひとを伝えるローカルメディア「みやびと」も運営しています。
+          </p>
+          <p class="text-sm font-bold text-bond-navy dark:text-sky-400 mb-2">AI活用の実体験コラム</p>
+          <ul class="space-y-2">
+            {columns.map((column) => (
+              <li class="flex items-start">
+                <Icon name="tabler:corner-down-right" class="w-5 h-5 text-bond-yellow-deep mt-0.5 mr-2 flex-shrink-0" />
+                <a href={column.href} class="text-sm text-bond-text-main dark:text-gray-300 underline hover:text-bond-navy">{column.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- よくある質問 -->
+  <section class="py-16 lg:py-20 bg-bond-background">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-bond-navy dark:text-sky-400 mb-4">
+          訪問AI導入に関するよくある質問
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-bond-border dark:border-gray-700 overflow-hidden">
+            <summary class="flex items-center justify-between cursor-pointer p-6 hover:bg-bond-background/50 dark:hover:bg-gray-700/50 transition-colors">
+              <span class="font-medium text-bond-navy dark:text-sky-400">
+                {faq.title}
+              </span>
+              <Icon name="tabler:chevron-down" class="w-5 h-5 text-bond-text-sub dark:text-gray-300" />
+            </summary>
+            <div class="px-6 pb-6">
+              <p class="text-bond-text-main dark:text-gray-300">
+                {faq.description}
+              </p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <BondCTA
+    title="AI導入・業務効率化・HP制作のご相談"
+    subtitle="初回相談はオンラインで、無料です"
+    description="「何ができるか知りたい」だけでも大丈夫です。お仕事の内容をお聞きして、AIで楽にできそうなところを一緒に探します。"
+  />
+</Layout>
