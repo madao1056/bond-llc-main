@@ -6,6 +6,12 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
 ---
 
 <form id="contact-form">
+  <!-- スパム対策の honeypot。人には見えず読み上げもされない。ボットが値を入れたら送信を破棄する -->
+  <div aria-hidden="true" style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
+    <label for="website">この欄は空のままにしてください</label>
+    <input type="text" name="website" id="website" tabindex="-1" autocomplete="off" value="" data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other" />
+  </div>
+
   {
     inputs &&
       inputs.map(

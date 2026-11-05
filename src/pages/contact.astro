@@ -126,6 +126,8 @@ const breadcrumbs = [
     document.addEventListener('astro:page-load', () => {
       const form = document.getElementById('contact-form') as HTMLFormElement | null;
       if (!form) return;
+      // スパム対策: 表示から送信までの時間をサーバーで見る
+      const formLoadedAt = Date.now();
 
       const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
       const statusEl = document.getElementById('form-status')!;
@@ -184,6 +186,9 @@ const breadcrumbs = [
               entryFrom: entry.from ?? '',
               entryPath: entry.path ?? '',
               page: location.pathname,
+              website: formData.get('website') ?? '',
+              formLoadedAt,
+              submittedAt: Date.now(),
             }),
           });
 

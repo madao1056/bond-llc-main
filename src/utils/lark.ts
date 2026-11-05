@@ -18,6 +18,8 @@ export interface Inquiry {
   service: string;
   business: string;
   page: string;
+  /** スパム判定で「怪しい」となったときの印（例: 【要確認】）。内容と通知の先頭に付ける */
+  flag?: string;
 }
 
 interface LarkConfig {
@@ -81,7 +83,7 @@ export async function sendInquiryToLark(inquiry: Inquiry): Promise<void> {
         メールアドレス: inquiry.email,
         電話番号: inquiry.phone,
         事業ジャンル: inquiry.business,
-        内容: inquiry.message,
+        内容: inquiry.flag ? `${inquiry.flag}${inquiry.message}` : inquiry.message,
         送信ページ: inquiry.page,
       },
     },
@@ -98,7 +100,7 @@ export async function sendInquiryToLark(inquiry: Inquiry): Promise<void> {
     ['電話', inquiry.phone],
   ];
   const lines: string[] = [
-    `【${inquiry.source}】${inquiry.name} 様からお問い合わせがありました`,
+    `${inquiry.flag ?? ''}【${inquiry.source}】${inquiry.name} 様からお問い合わせがありました`,
     ...details.filter(([, value]) => value).map(([label, value]) => `${label}: ${value}`),
     '',
     inquiry.message,

@@ -4,6 +4,7 @@ import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 import { buildNotificationEmail, buildAutoReplyEmail } from '~/utils/email-templates';
 import { sendInquiryToLark, type InquirySource } from '~/utils/lark';
+import { classifySpam } from '~/utils/spam';
 
 /** 別ドメインのフォーム（名刺LP）からの送信を受け付けるオリジン */
 const ALLOWED_ORIGINS = ['https://lp-meishi-bond.vercel.app'];
@@ -43,6 +44,11 @@ function escapeHtml(str: string): string {
     .replace(/'/g, '&#039;');
 }
 
+/** JSON の値を文字列として取り出す。数値・null・配列・オブジェクトなどは空文字扱い（.trim() で 500 にしない） */
+function str(value: unknown): string {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
 function json(body: Record<string, unknown>, status: number, headers: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(body), {
     status,
@@ -71,19 +77,23 @@ export const OPTIONS: APIRoute = async ({ request }) => {
 export const POST: APIRoute = async ({ request }) => {
   const cors = corsHeaders(request);
   try {
-    const data = await request.json();
+    const body: unknown = await request.json().catch(() => null);
+    if (!body || typeof body !== 'object' || Array.isArray(body)) {
+      return json({ error: 'リクエストの形式が正しくありません。' }, 400, cors);
+    }
+    const data = body as Record<string, unknown>;
 
-    const name = (data.name ?? '').trim();
-    const email = (data.email ?? '').trim();
-    const company = (data.company ?? '').trim();
-    const phone = (data.phone ?? '').trim();
-    const serviceValue = (data.service ?? '').trim();
-    const service = SERVICE_LABELS[serviceValue] ?? serviceValue;
-    const business = (data.business ?? '').trim();
-    const page = (data.page ?? '').trim();
+    const name = str(data.name);
+    const email = str(data.email);
+    const company = str(data.company);
+    const phone = str(data.phone);
+    const serviceValue = str(data.service);
+    const service = Object.hasOwn(SERVICE_LABELS, serviceValue) ? SERVICE_LABELS[serviceValue] : serviceValue;
+    const business = str(data.business);
+    const page = str(data.page);
     const source = resolveSource(data);
     // 名刺LPはメッセージ任意のため、空でも受け付ける
-    const message = (data.message ?? '').trim() || (source === '名刺' ? '（メッセージなし）' : '');
+    const message = str(data.message) || (source === '名刺' ? '（メッセージなし）' : '');
 
     if (!name || !email || !message) {
       return json({ error: 'お名前・メールアドレス・お問い合わせ内容は必須です。' }, 400, cors);
@@ -94,10 +104,37 @@ export const POST: APIRoute = async ({ request }) => {
       return json({ error: 'メールアドレスの形式が正しくありません。' }, 400, cors);
     }
 
+    // スパム判定。確定スパムはボットに気づかれないよう成功を返し、Lark・メールとも送らない
+    const spamCheck = classifySpam({
+      name,
+      message,
+      company,
+      website: data.website,
+      formLoadedAt: data.formLoadedAt,
+      submittedAt: data.submittedAt,
+      isMeishi: source === '名刺',
+    });
+    if (spamCheck.verdict === 'spam') {
+      console.warn('[spam]', spamCheck.reasons.join(','), email.split('@')[1] ?? '');
+      return json({ success: true }, 200, cors);
+    }
+    // 怪しいものは記録・社内通知だけ行い、第三者に届きうる自動返信は送らない
+    const flag = spamCheck.verdict === 'suspicious' ? '【要確認】' : '';
+    if (flag) console.warn('[spam-suspicious]', spamCheck.reasons.join(','), email.split('@')[1] ?? '');
+
     // Lark への記録・通知はメールと並行して行い、失敗してもお問い合わせは止めない
-    const larkTask = sendInquiryToLark({ source, name, email, message, company, phone, service, business, page }).catch(
-      (err) => console.error('Lark連携エラー:', err)
-    );
+    const larkTask = sendInquiryToLark({
+      source,
+      name,
+      email,
+      message,
+      company,
+      phone,
+      service,
+      business,
+      page,
+      flag: flag || undefined,
+    }).catch((err) => console.error('Lark連携エラー:', err));
 
     const mailMessage = business ? `事業ジャンル: ${business}\n\n${message}` : message;
     const sanitized = {
@@ -123,15 +160,17 @@ export const POST: APIRoute = async ({ request }) => {
         from: 'ぼんど お問い合わせ <noreply@bond-llc.jp>',
         to: 'info@bond-llc.jp',
         replyTo: email,
-        subject: `【お問い合わせ／${source}】${name} 様より`,
+        subject: `${flag}【お問い合わせ／${source}】${name} 様より`,
         html: buildNotificationEmail(sanitized),
       }),
-      resend.emails.send({
-        from: 'ぼんど <noreply@bond-llc.jp>',
-        to: email,
-        subject: '【ぼんど】お問い合わせありがとうございます',
-        html: buildAutoReplyEmail(sanitized),
-      }),
+      flag
+        ? Promise.resolve({ error: null })
+        : resend.emails.send({
+            from: 'ぼんど <noreply@bond-llc.jp>',
+            to: email,
+            subject: '【ぼんど】お問い合わせありがとうございます',
+            html: buildAutoReplyEmail(sanitized),
+          }),
     ]);
 
     await larkTask;
