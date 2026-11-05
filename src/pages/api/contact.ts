@@ -7,7 +7,7 @@ import { sendInquiryToLark, type InquirySource } from '~/utils/lark';
 import { classifySpam } from '~/utils/spam';
 
 /** 別ドメインのフォーム（名刺LP）からの送信を受け付けるオリジン */
-const ALLOWED_ORIGINS = ['https://lp-meishi-bond.vercel.app'];
+const ALLOWED_ORIGINS = ['https://business-card.bond-llc.jp', 'https://lp-meishi-bond.vercel.app'];
 
 /** フォームの選択肢の値 → 表示名（contact.astro の options と揃える） */
 const SERVICE_LABELS: Record<string, string> = {
