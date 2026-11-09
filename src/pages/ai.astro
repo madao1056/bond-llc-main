@@ -56,31 +56,37 @@ const useCases = [
   {
     title: 'メール・返信文の下書き',
     icon: 'tabler:mail',
+    demo: { input: '予約の日時を変えたい、という問い合わせに返信したい', output: 'ご連絡ありがとうございます。ご希望の日時をいくつかお知らせいただけますか。確認してすぐにご案内します。' },
     description: '問い合わせや予約への返信文をAIが下書きし、人が確認して送ります。',
   },
   {
     title: 'チラシ・SNS投稿の文案づくり',
     icon: 'tabler:writing',
+    demo: { input: '新メニュー・数量限定・土日だけ', output: '今週末だけの新メニューが登場します。数量限定なので、気になる方はお早めにどうぞ。' },
     description: '伝えたいことを箇条書きで渡すと、文章の形に整えてくれます。',
   },
   {
     title: '表の集計・整理',
     icon: 'tabler:table',
+    demo: { input: '月ごとの売上を合計して、多い順に並べて', output: '月別の合計表を作りました。多い順に並べ、前の月との差も横に足しています。' },
     description: 'Excelやスプレッドシート（Googleの表計算）の集計や並べ替えを手伝わせます。',
   },
   {
     title: '打ち合わせの記録',
     icon: 'tabler:microphone',
+    demo: { input: '打ち合わせの録音（30分）', output: '要点を3つと、次にやること・担当をまとめました。' },
     description: '録音から文字起こし（声を文字にすること）をして、要点をまとめます。',
   },
   {
     title: 'Gmail・カレンダーとつなぐ',
     icon: 'tabler:plug-connected',
+    demo: { input: '来週の予定と、まだ返信していないメールは？', output: '来週の予定と、返信がまだのメールを一覧にしました。返信の下書きも作れます。' },
     description: 'コネクタ（AIと普段使うサービスをつなぐ機能）で、メール探しや予定の確認を任せます。',
   },
   {
     title: 'ホームページの更新・相談',
     icon: 'tabler:world-www',
+    demo: { input: '年末年始の営業日をお知らせしたい', output: '年末年始の営業についてのお知らせ文です。日付を入れて確認してください。' },
     description: 'お知らせの文章づくりから、ホームページ制作そのものまでご相談いただけます。',
   },
 ];
@@ -118,6 +124,11 @@ const safetyPoints = [
     description: 'AIの答えには間違いもあります。送る前・使う前に人が確認する流れにします。',
   },
 ];
+
+const infoSort = {
+  ok: ['商品・メニューの説明', 'お店の営業時間', '公開済みのお知らせ'],
+  ng: ['お客様の名前・電話番号', 'カード番号', 'パスワード'],
+};
 
 const credentials = [
   'SECURITY ACTION 二つ星宣言（IPA）',
@@ -270,12 +281,18 @@ const faqs = [
         </p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {useCases.map((useCase) => (
-          <div class="flex items-start bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700">
+        {useCases.map((useCase, index) => (
+          <div class="flex items-start bg-white dark:bg-gray-800 p-6 border border-bond-border dark:border-gray-700" data-anim style={`--anim-i:${index % 3}`}>
             <Icon name={useCase.icon} class="w-6 h-6 text-bond-navy dark:text-sky-400 mt-0.5 mr-4 flex-shrink-0" />
-            <div>
+            <div class="min-w-0 flex-1">
               <h3 class="font-bold text-bond-navy dark:text-sky-400 mb-2">{useCase.title}</h3>
               <p class="text-sm text-bond-text-sub dark:text-gray-300 leading-relaxed">{useCase.description}</p>
+              <!-- やりとりの例（サンプル）。文字はHTMLのまま、画面に入ったら順に表示 -->
+              <div class="demo mt-4 text-xs leading-relaxed">
+                <p class="text-[10px] tracking-wider text-bond-text-sub dark:text-gray-400 mb-1.5">やりとりの例</p>
+                <p class="demo-in ml-auto w-fit max-w-[92%] bg-bond-navy text-white px-3 py-2 rounded-lg rounded-br-sm"><span class="sr-only">頼むこと: </span>{useCase.demo.input}</p>
+                <p class="demo-out mt-2 w-fit max-w-[92%] bg-bond-surface dark:bg-gray-700 text-bond-text-main dark:text-gray-200 border border-bond-border dark:border-gray-600 px-3 py-2 rounded-lg rounded-bl-sm"><span class="font-bold text-bond-yellow-deep mr-1">AI</span>{useCase.demo.output}</p>
+              </div>
             </div>
           </div>
         ))}
@@ -293,7 +310,7 @@ const faqs = [
           <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">FLOW</span>
         </h2>
       </div>
-      <div class="flow-steps relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-flow>
+      <div class="flow-steps relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-flow data-anim>
         <!-- ステップをつなぐ線（装飾）。スマホは縦、PCは横。カードの隙間にだけ見える -->
         <svg class="flow-line flow-line--v md:hidden" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
           <path d="M1 0 V100" pathLength="1" />
@@ -322,6 +339,29 @@ const faqs = [
           <Fragment set:html={phrases('安心して|使うために')} />
           <span class="block text-base font-sans font-normal text-bond-text-sub mt-2 tracking-normal opacity-80">SAFETY</span>
         </h2>
+      </div>
+      <!-- 入れていい情報の仕分け（例）。画面に入ったらカードが左右に分かれる -->
+      <div class="sort mb-8 bg-white dark:bg-gray-800 border border-bond-border dark:border-gray-700 p-6" data-anim>
+        <p class="text-sm font-bold text-bond-navy dark:text-sky-400 mb-4 text-center">最初に決める「AIに入れていい情報」の例</p>
+        <div class="grid grid-cols-2 gap-3 sm:gap-6">
+          <div>
+            <p class="flex items-center justify-center text-xs font-bold text-emerald-700 dark:text-emerald-400 mb-3"><Icon name="tabler:circle-check" class="w-4 h-4 mr-1" />入れてOK</p>
+            <ul class="space-y-2">
+              {infoSort.ok.map((item, index) => (
+                <li class="sort-chip sort-chip--ok text-xs sm:text-sm text-center border border-emerald-600/40 bg-emerald-50 dark:bg-emerald-900/20 text-bond-text-main dark:text-gray-200 px-2 py-2" style={`--anim-i:${index * 2}`}>{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p class="flex items-center justify-center text-xs font-bold text-red-700 dark:text-red-400 mb-3"><Icon name="tabler:ban" class="w-4 h-4 mr-1" />入れない</p>
+            <ul class="space-y-2">
+              {infoSort.ng.map((item, index) => (
+                <li class="sort-chip sort-chip--ng text-xs sm:text-sm text-center border border-red-600/40 bg-red-50 dark:bg-red-900/20 text-bond-text-main dark:text-gray-200 px-2 py-2" style={`--anim-i:${index * 2 + 1}`}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-bond-text-sub dark:text-gray-400 text-center">線引きはお仕事に合わせて一緒に決めます</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         {safetyPoints.map((point) => (
@@ -480,14 +520,14 @@ const faqs = [
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .flow-steps.flow-pending .flow-line path { stroke-dashoffset: 1; }
-    .flow-steps.flow-pending .flow-badge { border-color: rgb(255 255 255 / 0.3); color: #fff; }
+    .flow-steps.anim-pending .flow-line path { stroke-dashoffset: 1; }
+    .flow-steps.anim-pending .flow-badge { border-color: rgb(255 255 255 / 0.3); color: #fff; }
 
-    .flow-steps.flow-active .flow-line path {
+    .flow-steps.anim-active .flow-line path {
       stroke-dashoffset: 0;
       transition: stroke-dashoffset 1.6s ease-in-out;
     }
-    .flow-steps.flow-active .flow-badge {
+    .flow-steps.anim-active .flow-badge {
       animation: flow-glow 0.9s ease-out both;
       animation-delay: calc(var(--flow-i) * 0.4s + 0.1s);
     }
@@ -498,23 +538,51 @@ const faqs = [
     40% { box-shadow: 0 0 18px 4px rgb(250 215 7 / 0.55); }
     100% { border-color: rgb(250 215 7 / 0.9); color: rgb(250 215 7); box-shadow: 0 0 0 0 rgb(250 215 7 / 0); }
   }
+
+  /* 仕事の例: 頼むこと → AIの下書き の順に出す */
+  @media (prefers-reduced-motion: no-preference) {
+    .anim-pending .demo-in,
+    .anim-pending .demo-out { opacity: 0; transform: translateY(6px); }
+    .anim-active .demo-in,
+    .anim-active .demo-out {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .anim-active .demo-in { transition-delay: calc(var(--anim-i) * 0.2s + 0.1s); }
+    .anim-active .demo-out { transition-delay: calc(var(--anim-i) * 0.2s + 0.8s); }
+
+    /* 仕分け: 真ん中寄りから左右の列へ順に入る */
+    .sort.anim-pending .sort-chip { opacity: 0; }
+    .sort.anim-pending .sort-chip--ok { transform: translateX(40%); }
+    .sort.anim-pending .sort-chip--ng { transform: translateX(-40%); }
+    .sort.anim-active .sort-chip {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.45s ease-out, transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition-delay: calc(var(--anim-i) * 0.22s + 0.15s);
+    }
+  }
 </style>
 
 <script>
+  // 画面に入ったら anim-active を付ける共通処理。
+  // 動きを減らす設定・JSなしの環境では何もしない（＝完成形の静止表示）。
   const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-  document.querySelectorAll<HTMLElement>('[data-flow]').forEach((el) => {
-    if (!motionOk || !('IntersectionObserver' in window)) return;
-    el.classList.add('flow-pending');
+  if (motionOk && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          el.classList.add('flow-active');
-          io.disconnect();
+          entry.target.classList.add('anim-active');
+          io.unobserve(entry.target);
         });
       },
       { threshold: 0.2 }
     );
-    io.observe(el);
-  });
+    document.querySelectorAll<HTMLElement>('[data-anim]').forEach((el) => {
+      el.classList.add('anim-pending');
+      io.observe(el);
+    });
+  }
 </script>

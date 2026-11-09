@@ -5,7 +5,11 @@ import BondCTA from '~/components/widgets/BondCTA.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
+import { getImage } from 'astro:assets';
 import heroImage from '~/assets/images/hero-dx.png';
+
+// ヒーロー背景はPNGのままだと重いので、webpに変換して使う（LCP対策）
+const heroBg = await getImage({ src: heroImage, format: 'webp', width: 1024 });
 
 const metadata = {
   title: 'ローカルDX・業務効率化サービス',
@@ -152,7 +156,7 @@ const faqs = [
     title="ローカルDX・業務効率化"
     subtitle="デジタルの力で、本業に集中できる環境を<br />宮崎の企業のDX推進をサポート"
     description="手作業を減らして、価値ある仕事に集中。業務自動化、データ分析、システム導入で、日々の手間を減らす仕組みをつくります。"
-    backgroundImage={heroImage.src}
+    backgroundImage={heroBg.src}
     actions={[
       {
         text: '無料診断を申し込む',

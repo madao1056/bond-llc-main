@@ -5,7 +5,11 @@ import BondCTA from '~/components/widgets/BondCTA.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
+import { getImage } from 'astro:assets';
 import heroImage from '~/assets/images/hero-web-production.png';
+
+// ヒーロー背景はPNGのままだと重いので、webpに変換して使う（LCP対策）
+const heroBg = await getImage({ src: heroImage, format: 'webp', width: 1024 });
 
 const metadata = {
   title: 'Web制作・運用サービス',
@@ -94,7 +98,7 @@ const faqs = [
     title="Web制作・運用サービス"
     subtitle="見つけてもらえる、選んでもらえる<br />結果を出すWebサイトを"
     description="宮崎を拠点とする私たちが、お客さまのビジネスを深く理解し、成果の出るWebサイトを制作します。"
-    backgroundImage={heroImage.src}
+    backgroundImage={heroBg.src}
     actions={[
       {
         text: '無料相談はこちら',

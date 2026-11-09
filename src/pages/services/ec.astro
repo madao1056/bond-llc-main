@@ -2,10 +2,14 @@
 import Layout from '~/layouts/PageLayout.astro';
 import FullWidthHero from '~/components/widgets/FullWidthHero.astro';
 import { Icon } from 'astro-icon/components';
+import { getImage } from 'astro:assets';
 import BondCTA from '~/components/widgets/BondCTA.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import heroImage from '~/assets/images/hero-ec.png';
+
+// ヒーロー背景はPNGのままだと重いので、webpに変換して使う（LCP対策）
+const heroBg = await getImage({ src: heroImage, format: 'webp', width: 1024 });
 
 const metadata = {
   title: 'EC構築・オンライン販売支援',
@@ -93,7 +97,7 @@ const process = [
     title="EC構築<br>オンライン販売支援"
     subtitle="宮崎の魅力を全国へ<br />24時間365日、あなたの商品が売れる仕組みを"
     description="Shopifyを中心としたEC構築から運用まで、地域の特産品や商品を全国のお客さまにお届けするための総合サポートをご提供します。"
-    backgroundImage={heroImage.src}
+    backgroundImage={heroBg.src}
     actions={[
       {
         text: '無料相談はこちら',

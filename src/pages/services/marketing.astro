@@ -5,7 +5,11 @@ import BondCTA from '~/components/widgets/BondCTA.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 import Breadcrumb from '~/components/common/Breadcrumb.astro';
 import { Icon } from 'astro-icon/components';
+import { getImage } from 'astro:assets';
 import heroImage from '~/assets/images/hero-marketing.png';
+
+// ヒーロー背景はPNGのままだと重いので、webpに変換して使う（LCP対策）
+const heroBg = await getImage({ src: heroImage, format: 'webp', width: 1024 });
 
 const metadata = {
   title: 'MEO・LINE・集客支援サービス',
@@ -117,7 +121,7 @@ const faqs = [
     title="MEO・LINE・集客支援"
     subtitle="地域のお客さまと<br />つながる最適な導線を"
     description="Googleマップ、LINE、SNSなど、お客さまとの接点を最適化。地域密着型ビジネスだからこそ効果的な、デジタル集客の仕組みを構築します。"
-    backgroundImage={heroImage.src}
+    backgroundImage={heroBg.src}
     actions={[
       {
         text: '無料相談はこちら',
