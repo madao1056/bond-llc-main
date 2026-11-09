@@ -293,10 +293,17 @@ const faqs = [
           <span class="block text-base font-sans font-normal text-gray-400 mt-2 tracking-normal">FLOW</span>
         </h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="flow-steps relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" data-flow>
+        <!-- ステップをつなぐ線（装飾）。スマホは縦、PCは横。カードの隙間にだけ見える -->
+        <svg class="flow-line flow-line--v md:hidden" viewBox="0 0 2 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M1 0 V100" pathLength="1" />
+        </svg>
+        <svg class="flow-line flow-line--h hidden lg:block" viewBox="0 0 100 2" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          <path d="M0 1 H100" pathLength="1" />
+        </svg>
         {steps.map((step, index) => (
-          <div class="h-full p-8 border border-white/20 hover:border-bond-yellow-main transition-colors duration-300 bg-bond-navy group">
-            <div class="w-12 h-12 border-2 border-white/30 flex items-center justify-center mb-6 font-mono text-xl font-bold text-white group-hover:border-bond-yellow-main group-hover:text-bond-yellow-main transition-colors duration-300">
+          <div class="relative z-10 h-full p-8 border border-white/20 hover:border-bond-yellow-main transition-colors duration-300 bg-bond-navy group">
+            <div class={`flow-badge w-12 h-12 border-2 border-white/30 flex items-center justify-center mb-6 font-mono text-xl font-bold text-white group-hover:border-bond-yellow-main group-hover:text-bond-yellow-main transition-colors duration-300`} style={`--flow-i:${index}`}>
               0{index + 1}
             </div>
             <h3 class="text-lg font-bold text-white mb-3 font-serif">{step.title}</h3>
@@ -445,3 +452,69 @@ const faqs = [
     description="「何ができるか知りたい」だけでも大丈夫です。お仕事の内容をお聞きして、AIで楽にできそうなところを一緒に探します。"
   />
 </Layout>
+
+<style>
+  /* ご相談からの流れ: 線でつなぎ、画面に入ったら順に光らせる。
+     既定（JSなし・動きを減らす設定）は完成形の静止表示。 */
+  .flow-line {
+    position: absolute;
+    z-index: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .flow-line path {
+    fill: none;
+    stroke: var(--bond-yellow-main);
+    stroke-width: 2;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  /* 番号バッジの中心（カード上端から 32px + 24px）を通す */
+  .flow-line--v { top: 56px; bottom: 56px; left: 55px; width: 2px; height: calc(100% - 112px); }
+  .flow-line--h { left: 56px; right: 56px; top: 55px; height: 2px; width: calc(100% - 112px); }
+
+  .flow-badge {
+    border-color: rgb(250 215 7 / 0.9);
+    color: rgb(250 215 7);
+    box-shadow: 0 0 0 0 rgb(250 215 7 / 0);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .flow-steps.flow-pending .flow-line path { stroke-dashoffset: 1; }
+    .flow-steps.flow-pending .flow-badge { border-color: rgb(255 255 255 / 0.3); color: #fff; }
+
+    .flow-steps.flow-active .flow-line path {
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 1.6s ease-in-out;
+    }
+    .flow-steps.flow-active .flow-badge {
+      animation: flow-glow 0.9s ease-out both;
+      animation-delay: calc(var(--flow-i) * 0.4s + 0.1s);
+    }
+  }
+
+  @keyframes flow-glow {
+    0% { border-color: rgb(255 255 255 / 0.3); color: #fff; box-shadow: 0 0 0 0 rgb(250 215 7 / 0); }
+    40% { box-shadow: 0 0 18px 4px rgb(250 215 7 / 0.55); }
+    100% { border-color: rgb(250 215 7 / 0.9); color: rgb(250 215 7); box-shadow: 0 0 0 0 rgb(250 215 7 / 0); }
+  }
+</style>
+
+<script>
+  const motionOk = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+  document.querySelectorAll<HTMLElement>('[data-flow]').forEach((el) => {
+    if (!motionOk || !('IntersectionObserver' in window)) return;
+    el.classList.add('flow-pending');
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          el.classList.add('flow-active');
+          io.disconnect();
+        });
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(el);
+  });
+</script>
